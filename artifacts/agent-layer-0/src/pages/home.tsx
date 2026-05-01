@@ -6,8 +6,6 @@ import { AL0Wordmark } from "@/components/AL0Logo";
 
 const BUILDING_OPTIONS = [
   { value: "", label: "I'm building with… (optional)" },
-  { value: "elizaos", label: "Eliza OS" },
-  { value: "virtuals", label: "Virtuals" },
   { value: "custom", label: "Custom Agent" },
   { value: "dao", label: "A DAO" },
   { value: "other", label: "Other" },
