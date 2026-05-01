@@ -119,35 +119,6 @@ export function TwitterCover() {
         </div>
       </div>
 
-      {/* Bottom-right: powered by */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "22px",
-          right: "32px",
-          fontSize: "10px",
-          letterSpacing: "0.25em",
-          color: "rgba(232,84,28,0.45)",
-          fontWeight: 500,
-        }}
-      >
-        POWERED BY URVOTE
-      </div>
-
-      {/* Top-left: version tag */}
-      <div
-        style={{
-          position: "absolute",
-          top: "22px",
-          left: "32px",
-          fontSize: "10px",
-          letterSpacing: "0.2em",
-          color: "rgba(255,255,255,0.2)",
-          fontWeight: 500,
-        }}
-      >
-        V 1.0.0
-      </div>
     </div>
   );
 }
