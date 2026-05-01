@@ -4,5 +4,7 @@ export const modules: ModuleMap = {
   "./components/mockups/al0-logos/Bracket.tsx": () => import("../components/mockups/al0-logos/Bracket.tsx"),
   "./components/mockups/al0-logos/Circuit.tsx": () => import("../components/mockups/al0-logos/Circuit.tsx"),
   "./components/mockups/al0-logos/Layers.tsx": () => import("../components/mockups/al0-logos/Layers.tsx"),
-  "./components/mockups/al0-logos/Typographic.tsx": () => import("../components/mockups/al0-logos/Typographic.tsx")
+  "./components/mockups/al0-logos/Typographic.tsx": () => import("../components/mockups/al0-logos/Typographic.tsx"),
+  "./components/mockups/al0-social/TwitterCover.tsx": () => import("../components/mockups/al0-social/TwitterCover.tsx"),
+  "./components/mockups/al0-social/TwitterProfile.tsx": () => import("../components/mockups/al0-social/TwitterProfile.tsx")
 };
