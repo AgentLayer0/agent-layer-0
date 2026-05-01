@@ -5,7 +5,7 @@ import { useState } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 
 const BUILDING_OPTIONS = [
-  { value: "", label: "I'm building with… (optional)" },
+  { value: "", label: "I'm building… (optional)" },
   { value: "custom", label: "Custom Agent" },
   { value: "dao", label: "A DAO" },
   { value: "other", label: "Other" },
