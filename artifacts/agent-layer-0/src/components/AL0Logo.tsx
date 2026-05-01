@@ -51,7 +51,7 @@ export function AL0Wordmark({ size = "md", className, showFull = false }: AL0Wor
             className={`font-sans font-light text-muted-foreground ${config.sub}`}
             style={{ letterSpacing: "0.04em" }}
           >
-            · Agent Layer Zero
+            · Agent Layer 0
           </span>
         )}
       </div>
