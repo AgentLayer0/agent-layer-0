@@ -2,20 +2,25 @@ function DottedZero({ color = "#ffffff" }: { color?: string }) {
   return (
     <span style={{ position: "relative", display: "inline-block", color }}>
       0
-      <span
+      {/* Pill + dot sensor mark — centered in the 0's counter */}
+      <svg
+        aria-hidden="true"
+        width="0.28em"
+        height="0.48em"
+        viewBox="0 0 14 24"
+        fill="none"
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "0.18em",
-          height: "0.18em",
-          borderRadius: "50%",
-          background: color,
-          display: "block",
+          transform: "translate(-50%, -52%)",
           pointerEvents: "none",
+          overflow: "visible",
         }}
-      />
+      >
+        <rect x="1" y="1" width="12" height="22" rx="6" fill="none" stroke={color} strokeWidth="2" />
+        <circle cx="7" cy="9" r="2.5" fill={color} />
+      </svg>
     </span>
   );
 }

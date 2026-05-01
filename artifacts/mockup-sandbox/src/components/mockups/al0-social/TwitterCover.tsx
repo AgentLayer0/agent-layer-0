@@ -90,7 +90,27 @@ export function TwitterCover() {
           }}
         >
           <span style={{ color: "#E8541C", opacity: 0.9 }}>[</span>
-          <span style={{ color: "#ffffff" }}>AL0</span>
+          <span style={{ color: "#ffffff" }}>AL<span style={{ position: "relative", display: "inline-block" }}>
+            0
+            <svg
+              aria-hidden="true"
+              width="0.28em"
+              height="0.48em"
+              viewBox="0 0 14 24"
+              fill="none"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -52%)",
+                pointerEvents: "none",
+                overflow: "visible",
+              }}
+            >
+              <rect x="1" y="1" width="12" height="22" rx="6" fill="none" stroke="#ffffff" strokeWidth="2" />
+              <circle cx="7" cy="9" r="2.5" fill="#ffffff" />
+            </svg>
+          </span></span>
           <span style={{ color: "#E8541C", opacity: 0.9 }}>]</span>
         </div>
 
