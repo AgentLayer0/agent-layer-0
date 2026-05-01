@@ -6,7 +6,10 @@ import { AL0Wordmark } from "@/components/AL0Logo";
 
 const BUILDING_OPTIONS = [
   { value: "", label: "I'm building… (optional)" },
-  { value: "custom", label: "Custom Agent" },
+  { value: "startup", label: "A startup product" },
+  { value: "internal", label: "An internal tool" },
+  { value: "research", label: "A research project" },
+  { value: "custom", label: "A custom agent" },
   { value: "dao", label: "A DAO" },
   { value: "other", label: "Other" },
 ];
