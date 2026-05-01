@@ -1,3 +1,25 @@
+function DottedZero({ color = "#ffffff" }: { color?: string }) {
+  return (
+    <span style={{ position: "relative", display: "inline-block", color }}>
+      0
+      <span
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "0.18em",
+          height: "0.18em",
+          borderRadius: "50%",
+          background: color,
+          display: "block",
+          pointerEvents: "none",
+        }}
+      />
+    </span>
+  );
+}
+
 interface AL0WordmarkProps {
   size?: "sm" | "md" | "lg";
   className?: string;
@@ -26,7 +48,7 @@ export function AL0Wordmark({ size = "md", className, showFull = false }: AL0Wor
         }}
       >
         <span style={{ color: "#E8541C", opacity: 0.9 }}>[</span>
-        <span style={{ color: "#ffffff" }}>AL0</span>
+        <span style={{ color: "#ffffff" }}>AL<DottedZero /></span>
         <span style={{ color: "#E8541C", opacity: 0.9 }}>]</span>
       </div>
       {showFull && (
@@ -72,7 +94,7 @@ export function AL0CTAMark({ size = 64, className }: AL0CTAMarkProps) {
         }}
       >
         <span style={{ color: "#E8541C", opacity: 0.9 }}>[</span>
-        <span style={{ color: "#ffffff" }}>AL0</span>
+        <span style={{ color: "#ffffff" }}>AL<DottedZero /></span>
         <span style={{ color: "#E8541C", opacity: 0.9 }}>]</span>
       </div>
       <div

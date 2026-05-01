@@ -52,7 +52,21 @@ export function TwitterProfile() {
         }}
       >
         <span style={{ color: "#E8541C", opacity: 0.9 }}>[</span>
-        <span style={{ color: "#ffffff" }}>0</span>
+        <span style={{ position: "relative", display: "inline-block", color: "#ffffff" }}>
+          0
+          <span style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "0.18em",
+            height: "0.18em",
+            borderRadius: "50%",
+            background: "#ffffff",
+            display: "block",
+            pointerEvents: "none",
+          }} />
+        </span>
         <span style={{ color: "#E8541C", opacity: 0.9 }}>]</span>
       </div>
     </div>
