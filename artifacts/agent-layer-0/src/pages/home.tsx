@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Bot, ExternalLink, CheckSquare, ChevronRight } from "lucide-react";
+import { Bot, CheckSquare, ChevronRight } from "lucide-react";
 import { useState } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 
 const BUILDING_OPTIONS = [
   { value: "", label: "I'm building with… (optional)" },
-  { value: "elizaos", label: "ElizaOS" },
+  { value: "elizaos", label: "Eliza OS" },
   { value: "virtuals", label: "Virtuals" },
-  { value: "custom", label: "A custom agent" },
+  { value: "custom", label: "Custom Agent" },
   { value: "dao", label: "A DAO" },
   { value: "other", label: "Other" },
 ];
@@ -71,7 +71,7 @@ export default function Home() {
           rel="noopener noreferrer"
           className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
         >
-          Back to UrVote <ExternalLink className="w-3.5 h-3.5" />
+          Back to UrVote →
         </a>
       </nav>
 
@@ -115,7 +115,7 @@ export default function Home() {
               size="lg"
               className="w-full sm:w-auto h-12 px-6 border-border/60 text-muted-foreground hover:text-foreground hover:border-border transition-all"
             >
-              Back to UrVote <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+              Back to UrVote →
             </Button>
           </a>
         </div>
@@ -242,10 +242,10 @@ export default function Home() {
 
       {/* ── Footer ───────────────────────────────────────── */}
       <footer className="relative z-10 border-t border-border/40 max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="space-y-1">
+        <div className="space-y-1.5">
           <AL0Wordmark size="sm" />
           <p className="text-xs text-muted-foreground/50 font-mono pl-0.5">
-            Powered by <span className="text-primary/60">@UrVote_</span>
+            Agent Layer 0 — Powered by <span className="text-primary/60">@UrVote_</span>
           </p>
         </div>
         <div className="text-right space-y-1">
