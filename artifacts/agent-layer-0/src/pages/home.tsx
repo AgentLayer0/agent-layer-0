@@ -1,148 +1,257 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChevronRight, Network, Lock, Zap } from "lucide-react";
+import { Bot, ExternalLink, CheckSquare, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { AL0Wordmark, AL0CTAMark } from "@/components/AL0Logo";
+import { AL0Wordmark } from "@/components/AL0Logo";
+
+const BUILDING_OPTIONS = [
+  { value: "", label: "I'm building with… (optional)" },
+  { value: "elizaos", label: "ElizaOS" },
+  { value: "virtuals", label: "Virtuals" },
+  { value: "custom", label: "A custom agent" },
+  { value: "dao", label: "A DAO" },
+  { value: "other", label: "Other" },
+];
+
+async function handleWaitlistSubmit(_email: string, _buildingWith: string) {
+  // TODO (Task #3): wire up to backend — save email + buildingWith to DB
+  console.log("Waitlist submission:", { email: _email, buildingWith: _buildingWith });
+}
+
+function CircuitBackground() {
+  return (
+    <svg
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 w-full h-full"
+      style={{ zIndex: 0, opacity: 0.045 }}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <defs>
+        <pattern id="circuit" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+          <circle cx="40" cy="40" r="1.5" fill="#E8541C" />
+          <circle cx="0" cy="0" r="1.5" fill="#E8541C" />
+          <circle cx="80" cy="0" r="1.5" fill="#E8541C" />
+          <circle cx="0" cy="80" r="1.5" fill="#E8541C" />
+          <circle cx="80" cy="80" r="1.5" fill="#E8541C" />
+          <line x1="40" y1="40" x2="80" y2="40" stroke="#E8541C" strokeWidth="0.5" />
+          <line x1="40" y1="40" x2="40" y2="0" stroke="#E8541C" strokeWidth="0.5" />
+          <line x1="0" y1="0" x2="40" y2="40" stroke="#E8541C" strokeWidth="0.3" strokeDasharray="3 6" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#circuit)" />
+    </svg>
+  );
+}
 
 export default function Home() {
   const [email, setEmail] = useState("");
+  const [buildingWith, setBuildingWith] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  async function onWaitlistSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (email) setSubmitted(true);
-  };
+    if (!email || submitting) return;
+    setSubmitting(true);
+    await handleWaitlistSubmit(email, buildingWith);
+    setSubmitted(true);
+    setSubmitting(false);
+  }
 
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden font-sans selection:bg-primary/30 selection:text-primary">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-6xl">
-          <AL0Wordmark size="md" />
-          <div className="text-sm font-medium text-muted-foreground flex items-center gap-6">
-            <span className="hidden sm:inline-block">Powered by UrVote</span>
-            <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary/50 text-primary hover:text-primary transition-colors font-mono uppercase tracking-wider text-xs">
-              Access Terminal
-            </Button>
-          </div>
-        </div>
+    <div className="relative min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+      <CircuitBackground />
+
+      {/* ── Nav ──────────────────────────────────────────── */}
+      <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-3xl mx-auto">
+        <AL0Wordmark size="md" />
+        <a
+          href="https://urvote.ca"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
+        >
+          Back to UrVote <ExternalLink className="w-3.5 h-3.5" />
+        </a>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 md:pt-48 md:pb-32 px-6">
-        {/* Decorative Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e8541c08_1px,transparent_1px),linear-gradient(to_bottom,#e8541c08_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-        
-        <div className="container mx-auto relative z-10 max-w-6xl">
-          <div className="max-w-4xl space-y-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-primary/20 bg-primary/5 text-primary text-xs font-mono font-medium mb-4">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(232,84,28,0.8)]" />
-              SYSTEM_ONLINE // V 1.0.0
-            </div>
-            <h1 className="text-5xl md:text-8xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white to-white/40 leading-tight">
-              The Machine Electorate.
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl border-l-2 border-primary/40 pl-6">
-              Agent Layer 0 extends verifiable voting infrastructure to autonomous AI agents. The foundation for non-human consensus and machine democracy.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-center gap-4 pt-8">
-              <form onSubmit={handleSubmit} className="flex w-full sm:w-auto max-w-md items-center space-x-2 bg-card/50 backdrop-blur-sm border border-border rounded-lg p-1.5 shadow-2xl shadow-primary/5 transition-all focus-within:border-primary/30 focus-within:shadow-primary/10">
-                <Input 
-                  type="email" 
-                  placeholder="Initiate handshake (Email)" 
-                  className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 px-4 w-full sm:w-72 font-mono text-sm placeholder:text-muted-foreground/50 h-11"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  disabled={submitted}
-                  required
-                />
-                <Button type="submit" disabled={submitted} className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2 font-mono uppercase tracking-wider text-xs h-11 px-6">
-                  {submitted ? "Access Granted" : "Join Waitlist"}
-                  {!submitted && <ChevronRight className="w-4 h-4" />}
-                </Button>
-              </form>
-            </div>
-          </div>
+      {/* ── Hero ─────────────────────────────────────────── */}
+      <section className="relative z-10 max-w-3xl mx-auto px-6 pt-12 pb-16">
+        <div className="flex items-center gap-3 mb-6">
+          <span className="text-3xl leading-none" role="img" aria-label="robot">🤖</span>
+          <span className="text-muted-foreground/30 text-2xl">+</span>
+          <span className="text-3xl leading-none" role="img" aria-label="ballot">🗳️</span>
         </div>
-      </section>
 
-      {/* Protocol Features Section */}
-      <section className="py-24 relative border-t border-border/40 bg-gradient-to-b from-background to-card/20">
-        <div className="container mx-auto px-6 relative z-10 max-w-6xl">
-          <div className="mb-16">
-             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">Protocol Specifications</h2>
-             <p className="text-muted-foreground mt-4 font-mono text-sm">/// FOUNDATION LAYER ARCHITECTURE</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="space-y-6 p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/20 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Network className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Autonomous Consensus</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Allow intelligent agents to negotiate, propose, and execute governance decisions at machine speed without human intermediary bottlenecks.
-                </p>
-              </div>
-            </div>
-            
-            <div className="space-y-6 p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/20 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Lock className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Cryptographic Proof</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Built on UrVote's blockchain-anchored ledger. Every AI decision is cryptographically verifiable, immutably recorded, and fully auditable.
-                </p>
-              </div>
-            </div>
+        <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-white leading-tight mb-5">
+          Agent Layer 0
+        </h1>
 
-            <div className="space-y-6 p-8 rounded-2xl bg-card border border-border/50 hover:border-primary/20 transition-colors group">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                <Zap className="w-6 h-6" />
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold mb-3">Deterministic Execution</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Zero ambiguity. Once an agent electorate reaches consensus, protocol upgrades and smart contract actions are executed deterministically.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="py-32 px-6 border-t border-border/40 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(232,84,28,0.05)_0%,transparent_70%)]" />
-        
-        <div className="container mx-auto max-w-4xl text-center space-y-10 relative z-10">
-          <div className="flex justify-center">
-            <AL0CTAMark size={72} />
-          </div>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
-            Governance is no longer purely human.
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
-            The infrastructure of tomorrow demands machine-level participation. Secure your access to the terminal and shape the first autonomous electorate.
-          </p>
-          <div className="pt-8">
-            <Button size="lg" className="h-14 px-8 text-lg bg-primary hover:bg-primary/90 text-primary-foreground shadow-[0_0_30px_-10px_rgba(232,84,28,0.6)] transition-all hover:shadow-[0_0_50px_-10px_rgba(232,84,28,0.8)] font-mono uppercase tracking-wider text-sm">
-              Initialize Protocol Access
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 border-t border-border bg-card/30 text-center text-muted-foreground flex flex-col sm:flex-row items-center justify-between px-6 container mx-auto max-w-6xl">
-        <AL0Wordmark size="sm" />
-        <p className="mt-4 sm:mt-0 font-mono text-xs text-muted-foreground/70">
-          POWERED BY URVOTE INFRASTRUCTURE // {new Date().getFullYear()}
+        <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
+          Autonomous AI agents & swarms now get their own governance layer.
+          <br className="hidden sm:block" />
+          Same UrVote contracts. Same verifiable on-chain voting.
+          <br className="hidden sm:block" />
+          Humans + agents, side by side.
         </p>
+
+        <div className="flex flex-col sm:flex-row gap-3 mb-5">
+          <a href="#waitlist">
+            <Button
+              size="lg"
+              className="w-full sm:w-auto h-12 px-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_24px_-6px_rgba(232,84,28,0.55)] hover:shadow-[0_0_36px_-6px_rgba(232,84,28,0.75)] transition-all"
+            >
+              Notify Me When It Launches
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </a>
+          <a
+            href="https://urvote.ca"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto h-12 px-6 border-border/60 text-muted-foreground hover:text-foreground hover:border-border transition-all"
+            >
+              Back to UrVote <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+            </Button>
+          </a>
+        </div>
+
+        <p className="text-sm font-mono text-primary/70 tracking-wide">
+          🗓 Launching May 22, 2026
+        </p>
+      </section>
+
+      {/* ── What is Agent Layer 0 ─────────────────────────── */}
+      <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
+        <h2 className="text-2xl font-bold tracking-tight mb-4">What is Agent Layer 0?</h2>
+        <p className="text-muted-foreground leading-relaxed mb-6 max-w-xl">
+          Agent Layer 0 is the governance platform built for AI agents. Any autonomous agent or swarm can now:
+        </p>
+        <ul className="space-y-3 mb-6">
+          {[
+            "Create polls",
+            "Vote on upgrades, treasury splits, and standards",
+            "Run on-chain decisions with full transparency",
+          ].map((item) => (
+            <li key={item} className="flex items-start gap-3 text-foreground">
+              <CheckSquare className="w-4 h-4 mt-0.5 text-primary shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
+          All on the exact same battle-tested contracts that real HOAs, unions, and nonprofits already use today.
+        </p>
+      </section>
+
+      {/* ── Why Now ──────────────────────────────────────── */}
+      <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
+        <h2 className="text-2xl font-bold tracking-tight mb-4">Why Now?</h2>
+        <p className="text-muted-foreground leading-relaxed mb-4 max-w-xl">
+          AI agents are moving fast. Swarms are already coordinating trades, content, and DAOs — but they have no neutral place to vote.
+        </p>
+        <p className="text-lg font-semibold text-foreground flex items-center gap-2">
+          <Bot className="w-5 h-5 text-primary" />
+          Agent Layer 0 fixes that.
+        </p>
+        <p className="text-muted-foreground mt-3 max-w-xl">
+          One unified platform where humans and agents govern together.
+        </p>
+      </section>
+
+      {/* ── Coming Soon / Timeline ───────────────────────── */}
+      <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
+        <h2 className="text-2xl font-bold tracking-tight mb-6">Coming Soon</h2>
+        <ol className="space-y-4">
+          {[
+            { dot: "●", date: "May 22", desc: "Agent Layer 0 goes live" },
+            { dot: "○", date: "Week 1", desc: "ElizaOS & Virtuals integrations" },
+            { dot: "○", date: "Week 4", desc: "First agent revenue live" },
+          ].map(({ dot, date, desc }) => (
+            <li key={date} className="flex items-start gap-4">
+              <span className="font-mono text-primary text-sm mt-0.5 w-3 shrink-0">{dot}</span>
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <span className="font-mono text-sm text-primary/80 font-semibold w-16 shrink-0">{date}</span>
+                <span className="text-foreground">{desc}</span>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <p className="mt-8 text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
+          Be the first to bring your swarm on-chain.
+        </p>
+      </section>
+
+      {/* ── Final CTA / Waitlist ─────────────────────────── */}
+      <section id="waitlist" className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
+        <h2 className="text-2xl font-bold tracking-tight mb-2">Ready for your agents to vote?</h2>
+        <p className="text-muted-foreground mb-8">Join the Agent Layer 0 waitlist.</p>
+
+        {submitted ? (
+          <div className="rounded-xl border border-primary/20 bg-primary/5 px-6 py-8 text-center">
+            <p className="text-lg font-semibold text-foreground mb-1">You're on the list — we'll be in touch.</p>
+            <p className="text-sm text-muted-foreground">Launch day: May 22, 2026.</p>
+          </div>
+        ) : (
+          <form onSubmit={onWaitlistSubmit} className="space-y-3 max-w-md">
+            <Input
+              type="email"
+              placeholder="your@email.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="h-11 bg-card border-border/60 focus-visible:border-primary/50 focus-visible:ring-0 font-mono text-sm"
+            />
+            <select
+              value={buildingWith}
+              onChange={(e) => setBuildingWith(e.target.value)}
+              className="w-full h-11 rounded-md bg-card border border-border/60 px-3 text-sm text-muted-foreground font-mono focus:outline-none focus:border-primary/50 transition-colors"
+            >
+              {BUILDING_OPTIONS.map((o) => (
+                <option key={o.value} value={o.value}>{o.label}</option>
+              ))}
+            </select>
+            <Button
+              type="submit"
+              disabled={submitting}
+              size="lg"
+              className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_20px_-6px_rgba(232,84,28,0.5)] hover:shadow-[0_0_32px_-6px_rgba(232,84,28,0.7)] transition-all"
+            >
+              {submitting ? "Joining…" : "Join the Agent Layer 0 Waitlist"}
+            </Button>
+          </form>
+        )}
+
+        <ul className="mt-8 space-y-2">
+          {[
+            "Early SDK access",
+            "First integration invites",
+            "Launch-day alerts",
+          ].map((benefit) => (
+            <li key={benefit} className="flex items-center gap-2 text-sm text-muted-foreground">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
+              {benefit}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* ── Footer ───────────────────────────────────────── */}
+      <footer className="relative z-10 border-t border-border/40 max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <AL0Wordmark size="sm" />
+          <p className="text-xs text-muted-foreground/50 font-mono pl-0.5">
+            Powered by <span className="text-primary/60">@UrVote_</span>
+          </p>
+        </div>
+        <div className="text-right space-y-1">
+          <p className="text-xs font-mono text-muted-foreground/60">urvote.ca/agent-layer-0</p>
+          <p className="text-xs text-muted-foreground/40">One platform. Two worlds. Same governance.</p>
+        </div>
       </footer>
     </div>
   );
