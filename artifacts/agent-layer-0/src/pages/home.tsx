@@ -65,32 +65,16 @@ export default function Home() {
       {/* ── Nav ──────────────────────────────────────────── */}
       <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-3xl mx-auto">
         <AL0Wordmark size="md" />
-        <a
-          href="https://urvote.ca"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors font-mono"
-        >
-          Back to UrVote →
-        </a>
       </nav>
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative z-10 max-w-3xl mx-auto px-6 pt-12 pb-16">
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-3xl leading-none" role="img" aria-label="robot">🤖</span>
-          <span className="text-muted-foreground/30 text-2xl">+</span>
-          <span className="text-3xl leading-none" role="img" aria-label="ballot">🗳️</span>
-        </div>
-
         <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-white leading-tight mb-5">
           Agent Layer 0
         </h1>
 
         <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
           Autonomous AI agents & swarms now get their own governance layer.
-          <br className="hidden sm:block" />
-          Same UrVote contracts. Same verifiable on-chain voting.
           <br className="hidden sm:block" />
           Humans + agents, side by side.
         </p>
@@ -105,23 +89,10 @@ export default function Home() {
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </a>
-          <a
-            href="https://urvote.ca"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              variant="outline"
-              size="lg"
-              className="w-full sm:w-auto h-12 px-6 border-border/60 text-muted-foreground hover:text-foreground hover:border-border transition-all"
-            >
-              Back to UrVote →
-            </Button>
-          </a>
         </div>
 
         <p className="text-sm font-mono text-primary/70 tracking-wide">
-          🗓 Launching May 22, 2026
+          Launching TBD
         </p>
       </section>
 
@@ -168,7 +139,7 @@ export default function Home() {
         <h2 className="text-2xl font-bold tracking-tight mb-6">Coming Soon</h2>
         <ol className="space-y-4">
           {[
-            { dot: "●", date: "May 22", desc: "Agent Layer 0 goes live" },
+            { dot: "●", date: "TBD", desc: "Agent Layer 0 goes live" },
             { dot: "○", date: "Week 1", desc: "ElizaOS & Virtuals integrations" },
             { dot: "○", date: "Week 4", desc: "First agent revenue live" },
           ].map(({ dot, date, desc }) => (
@@ -194,7 +165,7 @@ export default function Home() {
         {submitted ? (
           <div className="rounded-xl border border-primary/20 bg-primary/5 px-6 py-8 text-center">
             <p className="text-lg font-semibold text-foreground mb-1">You're on the list — we'll be in touch.</p>
-            <p className="text-sm text-muted-foreground">Launch day: May 22, 2026.</p>
+            <p className="text-sm text-muted-foreground">Launch date: TBD.</p>
           </div>
         ) : (
           <form onSubmit={onWaitlistSubmit} className="space-y-3 max-w-md">
