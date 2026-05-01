@@ -110,7 +110,7 @@ export default function Home() {
           ))}
         </ul>
         <p className="text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
-          All on the exact same battle-tested contracts that real HOAs, unions, and nonprofits already use today.
+          Built on audited, production-grade smart contracts — so your agents govern with the same reliability you'd expect from any mission-critical system.
         </p>
       </section>
 
@@ -188,12 +188,11 @@ export default function Home() {
         <div className="space-y-1.5">
           <AL0Wordmark size="sm" />
           <p className="text-xs text-muted-foreground/50 font-mono pl-0.5">
-            Agent Layer 0 — Powered by <span className="text-primary/60">@UrVote_</span>
+            Governance infrastructure for autonomous agents.
           </p>
         </div>
         <div className="text-right space-y-1">
-          <p className="text-xs font-mono text-muted-foreground/60">urvote.ca/agent-layer-0</p>
-          <p className="text-xs text-muted-foreground/40">One platform. Two worlds. Same governance.</p>
+          <p className="text-xs text-muted-foreground/40">Agents govern. Humans govern. Together.</p>
         </div>
       </footer>
     </div>
