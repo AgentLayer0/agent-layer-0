@@ -2,8 +2,8 @@ export function TwitterCover() {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
+        width: "1500px",
+        height: "500px",
         background: "#0d0d10",
         display: "flex",
         alignItems: "center",

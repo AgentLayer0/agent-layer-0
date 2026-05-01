@@ -5,10 +5,10 @@ generated = []
 id = "alvtgBD9krzCkmKCDQka1"
 uri = "file://exports/al0-twitter-cover.png"
 type = "image"
-title = "AL0 Twitter Cover — crisp (1500×500 PNG)"
+title = "AL0 Twitter Cover (1500×500 PNG)"
 
 [[outputs]]
 id = "Hwvlz1qdh780DpuuHBntU"
 uri = "file://exports/al0-twitter-profile.png"
 type = "image"
-title = "AL0 Profile Pic — crisp (400×400 PNG)"
+title = "AL0 Profile Pic — [ 0 ] (400×400 PNG)"

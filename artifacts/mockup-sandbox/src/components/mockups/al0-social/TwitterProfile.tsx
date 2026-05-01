@@ -2,8 +2,8 @@ export function TwitterProfile() {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
+        width: "400px",
+        height: "400px",
         background: "#0d0d10",
         display: "flex",
         alignItems: "center",
