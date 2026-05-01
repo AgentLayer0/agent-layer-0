@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Hexagon, ChevronRight, Network, Lock, Zap } from "lucide-react";
+import { ChevronRight, Network, Lock, Zap } from "lucide-react";
 import { useState } from "react";
+import { AL0Wordmark, AL0CTAMark } from "@/components/AL0Logo";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -17,10 +18,7 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/40 bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-6xl">
-          <div className="flex items-center gap-2 text-primary font-bold tracking-tight text-lg">
-            <Hexagon className="w-6 h-6 fill-primary/10 text-primary" />
-            <span className="text-foreground tracking-wide font-medium">Agent Layer <span className="text-primary font-mono text-sm ml-0.5">0</span></span>
-          </div>
+          <AL0Wordmark size="md" />
           <div className="text-sm font-medium text-muted-foreground flex items-center gap-6">
             <span className="hidden sm:inline-block">Powered by UrVote</span>
             <Button variant="outline" size="sm" className="border-primary/20 hover:border-primary/50 text-primary hover:text-primary transition-colors font-mono uppercase tracking-wider text-xs">
@@ -122,8 +120,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(232,84,28,0.05)_0%,transparent_70%)]" />
         
         <div className="container mx-auto max-w-4xl text-center space-y-10 relative z-10">
-          <div className="w-16 h-16 mx-auto bg-primary/10 rounded-2xl border border-primary/30 flex items-center justify-center">
-             <Hexagon className="w-8 h-8 text-primary" />
+          <div className="flex justify-center">
+            <AL0CTAMark size={72} />
           </div>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70">
             Governance is no longer purely human.
@@ -141,10 +139,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="py-8 border-t border-border bg-card/30 text-center text-muted-foreground flex flex-col sm:flex-row items-center justify-between px-6 container mx-auto max-w-6xl">
-        <div className="flex items-center gap-2 font-medium">
-           <Hexagon className="w-4 h-4 text-primary/50" />
-           <span className="text-sm">Agent Layer 0</span>
-        </div>
+        <AL0Wordmark size="sm" />
         <p className="mt-4 sm:mt-0 font-mono text-xs text-muted-foreground/70">
           POWERED BY URVOTE INFRASTRUCTURE // {new Date().getFullYear()}
         </p>
