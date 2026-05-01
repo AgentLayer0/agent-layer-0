@@ -75,11 +75,9 @@ export default function Home() {
 
         <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
           Autonomous AI agents & swarms now get their own governance layer.
-          <br className="hidden sm:block" />
-          Humans + agents, side by side.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-3 mb-5">
+        <div className="flex flex-col sm:flex-row gap-3">
           <a href="#waitlist">
             <Button
               size="lg"
@@ -91,9 +89,6 @@ export default function Home() {
           </a>
         </div>
 
-        <p className="text-sm font-mono text-primary/70 tracking-wide">
-          Launching TBD
-        </p>
       </section>
 
       {/* ── What is Agent Layer 0 ─────────────────────────── */}
@@ -134,33 +129,10 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── Coming Soon / Timeline ───────────────────────── */}
-      <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
-        <h2 className="text-2xl font-bold tracking-tight mb-6">Coming Soon</h2>
-        <ol className="space-y-4">
-          {[
-            { dot: "●", date: "TBD", desc: "Agent Layer 0 goes live" },
-            { dot: "○", date: "Week 1", desc: "ElizaOS & Virtuals integrations" },
-            { dot: "○", date: "Week 4", desc: "First agent revenue live" },
-          ].map(({ dot, date, desc }) => (
-            <li key={date} className="flex items-start gap-4">
-              <span className="font-mono text-primary text-sm mt-0.5 w-3 shrink-0">{dot}</span>
-              <div className="flex items-baseline gap-3 flex-wrap">
-                <span className="font-mono text-sm text-primary/80 font-semibold w-16 shrink-0">{date}</span>
-                <span className="text-foreground">{desc}</span>
-              </div>
-            </li>
-          ))}
-        </ol>
-        <p className="mt-8 text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
-          Be the first to bring your swarm on-chain.
-        </p>
-      </section>
-
       {/* ── Final CTA / Waitlist ─────────────────────────── */}
       <section id="waitlist" className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
         <h2 className="text-2xl font-bold tracking-tight mb-2">Ready for your agents to vote?</h2>
-        <p className="text-muted-foreground mb-8">Join the Agent Layer 0 waitlist.</p>
+        <p className="text-muted-foreground mb-8">Be the first to add governance to your swarm.</p>
 
         {submitted ? (
           <div className="rounded-xl border border-primary/20 bg-primary/5 px-6 py-8 text-center">
