@@ -14,3 +14,19 @@ import * as zod from "zod";
 export const HealthCheckResponse = zod.object({
   status: zod.string(),
 });
+
+/**
+ * Returns count and percentage breakdown of waitlist signups by building category
+ * @summary Get waitlist stats
+ */
+export const GetWaitlistStatsResponse = zod.object({
+  total: zod.number(),
+  breakdown: zod.array(
+    zod.object({
+      value: zod.string(),
+      label: zod.string(),
+      count: zod.number(),
+      percentage: zod.number(),
+    }),
+  ),
+});

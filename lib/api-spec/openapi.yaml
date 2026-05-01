@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: waitlist
+    description: Waitlist operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,19 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /waitlist/stats:
+    get:
+      operationId: getWaitlistStats
+      tags: [waitlist]
+      summary: Get waitlist stats
+      description: Returns count and percentage breakdown of waitlist signups by building category
+      responses:
+        "200":
+          description: Waitlist stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaitlistStats"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +48,31 @@ components:
           type: string
       required:
         - status
-
+    WaitlistStatItem:
+      type: object
+      properties:
+        value:
+          type: string
+        label:
+          type: string
+        count:
+          type: integer
+        percentage:
+          type: number
+      required:
+        - value
+        - label
+        - count
+        - percentage
+    WaitlistStats:
+      type: object
+      properties:
+        total:
+          type: integer
+        breakdown:
+          type: array
+          items:
+            $ref: "#/components/schemas/WaitlistStatItem"
+      required:
+        - total
+        - breakdown

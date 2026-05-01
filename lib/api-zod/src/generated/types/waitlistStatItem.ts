@@ -6,6 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from "./healthStatus";
-export * from "./waitlistStatItem";
-export * from "./waitlistStats";
+export interface WaitlistStatItem {
+  value: string;
+  label: string;
+  count: number;
+  percentage: number;
+}

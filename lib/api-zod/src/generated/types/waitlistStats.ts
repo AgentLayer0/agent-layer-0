@@ -5,16 +5,7 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
-
-export interface WaitlistStatItem {
-  value: string;
-  label: string;
-  count: number;
-  percentage: number;
-}
+import type { WaitlistStatItem } from "./waitlistStatItem";
 
 export interface WaitlistStats {
   total: number;

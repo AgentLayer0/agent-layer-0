@@ -13,7 +13,7 @@ import type {
   UseQueryResult,
 } from "@tanstack/react-query";
 
-import type { HealthStatus } from "./api.schemas";
+import type { HealthStatus, WaitlistStats } from "./api.schemas";
 
 import { customFetch } from "../custom-fetch";
 import type { ErrorType } from "../custom-fetch";
@@ -92,6 +92,82 @@ export function useHealthCheck<
   request?: SecondParameter<typeof customFetch>;
 }): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
   const queryOptions = getHealthCheckQueryOptions(options);
+
+  const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
+    queryKey: QueryKey;
+  };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+/**
+ * Returns count and percentage breakdown of waitlist signups by building category
+ * @summary Get waitlist stats
+ */
+export const getGetWaitlistStatsUrl = () => {
+  return `/api/waitlist/stats`;
+};
+
+export const getWaitlistStats = async (
+  options?: RequestInit,
+): Promise<WaitlistStats> => {
+  return customFetch<WaitlistStats>(getGetWaitlistStatsUrl(), {
+    ...options,
+    method: "GET",
+  });
+};
+
+export const getGetWaitlistStatsQueryKey = () => {
+  return [`/api/waitlist/stats`] as const;
+};
+
+export const getGetWaitlistStatsQueryOptions = <
+  TData = Awaited<ReturnType<typeof getWaitlistStats>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getWaitlistStats>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}) => {
+  const { query: queryOptions, request: requestOptions } = options ?? {};
+
+  const queryKey = queryOptions?.queryKey ?? getGetWaitlistStatsQueryKey();
+
+  const queryFn: QueryFunction<
+    Awaited<ReturnType<typeof getWaitlistStats>>
+  > = ({ signal }) => getWaitlistStats({ signal, ...requestOptions });
+
+  return { queryKey, queryFn, ...queryOptions } as UseQueryOptions<
+    Awaited<ReturnType<typeof getWaitlistStats>>,
+    TError,
+    TData
+  > & { queryKey: QueryKey };
+};
+
+export type GetWaitlistStatsQueryResult = NonNullable<
+  Awaited<ReturnType<typeof getWaitlistStats>>
+>;
+export type GetWaitlistStatsQueryError = ErrorType<unknown>;
+
+/**
+ * @summary Get waitlist stats
+ */
+
+export function useGetWaitlistStats<
+  TData = Awaited<ReturnType<typeof getWaitlistStats>>,
+  TError = ErrorType<unknown>,
+>(options?: {
+  query?: UseQueryOptions<
+    Awaited<ReturnType<typeof getWaitlistStats>>,
+    TError,
+    TData
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+  const queryOptions = getGetWaitlistStatsQueryOptions(options);
 
   const query = useQuery(queryOptions) as UseQueryResult<TData, TError> & {
     queryKey: QueryKey;
