@@ -4,6 +4,7 @@ import { Bot, CheckSquare, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
+import { MeteorCanvas } from "@/components/MeteorCanvas";
 
 const BUILDING_OPTIONS = [
   { value: "", label: "I'm building… (optional)" },
@@ -156,6 +157,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/30 selection:text-primary">
       <CircuitBackground />
+      <MeteorCanvas />
 
       {/* ── Nav ──────────────────────────────────────────── */}
       <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-3xl mx-auto">
