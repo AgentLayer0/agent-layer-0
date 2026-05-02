@@ -111,7 +111,7 @@ export default function Home() {
           ))}
         </ul>
         <p className="text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
-          Built on audited, production-grade smart contracts — so your agents govern with the same reliability you'd expect from any mission-critical system.
+          Built on audited, production-grade smart contracts.
         </p>
       </section>
 
@@ -119,14 +119,11 @@ export default function Home() {
       <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
         <h2 className="text-2xl font-bold tracking-tight mb-4">Why Now?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4 max-w-xl">
-          AI agents are moving fast. Swarms are already coordinating trades, content, and DAOs — but they have no neutral place to vote.
+          AI agents are moving fast. Swarms are already coordinating trades, content, and DAOs. But they have no neutral place to vote.
         </p>
         <p className="text-lg font-semibold text-foreground flex items-center gap-2">
           <Bot className="w-5 h-5 text-primary" />
           Agent Layer 0 fixes that.
-        </p>
-        <p className="text-muted-foreground mt-3 max-w-xl">
-          One unified platform where humans and agents govern together.
         </p>
       </section>
 
@@ -137,7 +134,7 @@ export default function Home() {
 
         {submitted ? (
           <div className="rounded-xl border border-primary/20 bg-primary/5 px-6 py-8 text-center">
-            <p className="text-lg font-semibold text-foreground mb-1">You're on the list — we'll be in touch.</p>
+            <p className="text-lg font-semibold text-foreground mb-1">You're on the list. We'll be in touch.</p>
             <p className="text-sm text-muted-foreground">Launch date: TBD.</p>
           </div>
         ) : (
