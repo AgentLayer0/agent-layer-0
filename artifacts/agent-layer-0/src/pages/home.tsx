@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Bot, CheckSquare, ChevronRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 
@@ -17,6 +18,98 @@ const BUILDING_OPTIONS = [
 async function handleWaitlistSubmit(_email: string, _buildingWith: string) {
   // TODO (Task #3): wire up to backend — save email + buildingWith to DB
   console.log("Waitlist submission:", { email: _email, buildingWith: _buildingWith });
+}
+
+const BRACKET_SPRING = {
+  type: "spring" as const,
+  stiffness: 70,
+  damping: 14,
+  delay: 0.05,
+};
+
+function HeroTitle() {
+  const shouldReduce = useReducedMotion();
+
+  if (shouldReduce) {
+    return (
+      <h1
+        className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
+        style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
+      >
+        <span style={{ fontFamily: '"JetBrains Mono", monospace', color: "#E8541C", opacity: 0.9 }}>[</span>
+        <span className="text-white">Agent Layer 0</span>
+        <span style={{ fontFamily: '"JetBrains Mono", monospace', color: "#E8541C", opacity: 0.9 }}>]</span>
+      </h1>
+    );
+  }
+
+  return (
+    <h1
+      className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
+      style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
+    >
+      {/* Left bracket slides in from the right (toward center) */}
+      <motion.span
+        style={{
+          fontFamily: '"JetBrains Mono", monospace',
+          color: "#E8541C",
+          opacity: 0.9,
+          display: "inline-block",
+        }}
+        initial={{ x: "2.2em" }}
+        animate={{ x: 0 }}
+        transition={BRACKET_SPRING}
+      >
+        [
+      </motion.span>
+
+      {/* Center: AL0 fades out, full title fades in — title controls the layout width */}
+      <span style={{ position: "relative" }}>
+        {/* "AL0" sits absolutely centered, visible initially, fades out */}
+        <motion.span
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "#ffffff",
+            whiteSpace: "nowrap",
+            pointerEvents: "none",
+          }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.2, delay: 0.1 }}
+        >
+          AL0
+        </motion.span>
+
+        {/* "Agent Layer 0" controls width, starts transparent */}
+        <motion.span
+          className="text-white"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.45, delay: 0.3 }}
+        >
+          Agent Layer 0
+        </motion.span>
+      </span>
+
+      {/* Right bracket slides in from the left (toward center) */}
+      <motion.span
+        style={{
+          fontFamily: '"JetBrains Mono", monospace',
+          color: "#E8541C",
+          opacity: 0.9,
+          display: "inline-block",
+        }}
+        initial={{ x: "-2.2em" }}
+        animate={{ x: 0 }}
+        transition={BRACKET_SPRING}
+      >
+        ]
+      </motion.span>
+    </h1>
+  );
 }
 
 function CircuitBackground() {
@@ -70,15 +163,23 @@ export default function Home() {
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative z-10 max-w-3xl mx-auto px-6 pt-12 pb-16">
-        <h1 className="text-5xl sm:text-6xl font-bold tracking-tight text-white leading-tight mb-5">
-          Agent Layer 0
-        </h1>
+        <HeroTitle />
 
-        <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
+        <motion.p
+          className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45, delay: 0.55 }}
+        >
           Autonomous AI agents & swarms now get their own governance layer.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-col sm:flex-row gap-3">
+        <motion.div
+          className="flex flex-col sm:flex-row gap-3"
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.7 }}
+        >
           <a href="#waitlist">
             <Button
               size="lg"
@@ -88,7 +189,7 @@ export default function Home() {
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </a>
-        </div>
+        </motion.div>
 
       </section>
 
