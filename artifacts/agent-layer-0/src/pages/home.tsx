@@ -46,6 +46,7 @@ function HeroTitle() {
 
   return (
     <h1
+      aria-label="[ Agent Layer 0 ]"
       className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
       style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
     >
@@ -68,6 +69,7 @@ function HeroTitle() {
       <span style={{ position: "relative" }}>
         {/* "AL0" sits absolutely centered, visible initially, fades out */}
         <motion.span
+          aria-hidden="true"
           style={{
             position: "absolute",
             left: "50%",
@@ -143,6 +145,7 @@ export default function Home() {
   const [buildingWith, setBuildingWith] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [heroKey, setHeroKey] = useState(0);
   const shouldReduce = useReducedMotion();
 
   async function onWaitlistSubmit(e: React.FormEvent) {
@@ -161,12 +164,20 @@ export default function Home() {
 
       {/* ── Nav ──────────────────────────────────────────── */}
       <nav className="relative z-10 flex items-center justify-between px-6 py-5 max-w-3xl mx-auto">
-        <AL0Wordmark size="md" />
+        <button
+          type="button"
+          onClick={() => setHeroKey((k) => k + 1)}
+          aria-label="Replay intro animation"
+          className="group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 rounded transition-all duration-150 hover:drop-shadow-[0_0_8px_rgba(232,84,28,0.7)]"
+          style={{ cursor: "pointer", background: "none", border: "none", padding: 0 }}
+        >
+          <AL0Wordmark size="md" />
+        </button>
       </nav>
 
       {/* ── Hero ─────────────────────────────────────────── */}
       <section className="relative z-10 max-w-3xl mx-auto px-6 pt-12 pb-16">
-        <HeroTitle />
+        <HeroTitle key={heroKey} />
 
         <motion.p
           className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
