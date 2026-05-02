@@ -142,6 +142,7 @@ export default function Home() {
   const [buildingWith, setBuildingWith] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const shouldReduce = useReducedMotion();
 
   async function onWaitlistSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -167,18 +168,18 @@ export default function Home() {
 
         <motion.p
           className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl"
-          initial={{ opacity: 0, y: 6 }}
+          initial={shouldReduce ? false : { opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.55 }}
+          transition={shouldReduce ? { duration: 0 } : { duration: 0.45, delay: 0.55 }}
         >
           Autonomous AI agents & swarms now get their own governance layer.
         </motion.p>
 
         <motion.div
           className="flex flex-col sm:flex-row gap-3"
-          initial={{ opacity: 0, y: 6 }}
+          initial={shouldReduce ? false : { opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.7 }}
+          transition={shouldReduce ? { duration: 0 } : { duration: 0.4, delay: 0.7 }}
         >
           <a href="#waitlist">
             <Button
