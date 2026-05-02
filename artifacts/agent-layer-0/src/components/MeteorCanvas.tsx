@@ -13,6 +13,13 @@ interface Meteor {
   pixelsSinceLastTurn: number;
 }
 
+interface Flare {
+  x: number;
+  y: number;
+  age: number;
+  duration: number;
+}
+
 const BRAND = { r: 232, g: 84, b: 28 };
 const MIN_METEORS = 3;
 const MAX_METEORS = 5;
@@ -24,6 +31,9 @@ const GRID_OFFSET = 40;
 const TURN_CHANCE = 0.35;
 const MIN_SEGMENT_PX = GRID_SIZE * 1.5;
 const MAX_TURNS = 3;
+
+const FLARE_DURATION = 10;
+const FLARE_RADIUS = 16;
 
 function rgba(alpha: number) {
   return `rgba(${BRAND.r},${BRAND.g},${BRAND.b},${alpha.toFixed(3)})`;
@@ -85,16 +95,16 @@ function gridNodeIndex(value: number): number {
   return Math.floor((value - GRID_OFFSET) / GRID_SIZE);
 }
 
-function tryTurn(m: Meteor, prevX: number, prevY: number): void {
-  if (m.turnsLeft <= 0) return;
-  if (m.pixelsSinceLastTurn < MIN_SEGMENT_PX) return;
+function tryTurn(m: Meteor, prevX: number, prevY: number): boolean {
+  if (m.turnsLeft <= 0) return false;
+  if (m.pixelsSinceLastTurn < MIN_SEGMENT_PX) return false;
 
   const isHorizontal = m.vy === 0;
 
   if (isHorizontal) {
     const prevIdx = gridNodeIndex(prevX);
     const currIdx = gridNodeIndex(m.x);
-    if (currIdx === prevIdx) return;
+    if (currIdx === prevIdx) return false;
 
     if (Math.random() < TURN_CHANCE) {
       const speed = Math.abs(m.vx);
@@ -103,11 +113,12 @@ function tryTurn(m: Meteor, prevX: number, prevY: number): void {
       m.vx = 0;
       m.turnsLeft--;
       m.pixelsSinceLastTurn = 0;
+      return true;
     }
   } else {
     const prevIdx = gridNodeIndex(prevY);
     const currIdx = gridNodeIndex(m.y);
-    if (currIdx === prevIdx) return;
+    if (currIdx === prevIdx) return false;
 
     if (Math.random() < TURN_CHANCE) {
       const speed = Math.abs(m.vy);
@@ -116,8 +127,11 @@ function tryTurn(m: Meteor, prevX: number, prevY: number): void {
       m.vy = 0;
       m.turnsLeft--;
       m.pixelsSinceLastTurn = 0;
+      return true;
     }
   }
+
+  return false;
 }
 
 function lifeEnvelope(age: number, duration: number): number {
@@ -136,6 +150,25 @@ function isOutOfBounds(m: Meteor, w: number, h: number): boolean {
   );
 }
 
+function drawFlare(ctx: CanvasRenderingContext2D, f: Flare) {
+  const t = f.age / f.duration;
+  const alpha = (1 - t) * 0.6;
+  const radius = FLARE_RADIUS * (0.4 + 0.6 * t);
+
+  const grad = ctx.createRadialGradient(f.x, f.y, 0, f.x, f.y, radius);
+  grad.addColorStop(0, rgba(alpha));
+  grad.addColorStop(0.4, rgba(alpha * 0.55));
+  grad.addColorStop(1, rgba(0));
+
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  ctx.beginPath();
+  ctx.arc(f.x, f.y, radius, 0, Math.PI * 2);
+  ctx.fillStyle = grad;
+  ctx.fill();
+  ctx.restore();
+}
+
 export function MeteorCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const shouldReduce = useReducedMotion();
@@ -150,6 +183,7 @@ export function MeteorCanvas() {
 
     let rafId: number;
     const meteors: Meteor[] = [];
+    const flares: Flare[] = [];
 
     function resize() {
       if (!canvas) return;
@@ -176,7 +210,10 @@ export function MeteorCanvas() {
         m.y += m.vy;
         m.pixelsSinceLastTurn += Math.abs(m.vx) + Math.abs(m.vy);
 
-        tryTurn(m, prevX, prevY);
+        const turned = tryTurn(m, prevX, prevY);
+        if (turned) {
+          flares.push({ x: m.x, y: m.y, age: 0, duration: FLARE_DURATION });
+        }
 
         if (m.age >= m.duration || isOutOfBounds(m, w, h)) {
           meteors.splice(i, 1);
@@ -204,6 +241,15 @@ export function MeteorCanvas() {
         ctx.lineCap = "round";
         ctx.stroke();
         ctx.restore();
+      }
+
+      for (let i = flares.length - 1; i >= 0; i--) {
+        const f = flares[i];
+        drawFlare(ctx, f);
+        f.age++;
+        if (f.age >= f.duration) {
+          flares.splice(i, 1);
+        }
       }
 
       while (meteors.length < MIN_METEORS) {
