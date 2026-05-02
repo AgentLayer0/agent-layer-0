@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Bot, CheckSquare, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 import { MeteorCanvas } from "@/components/MeteorCanvas";
 
@@ -22,12 +22,45 @@ async function handleWaitlistSubmit(_email: string, _buildingWith: string) {
 }
 
 const BRACKET_EASE = {
-  duration: 0.85,
-  ease: [0.16, 1, 0.3, 1] as const, // expo ease-out: fast start, graceful settle
+  duration: 0.9,
+  ease: [0.16, 1, 0.3, 1] as const,
+};
+
+const FULL_TITLE = "Agent Layer 0";
+const CHAR_INTERVAL_MS = 48;
+const TYPE_START_MS = 90;
+
+const BRACKET_STYLE: React.CSSProperties = {
+  fontFamily: '"JetBrains Mono", monospace',
+  color: "#E8541C",
+  opacity: 0.9,
+  display: "inline-block",
 };
 
 function HeroTitle() {
   const shouldReduce = useReducedMotion();
+  const [charCount, setCharCount] = useState(shouldReduce ? FULL_TITLE.length : 0);
+  const [showCursor, setShowCursor] = useState(!shouldReduce);
+
+  useEffect(() => {
+    if (shouldReduce) return;
+    let count = 0;
+    let intervalId: ReturnType<typeof setInterval>;
+    const startId = setTimeout(() => {
+      intervalId = setInterval(() => {
+        count++;
+        setCharCount(count);
+        if (count >= FULL_TITLE.length) {
+          clearInterval(intervalId);
+          setTimeout(() => setShowCursor(false), 500);
+        }
+      }, CHAR_INTERVAL_MS);
+    }, TYPE_START_MS);
+    return () => {
+      clearTimeout(startId);
+      clearInterval(intervalId);
+    };
+  }, [shouldReduce]);
 
   if (shouldReduce) {
     return (
@@ -35,9 +68,9 @@ function HeroTitle() {
         className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
         style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
       >
-        <span style={{ fontFamily: '"JetBrains Mono", monospace', color: "#E8541C", opacity: 0.9 }}>[</span>
-        <span className="text-white">Agent Layer 0</span>
-        <span style={{ fontFamily: '"JetBrains Mono", monospace', color: "#E8541C", opacity: 0.9 }}>]</span>
+        <span style={BRACKET_STYLE}>[</span>
+        <span className="text-white">{FULL_TITLE}</span>
+        <span style={BRACKET_STYLE}>]</span>
       </h1>
     );
   }
@@ -48,24 +81,17 @@ function HeroTitle() {
       className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
       style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
     >
-      {/* Left bracket slides in from the right (toward center) */}
-      <motion.span
-        style={{
-          fontFamily: '"JetBrains Mono", monospace',
-          color: "#E8541C",
-          opacity: 0.9,
-          display: "inline-block",
-        }}
-        initial={{ x: "2.2em" }}
-        animate={{ x: 0 }}
-        transition={BRACKET_EASE}
-      >
+      <motion.span style={BRACKET_STYLE} initial={{ x: "2.2em" }} animate={{ x: 0 }} transition={BRACKET_EASE}>
         [
       </motion.span>
 
-      {/* Center: AL0 dissolves out while Agent Layer 0 resolves in — overlapping */}
-      <span style={{ position: "relative" }}>
-        {/* "AL0" blurs and fades out — starts dissolving immediately */}
+      {/* Invisible full-width anchor keeps brackets at final spacing */}
+      <span style={{ position: "relative", display: "inline-block" }}>
+        <span aria-hidden="true" style={{ visibility: "hidden", display: "block", whiteSpace: "nowrap" }}>
+          {FULL_TITLE}
+        </span>
+
+        {/* AL0 — fades out quickly as typing begins */}
         <motion.span
           aria-hidden="true"
           style={{
@@ -77,37 +103,32 @@ function HeroTitle() {
             whiteSpace: "nowrap",
             pointerEvents: "none",
           }}
-          initial={{ opacity: 1, filter: "blur(0px)" }}
-          animate={{ opacity: 0, filter: "blur(10px)" }}
-          transition={{ duration: 0.55, ease: "easeIn" }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 0 }}
+          transition={{ duration: 0.18, delay: 0.06 }}
         >
           AL0
         </motion.span>
 
-        {/* "Agent Layer 0" controls width — resolves in from a slight blur */}
-        <motion.span
+        {/* Typed text — grows left to right */}
+        <span
           className="text-white"
-          initial={{ opacity: 0, filter: "blur(8px)", scaleX: 0.94 }}
-          animate={{ opacity: 1, filter: "blur(0px)", scaleX: 1 }}
-          transition={{ duration: 0.65, delay: 0.18, ease: "easeOut" }}
-          style={{ display: "inline-block", transformOrigin: "center" }}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: "50%",
+            transform: "translateY(-50%)",
+            whiteSpace: "nowrap",
+          }}
         >
-          Agent Layer 0
-        </motion.span>
+          {FULL_TITLE.slice(0, charCount)}
+          {showCursor && (
+            <span className="hero-cursor" style={{ color: "#E8541C", opacity: 0.8 }}>|</span>
+          )}
+        </span>
       </span>
 
-      {/* Right bracket slides in from the left (toward center) */}
-      <motion.span
-        style={{
-          fontFamily: '"JetBrains Mono", monospace',
-          color: "#E8541C",
-          opacity: 0.9,
-          display: "inline-block",
-        }}
-        initial={{ x: "-2.2em" }}
-        animate={{ x: 0 }}
-        transition={BRACKET_EASE}
-      >
+      <motion.span style={BRACKET_STYLE} initial={{ x: "-2.2em" }} animate={{ x: 0 }} transition={BRACKET_EASE}>
         ]
       </motion.span>
     </h1>

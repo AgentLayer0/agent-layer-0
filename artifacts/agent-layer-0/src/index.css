@@ -100,3 +100,13 @@
     @apply font-sans antialiased bg-background text-foreground;
   }
 }
+
+@keyframes hero-blink {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 0; }
+}
+
+.hero-cursor {
+  animation: hero-blink 0.65s step-start infinite;
+  margin-left: 1px;
+}
