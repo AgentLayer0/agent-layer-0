@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Bot, CheckSquare, ChevronRight } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 import { MeteorCanvas } from "@/components/MeteorCanvas";
 
@@ -21,14 +21,12 @@ async function handleWaitlistSubmit(_email: string, _buildingWith: string) {
   console.log("Waitlist submission:", { email: _email, buildingWith: _buildingWith });
 }
 
+const TITLE = "Agent Layer 0";
+
 const BRACKET_EASE = {
   duration: 0.9,
   ease: [0.16, 1, 0.3, 1] as const,
 };
-
-const FULL_TITLE = "Agent Layer 0";
-const CHAR_INTERVAL_MS = 48;
-const TYPE_START_MS = 90;
 
 const BRACKET_STYLE: React.CSSProperties = {
   fontFamily: '"JetBrains Mono", monospace',
@@ -39,28 +37,6 @@ const BRACKET_STYLE: React.CSSProperties = {
 
 function HeroTitle() {
   const shouldReduce = useReducedMotion();
-  const [charCount, setCharCount] = useState(shouldReduce ? FULL_TITLE.length : 0);
-  const [showCursor, setShowCursor] = useState(!shouldReduce);
-
-  useEffect(() => {
-    if (shouldReduce) return;
-    let count = 0;
-    let intervalId: ReturnType<typeof setInterval>;
-    const startId = setTimeout(() => {
-      intervalId = setInterval(() => {
-        count++;
-        setCharCount(count);
-        if (count >= FULL_TITLE.length) {
-          clearInterval(intervalId);
-          setTimeout(() => setShowCursor(false), 500);
-        }
-      }, CHAR_INTERVAL_MS);
-    }, TYPE_START_MS);
-    return () => {
-      clearTimeout(startId);
-      clearInterval(intervalId);
-    };
-  }, [shouldReduce]);
 
   if (shouldReduce) {
     return (
@@ -69,7 +45,7 @@ function HeroTitle() {
         style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
       >
         <span style={BRACKET_STYLE}>[</span>
-        <span className="text-white">{FULL_TITLE}</span>
+        <span className="text-white">{TITLE}</span>
         <span style={BRACKET_STYLE}>]</span>
       </h1>
     );
@@ -81,37 +57,44 @@ function HeroTitle() {
       className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
       style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
     >
-      <motion.span style={BRACKET_STYLE} initial={{ x: "2.2em" }} animate={{ x: 0 }} transition={BRACKET_EASE}>
+      {/* Left bracket: starts overlapping center, spreads left */}
+      <motion.span
+        style={BRACKET_STYLE}
+        initial={{ x: "2.2em" }}
+        animate={{ x: 0 }}
+        transition={BRACKET_EASE}
+      >
         [
       </motion.span>
 
-      {/* Invisible full-width anchor keeps brackets at final spacing */}
+      {/* Center: invisible anchor holds bracket spacing; text wipes open from center */}
       <span style={{ position: "relative", display: "inline-block" }}>
+        {/* Anchor — always full width, keeps brackets at correct spacing */}
         <span aria-hidden="true" style={{ visibility: "hidden", display: "block", whiteSpace: "nowrap" }}>
-          {FULL_TITLE}
+          {TITLE}
         </span>
 
-        {/* AL0 — fades out quickly as typing begins */}
+        {/* AL0 ghost — fades out as the reveal begins */}
         <motion.span
           aria-hidden="true"
           style={{
             position: "absolute",
             left: "50%",
             top: "50%",
-            transform: "translate(-50%, -50%)",
-            color: "#ffffff",
+            transform: "translate(-50%,-50%)",
+            color: "#fff",
             whiteSpace: "nowrap",
             pointerEvents: "none",
           }}
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
-          transition={{ duration: 0.18, delay: 0.06 }}
+          transition={{ duration: 0.2, delay: 0.05 }}
         >
           AL0
         </motion.span>
 
-        {/* Typed text — grows left to right */}
-        <span
+        {/* Title wipes open from center → edges (clip-path inset shrinks symmetrically) */}
+        <motion.span
           className="text-white"
           style={{
             position: "absolute",
@@ -119,16 +102,23 @@ function HeroTitle() {
             top: "50%",
             transform: "translateY(-50%)",
             whiteSpace: "nowrap",
+            display: "inline-block",
           }}
+          initial={{ clipPath: "inset(0 50% 0 50%)" }}
+          animate={{ clipPath: "inset(0 0% 0 0%)" }}
+          transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
         >
-          {FULL_TITLE.slice(0, charCount)}
-          {showCursor && (
-            <span className="hero-cursor" style={{ color: "#E8541C", opacity: 0.8 }}>|</span>
-          )}
-        </span>
+          {TITLE}
+        </motion.span>
       </span>
 
-      <motion.span style={BRACKET_STYLE} initial={{ x: "-2.2em" }} animate={{ x: 0 }} transition={BRACKET_EASE}>
+      {/* Right bracket: starts overlapping center, spreads right */}
+      <motion.span
+        style={BRACKET_STYLE}
+        initial={{ x: "-2.2em" }}
+        animate={{ x: 0 }}
+        transition={BRACKET_EASE}
+      >
         ]
       </motion.span>
     </h1>
