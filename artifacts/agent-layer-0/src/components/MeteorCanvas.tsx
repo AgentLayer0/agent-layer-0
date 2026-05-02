@@ -12,15 +12,17 @@ interface Meteor {
 }
 
 const BRAND = { r: 232, g: 84, b: 28 };
-const MAX_METEORS = 4;
-const SPAWN_CHANCE = 0.008;
+const MIN_METEORS = 3;
+const MAX_METEORS = 5;
+const SPAWN_CHANCE = 0.012;
 
 function rgba(alpha: number) {
   return `rgba(${BRAND.r},${BRAND.g},${BRAND.b},${alpha.toFixed(3)})`;
 }
 
 function spawnMeteor(w: number, h: number): Meteor {
-  const edge = Math.random() < 0.5 ? "top" : Math.random() < 0.5 ? "left" : "right";
+  const r = Math.random();
+  const edge = r < 0.35 ? "top" : r < 0.55 ? "left" : r < 0.75 ? "right" : "bottom";
   let x: number, y: number, vx: number, vy: number;
 
   const speed = 1.6 + Math.random() * 1.2;
@@ -33,14 +35,19 @@ function spawnMeteor(w: number, h: number): Meteor {
     vy = Math.sin(angle) * speed;
   } else if (edge === "left") {
     x = -10;
-    y = Math.random() * h * 0.7;
+    y = Math.random() * h;
     vx = Math.cos(angle) * speed;
-    vy = Math.sin(angle) * speed;
-  } else {
+    vy = (Math.random() < 0.5 ? 1 : -1) * Math.sin(angle) * speed;
+  } else if (edge === "right") {
     x = w + 10;
-    y = Math.random() * h * 0.7;
+    y = Math.random() * h;
     vx = -Math.cos(angle) * speed;
-    vy = Math.sin(angle) * speed;
+    vy = (Math.random() < 0.5 ? 1 : -1) * Math.sin(angle) * speed;
+  } else {
+    x = Math.random() * w;
+    y = h + 10;
+    vx = (Math.random() < 0.5 ? 1 : -1) * Math.cos(angle) * speed;
+    vy = -Math.sin(angle) * speed;
   }
 
   return {
@@ -121,6 +128,9 @@ export function MeteorCanvas() {
         ctx.restore();
       }
 
+      while (meteors.length < MIN_METEORS) {
+        meteors.push(spawnMeteor(canvas.width, canvas.height));
+      }
       if (meteors.length < MAX_METEORS && Math.random() < SPAWN_CHANCE) {
         meteors.push(spawnMeteor(canvas.width, canvas.height));
       }
@@ -128,8 +138,9 @@ export function MeteorCanvas() {
       rafId = requestAnimationFrame(frame);
     }
 
-    meteors.push(spawnMeteor(canvas.width, canvas.height));
-    meteors.push(spawnMeteor(canvas.width, canvas.height));
+    for (let i = 0; i < MIN_METEORS; i++) {
+      meteors.push(spawnMeteor(canvas.width, canvas.height));
+    }
     rafId = requestAnimationFrame(frame);
 
     return () => {
