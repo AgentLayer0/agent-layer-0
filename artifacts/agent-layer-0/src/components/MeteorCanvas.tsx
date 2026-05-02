@@ -15,6 +15,7 @@ const BRAND = { r: 232, g: 84, b: 28 };
 const MIN_METEORS = 3;
 const MAX_METEORS = 5;
 const SPAWN_CHANCE = 0.012;
+const CULL_MARGIN = 200;
 
 function rgba(alpha: number) {
   return `rgba(${BRAND.r},${BRAND.g},${BRAND.b},${alpha.toFixed(3)})`;
@@ -23,31 +24,32 @@ function rgba(alpha: number) {
 function spawnMeteor(w: number, h: number): Meteor {
   const r = Math.random();
   const edge = r < 0.35 ? "top" : r < 0.55 ? "left" : r < 0.75 ? "right" : "bottom";
-  let x: number, y: number, vx: number, vy: number;
 
-  const speed = 1.6 + Math.random() * 1.2;
-  const angle = (Math.PI / 4) * (0.6 + Math.random() * 0.8);
+  const speed = 1.8 + Math.random() * 1.0;
+  const driftAngle = Math.PI / 6 + Math.random() * (Math.PI / 6);
+
+  let x: number, y: number, vx: number, vy: number;
 
   if (edge === "top") {
     x = Math.random() * w;
     y = -10;
-    vx = (Math.random() < 0.5 ? 1 : -1) * Math.cos(angle) * speed;
-    vy = Math.sin(angle) * speed;
+    vx = (Math.random() < 0.5 ? 1 : -1) * Math.sin(driftAngle) * speed;
+    vy = Math.cos(driftAngle) * speed;
+  } else if (edge === "bottom") {
+    x = Math.random() * w;
+    y = h + 10;
+    vx = (Math.random() < 0.5 ? 1 : -1) * Math.sin(driftAngle) * speed;
+    vy = -Math.cos(driftAngle) * speed;
   } else if (edge === "left") {
     x = -10;
     y = Math.random() * h;
-    vx = Math.cos(angle) * speed;
-    vy = (Math.random() < 0.5 ? 1 : -1) * Math.sin(angle) * speed;
-  } else if (edge === "right") {
+    vx = Math.cos(driftAngle) * speed;
+    vy = (Math.random() < 0.75 ? 1 : -1) * Math.sin(driftAngle) * speed;
+  } else {
     x = w + 10;
     y = Math.random() * h;
-    vx = -Math.cos(angle) * speed;
-    vy = (Math.random() < 0.5 ? 1 : -1) * Math.sin(angle) * speed;
-  } else {
-    x = Math.random() * w;
-    y = h + 10;
-    vx = (Math.random() < 0.5 ? 1 : -1) * Math.cos(angle) * speed;
-    vy = -Math.sin(angle) * speed;
+    vx = -Math.cos(driftAngle) * speed;
+    vy = (Math.random() < 0.75 ? 1 : -1) * Math.sin(driftAngle) * speed;
   }
 
   return {
@@ -57,7 +59,7 @@ function spawnMeteor(w: number, h: number): Meteor {
     vy,
     len: 70 + Math.random() * 60,
     age: 0,
-    duration: 140 + Math.floor(Math.random() * 80),
+    duration: 160 + Math.floor(Math.random() * 80),
   };
 }
 
@@ -66,6 +68,15 @@ function lifeEnvelope(age: number, duration: number): number {
   if (t < 0.15) return t / 0.15;
   if (t > 0.75) return (1 - t) / 0.25;
   return 1;
+}
+
+function isOutOfBounds(m: Meteor, w: number, h: number): boolean {
+  return (
+    m.x < -CULL_MARGIN ||
+    m.x > w + CULL_MARGIN ||
+    m.y < -CULL_MARGIN ||
+    m.y > h + CULL_MARGIN
+  );
 }
 
 export function MeteorCanvas() {
@@ -93,7 +104,10 @@ export function MeteorCanvas() {
 
     function frame() {
       if (!canvas || !ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
 
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
@@ -101,23 +115,24 @@ export function MeteorCanvas() {
         m.x += m.vx;
         m.y += m.vy;
 
-        if (m.age >= m.duration) {
+        if (m.age >= m.duration || isOutOfBounds(m, w, h)) {
           meteors.splice(i, 1);
           continue;
         }
 
         const life = lifeEnvelope(m.age, m.duration);
-        const tailX = m.x - (m.vx / Math.hypot(m.vx, m.vy)) * m.len;
-        const tailY = m.y - (m.vy / Math.hypot(m.vx, m.vy)) * m.len;
+        const speed = Math.hypot(m.vx, m.vy);
+        const tailX = m.x - (m.vx / speed) * m.len;
+        const tailY = m.y - (m.vy / speed) * m.len;
 
         const grad = ctx.createLinearGradient(tailX, tailY, m.x, m.y);
         grad.addColorStop(0, rgba(0));
-        grad.addColorStop(0.55, rgba(life * 0.22));
-        grad.addColorStop(1, rgba(life * 0.5));
+        grad.addColorStop(0.5, rgba(life * 0.18));
+        grad.addColorStop(1, rgba(life * 0.4));
 
         ctx.save();
-        ctx.shadowColor = rgba(life * 0.4);
-        ctx.shadowBlur = 7;
+        ctx.shadowColor = rgba(life * 0.35);
+        ctx.shadowBlur = 6;
         ctx.beginPath();
         ctx.moveTo(tailX, tailY);
         ctx.lineTo(m.x, m.y);
@@ -129,10 +144,10 @@ export function MeteorCanvas() {
       }
 
       while (meteors.length < MIN_METEORS) {
-        meteors.push(spawnMeteor(canvas.width, canvas.height));
+        meteors.push(spawnMeteor(w, h));
       }
       if (meteors.length < MAX_METEORS && Math.random() < SPAWN_CHANCE) {
-        meteors.push(spawnMeteor(canvas.width, canvas.height));
+        meteors.push(spawnMeteor(w, h));
       }
 
       rafId = requestAnimationFrame(frame);
