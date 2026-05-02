@@ -9,6 +9,8 @@ interface Meteor {
   len: number;
   age: number;
   duration: number;
+  turnsLeft: number;
+  pixelsSinceLastTurn: number;
 }
 
 const BRAND = { r: 232, g: 84, b: 28 };
@@ -17,19 +19,24 @@ const MAX_METEORS = 5;
 const SPAWN_CHANCE = 0.012;
 const CULL_MARGIN = 200;
 
-// The circuit SVG tiles at 80px. Grid-line positions are 40 + 80k
-// (center of each tile, where the node dots and line segments sit).
 const GRID_SIZE = 80;
 const GRID_OFFSET = 40;
+const TURN_CHANCE = 0.35;
+const MIN_SEGMENT_PX = GRID_SIZE * 1.5;
+const MAX_TURNS = 3;
 
 function rgba(alpha: number) {
   return `rgba(${BRAND.r},${BRAND.g},${BRAND.b},${alpha.toFixed(3)})`;
 }
 
-/** Return a random grid-line coordinate along the given axis length. */
 function randomGridLine(axisLen: number): number {
   const count = Math.floor((axisLen - GRID_OFFSET) / GRID_SIZE) + 1;
   const idx = Math.floor(Math.random() * count);
+  return GRID_OFFSET + idx * GRID_SIZE;
+}
+
+function snapToGrid(value: number): number {
+  const idx = Math.round((value - GRID_OFFSET) / GRID_SIZE);
   return GRID_OFFSET + idx * GRID_SIZE;
 }
 
@@ -40,7 +47,6 @@ function spawnMeteor(w: number, h: number): Meteor {
   let x: number, y: number, vx: number, vy: number;
 
   if (horizontal) {
-    // Travel left→right or right→left along a horizontal grid line
     y = randomGridLine(h);
     if (Math.random() < 0.5) {
       x = -CULL_MARGIN + 10;
@@ -51,7 +57,6 @@ function spawnMeteor(w: number, h: number): Meteor {
     }
     vy = 0;
   } else {
-    // Travel top→bottom or bottom→top along a vertical grid line
     x = randomGridLine(w);
     if (Math.random() < 0.5) {
       y = -CULL_MARGIN + 10;
@@ -71,7 +76,48 @@ function spawnMeteor(w: number, h: number): Meteor {
     len: 60 + Math.random() * 60,
     age: 0,
     duration: 200 + Math.floor(Math.random() * 120),
+    turnsLeft: Math.floor(Math.random() * (MAX_TURNS + 1)),
+    pixelsSinceLastTurn: 0,
   };
+}
+
+function gridNodeIndex(value: number): number {
+  return Math.floor((value - GRID_OFFSET) / GRID_SIZE);
+}
+
+function tryTurn(m: Meteor, prevX: number, prevY: number): void {
+  if (m.turnsLeft <= 0) return;
+  if (m.pixelsSinceLastTurn < MIN_SEGMENT_PX) return;
+
+  const isHorizontal = m.vy === 0;
+
+  if (isHorizontal) {
+    const prevIdx = gridNodeIndex(prevX);
+    const currIdx = gridNodeIndex(m.x);
+    if (currIdx === prevIdx) return;
+
+    if (Math.random() < TURN_CHANCE) {
+      const speed = Math.abs(m.vx);
+      m.x = snapToGrid(m.x);
+      m.vy = Math.random() < 0.5 ? speed : -speed;
+      m.vx = 0;
+      m.turnsLeft--;
+      m.pixelsSinceLastTurn = 0;
+    }
+  } else {
+    const prevIdx = gridNodeIndex(prevY);
+    const currIdx = gridNodeIndex(m.y);
+    if (currIdx === prevIdx) return;
+
+    if (Math.random() < TURN_CHANCE) {
+      const speed = Math.abs(m.vy);
+      m.y = snapToGrid(m.y);
+      m.vx = Math.random() < 0.5 ? speed : -speed;
+      m.vy = 0;
+      m.turnsLeft--;
+      m.pixelsSinceLastTurn = 0;
+    }
+  }
 }
 
 function lifeEnvelope(age: number, duration: number): number {
@@ -123,8 +169,14 @@ export function MeteorCanvas() {
       for (let i = meteors.length - 1; i >= 0; i--) {
         const m = meteors[i];
         m.age++;
+
+        const prevX = m.x;
+        const prevY = m.y;
         m.x += m.vx;
         m.y += m.vy;
+        m.pixelsSinceLastTurn += Math.abs(m.vx) + Math.abs(m.vy);
+
+        tryTurn(m, prevX, prevY);
 
         if (m.age >= m.duration || isOutOfBounds(m, w, h)) {
           meteors.splice(i, 1);
