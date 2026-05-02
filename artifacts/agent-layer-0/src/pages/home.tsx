@@ -21,11 +21,9 @@ async function handleWaitlistSubmit(_email: string, _buildingWith: string) {
   console.log("Waitlist submission:", { email: _email, buildingWith: _buildingWith });
 }
 
-const BRACKET_SPRING = {
-  type: "spring" as const,
-  stiffness: 70,
-  damping: 14,
-  delay: 0.05,
+const BRACKET_EASE = {
+  duration: 0.85,
+  ease: [0.16, 1, 0.3, 1] as const, // expo ease-out: fast start, graceful settle
 };
 
 function HeroTitle() {
@@ -60,14 +58,14 @@ function HeroTitle() {
         }}
         initial={{ x: "2.2em" }}
         animate={{ x: 0 }}
-        transition={BRACKET_SPRING}
+        transition={BRACKET_EASE}
       >
         [
       </motion.span>
 
-      {/* Center: AL0 fades out, full title fades in — title controls the layout width */}
+      {/* Center: AL0 dissolves out while Agent Layer 0 resolves in — overlapping */}
       <span style={{ position: "relative" }}>
-        {/* "AL0" sits absolutely centered, visible initially, fades out */}
+        {/* "AL0" blurs and fades out — starts dissolving immediately */}
         <motion.span
           aria-hidden="true"
           style={{
@@ -79,19 +77,20 @@ function HeroTitle() {
             whiteSpace: "nowrap",
             pointerEvents: "none",
           }}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          transition={{ duration: 0.2, delay: 0.1 }}
+          initial={{ opacity: 1, filter: "blur(0px)" }}
+          animate={{ opacity: 0, filter: "blur(10px)" }}
+          transition={{ duration: 0.55, ease: "easeIn" }}
         >
           AL0
         </motion.span>
 
-        {/* "Agent Layer 0" controls width, starts transparent */}
+        {/* "Agent Layer 0" controls width — resolves in from a slight blur */}
         <motion.span
           className="text-white"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.45, delay: 0.3 }}
+          initial={{ opacity: 0, filter: "blur(8px)", scaleX: 0.94 }}
+          animate={{ opacity: 1, filter: "blur(0px)", scaleX: 1 }}
+          transition={{ duration: 0.65, delay: 0.18, ease: "easeOut" }}
+          style={{ display: "inline-block", transformOrigin: "center" }}
         >
           Agent Layer 0
         </motion.span>
@@ -107,7 +106,7 @@ function HeroTitle() {
         }}
         initial={{ x: "-2.2em" }}
         animate={{ x: 0 }}
-        transition={BRACKET_SPRING}
+        transition={BRACKET_EASE}
       >
         ]
       </motion.span>
