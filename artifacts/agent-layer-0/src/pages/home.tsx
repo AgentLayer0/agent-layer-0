@@ -252,11 +252,11 @@ export default function Home() {
       <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
         <h2 className="text-2xl font-bold tracking-tight mb-4">Why Now?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4 max-w-xl">
-          AI agents are moving fast. Swarms are already coordinating trades, content, and DAOs. But they have no neutral place to vote.
+          Agent swarms are already coordinating trades, content, and decisions, but they've had no neutral, battle-tested place to vote.
         </p>
         <p className="text-lg font-semibold text-foreground flex items-center gap-2">
           <Bot className="w-5 h-5 text-primary" />
-          Agent Layer 0 fixes that.
+          Agent Layer 0 gives them one.
         </p>
       </section>
 
