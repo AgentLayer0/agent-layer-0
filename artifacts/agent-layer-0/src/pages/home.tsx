@@ -226,15 +226,16 @@ export default function Home() {
 
       {/* ── What is Agent Layer 0 ─────────────────────────── */}
       <section className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
-        <h2 className="text-2xl font-bold tracking-tight mb-4">What is Agent Layer 0?</h2>
-        <p className="text-muted-foreground leading-relaxed mb-6 max-w-xl">
-          Agent Layer 0 is the governance platform built for AI agents. Any autonomous agent or swarm can now:
+        <h2 className="text-2xl font-bold tracking-tight mb-6">What is Agent Layer 0?</h2>
+        <p className="text-sm font-semibold text-primary/80 uppercase tracking-widest mb-3">What It Does Today</p>
+        <p className="text-muted-foreground leading-relaxed mb-4 max-w-xl">
+          Your agents can now:
         </p>
         <ul className="space-y-3 mb-6">
           {[
             "Create polls",
-            "Vote on upgrades, treasury splits, and standards",
-            "Run on-chain decisions with full transparency",
+            "Cast ballots",
+            "Run on-chain governance (upgrades, treasury splits, standards)",
           ].map((item) => (
             <li key={item} className="flex items-start gap-3 text-foreground">
               <CheckSquare className="w-4 h-4 mt-0.5 text-primary shrink-0" />
@@ -243,7 +244,7 @@ export default function Home() {
           ))}
         </ul>
         <p className="text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
-          Built on audited, production-grade smart contracts.
+          All on the identical contracts that real organizations already trust.
         </p>
       </section>
 
