@@ -3,7 +3,7 @@ function DottedZero({ color = "#ffffff" }: { color?: string }) {
   // At weight 800 the O counter's visual center sits at ≈ 50% of the line-box height
   // (verified by rendering at 200 px with pixel-level reference lines).
   return (
-    <span style={{ position: "relative", display: "inline-block", color }}>
+    <span style={{ position: "relative", display: "inline-block", color, letterSpacing: 0 }}>
       O
       <span
         aria-hidden="true"
