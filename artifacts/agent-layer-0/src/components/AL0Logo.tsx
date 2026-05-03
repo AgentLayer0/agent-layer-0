@@ -1,38 +1,35 @@
 function DottedZero({ color = "#ffffff" }: { color?: string }) {
-  // "0" in transparent keeps the exact advance width and line metrics of the font.
-  // The SVG fills that character cell and draws a clean ring + dot in the cap-height zone.
-  // Cap height in JetBrains Mono ≈ 73% of em; baseline ≈ 76.5% from the top of the 1em box.
-  // So the glyph body spans viewBox rows ~3 → ~77 (in a 0-100 viewBox).
+  // Literal "0" character — correct size automatically matches A and L.
+  // fontFeatureSettings "zero" 0 suppresses JetBrains Mono's slashed-zero variant.
+  // Portrait pill outline + dot overlay matches the cover-art sensor mark.
   return (
-    <span style={{ position: "relative", display: "inline-block" }}>
-      <span style={{ color: "transparent" }} aria-hidden="true">0</span>
+    <span
+      style={{
+        position: "relative",
+        display: "inline-block",
+        fontFeatureSettings: '"zero" 0',
+        color,
+      }}
+    >
+      0
       <svg
-        aria-label="0"
-        role="img"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
+        aria-hidden="true"
+        viewBox="0 0 14 26"
         style={{
           position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -54%)",
+          width: "0.26em",
+          height: "0.46em",
+          pointerEvents: "none",
           overflow: "visible",
         }}
       >
-        {/* Ring centred in the cap-height zone (y: 3–77 of 100) */}
-        <rect
-          x="10"
-          y="4"
-          width="80"
-          height="72"
-          rx="36"
-          ry="36"
-          fill="none"
-          stroke={color}
-          strokeWidth="20"
-        />
-        {/* Centered dot */}
-        <circle cx="50" cy="40" r="6" fill={color} />
+        {/* Portrait pill outline — the sensor body */}
+        <rect x="1" y="1" width="12" height="24" rx="6" ry="6" fill="none" stroke={color} strokeWidth="2.2" />
+        {/* Dot in the upper half of the pill */}
+        <circle cx="7" cy="10" r="2.8" fill={color} />
       </svg>
     </span>
   );
