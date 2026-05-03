@@ -28,9 +28,10 @@ interface AL0WordmarkProps {
   size?: "sm" | "md" | "lg";
   className?: string;
   showFull?: boolean;
+  variant?: "abbr" | "full";
 }
 
-export function AL0Wordmark({ size = "md", className, showFull = false }: AL0WordmarkProps) {
+export function AL0Wordmark({ size = "md", className, showFull = false, variant = "abbr" }: AL0WordmarkProps) {
   const config = {
     sm: { fontSize: "14px", gap: "5px", tagSize: "8px", tagSpacing: "0.3em" },
     md: { fontSize: "20px", gap: "8px", tagSize: "9px", tagSpacing: "0.35em" },
@@ -52,7 +53,11 @@ export function AL0Wordmark({ size = "md", className, showFull = false }: AL0Wor
         }}
       >
         <span style={{ color: "#E8541C", opacity: 0.9 }}>[</span>
-        <span style={{ color: "#ffffff" }}>AL<DottedZero /></span>
+        {variant === "full" ? (
+          <span style={{ color: "#ffffff" }}>Agent Layer <DottedZero /></span>
+        ) : (
+          <span style={{ color: "#ffffff" }}>AL<DottedZero /></span>
+        )}
         <span style={{ color: "#E8541C", opacity: 0.9 }}>]</span>
       </div>
       {showFull && (

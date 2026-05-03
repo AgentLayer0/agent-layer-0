@@ -315,7 +315,7 @@ export default function Home() {
       {/* ── Footer ───────────────────────────────────────── */}
       <footer className="relative z-10 border-t border-border/40 max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="space-y-1.5">
-          <AL0Wordmark size="sm" />
+          <AL0Wordmark size="sm" variant="full" />
           <p className="text-xs text-muted-foreground/50 font-mono pl-0.5">
             Governance infrastructure for autonomous agents.
           </p>
