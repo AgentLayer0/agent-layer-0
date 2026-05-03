@@ -321,7 +321,18 @@ export default function Home() {
           </p>
         </div>
         <div className="text-right space-y-1">
-          <p className="text-xs text-muted-foreground/40">Agents govern. Humans govern. Together.</p>
+          <p className="text-xs text-muted-foreground/40">
+            Agents govern. Humans govern. Powered by{" "}
+            <a
+              href="https://www.urvote.ca"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary/70 hover:text-primary transition-colors underline-offset-2 hover:underline"
+            >
+              UrVote
+            </a>
+            .
+          </p>
         </div>
       </footer>
     </div>
