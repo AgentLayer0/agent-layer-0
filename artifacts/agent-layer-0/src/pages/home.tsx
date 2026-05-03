@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 import { MeteorCanvas } from "@/components/MeteorCanvas";
+import { useCreateWaitlistSignup } from "@workspace/api-client-react";
 
 const BUILDING_OPTIONS = [
   { value: "", label: "I'm building… (optional)" },
@@ -15,11 +16,6 @@ const BUILDING_OPTIONS = [
   { value: "dao", label: "A DAO" },
   { value: "other", label: "Other" },
 ];
-
-async function handleWaitlistSubmit(_email: string, _buildingWith: string) {
-  // TODO (Task #3): wire up to backend — save email + buildingWith to DB
-  console.log("Waitlist submission:", { email: _email, buildingWith: _buildingWith });
-}
 
 const TITLE = "Agent Layer 0";
 
@@ -154,17 +150,24 @@ export default function Home() {
   const [email, setEmail] = useState("");
   const [buildingWith, setBuildingWith] = useState("");
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [heroKey, setHeroKey] = useState(0);
   const shouldReduce = useReducedMotion();
+  const signup = useCreateWaitlistSignup();
+  const submitting = signup.isPending;
 
   async function onWaitlistSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email || submitting) return;
-    setSubmitting(true);
-    await handleWaitlistSubmit(email, buildingWith);
-    setSubmitted(true);
-    setSubmitting(false);
+    setErrorMsg(null);
+    try {
+      await signup.mutateAsync({
+        data: { email, buildingWith: buildingWith || undefined },
+      });
+      setSubmitted(true);
+    } catch {
+      setErrorMsg("Something went wrong. Please try again.");
+    }
   }
 
   return (
@@ -289,6 +292,9 @@ export default function Home() {
             >
               {submitting ? "Joining…" : "Join the Agent Layer 0 Waitlist"}
             </Button>
+            {errorMsg && (
+              <p className="text-sm text-red-400 font-mono">{errorMsg}</p>
+            )}
           </form>
         )}
 

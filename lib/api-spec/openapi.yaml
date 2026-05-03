@@ -26,6 +26,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /waitlist:
+    post:
+      operationId: createWaitlistSignup
+      tags: [waitlist]
+      summary: Create a waitlist signup
+      description: Adds an email (and optional building category) to the waitlist
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WaitlistSignupInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaitlistSignupResponse"
+        "200":
+          description: Already on the waitlist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WaitlistSignupResponse"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /waitlist/stats:
     get:
       operationId: getWaitlistStats
@@ -76,3 +107,32 @@ components:
       required:
         - total
         - breakdown
+    WaitlistSignupInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        buildingWith:
+          type: string
+          maxLength: 64
+      required:
+        - email
+    WaitlistSignupResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        alreadyOnList:
+          type: boolean
+      required:
+        - ok
+        - alreadyOnList
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error

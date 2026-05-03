@@ -20,3 +20,19 @@ export interface WaitlistStats {
   total: number;
   breakdown: WaitlistStatItem[];
 }
+
+export interface WaitlistSignupInput {
+  /** @maxLength 254 */
+  email: string;
+  /** @maxLength 64 */
+  buildingWith?: string;
+}
+
+export interface WaitlistSignupResponse {
+  ok: boolean;
+  alreadyOnList: boolean;
+}
+
+export interface ErrorResponse {
+  error: string;
+}

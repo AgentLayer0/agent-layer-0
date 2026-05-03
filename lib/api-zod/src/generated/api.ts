@@ -16,6 +16,27 @@ export const HealthCheckResponse = zod.object({
 });
 
 /**
+ * Adds an email (and optional building category) to the waitlist
+ * @summary Create a waitlist signup
+ */
+export const createWaitlistSignupBodyEmailMax = 254;
+
+export const createWaitlistSignupBodyBuildingWithMax = 64;
+
+export const CreateWaitlistSignupBody = zod.object({
+  email: zod.string().email().max(createWaitlistSignupBodyEmailMax),
+  buildingWith: zod
+    .string()
+    .max(createWaitlistSignupBodyBuildingWithMax)
+    .optional(),
+});
+
+export const CreateWaitlistSignupResponse = zod.object({
+  ok: zod.boolean(),
+  alreadyOnList: zod.boolean(),
+});
+
+/**
  * Returns count and percentage breakdown of waitlist signups by building category
  * @summary Get waitlist stats
  */

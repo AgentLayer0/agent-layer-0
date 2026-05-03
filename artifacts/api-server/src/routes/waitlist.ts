@@ -2,9 +2,42 @@ import { Router, type IRouter } from "express";
 import { db } from "@workspace/db";
 import { waitlistTable } from "@workspace/db/schema";
 import { sql } from "drizzle-orm";
-import { GetWaitlistStatsResponse } from "@workspace/api-zod";
+import {
+  CreateWaitlistSignupBody,
+  CreateWaitlistSignupResponse,
+  GetWaitlistStatsResponse,
+} from "@workspace/api-zod";
 
 const router: IRouter = Router();
+
+router.post("/waitlist", async (req, res) => {
+  const parsed = CreateWaitlistSignupBody.safeParse(req.body);
+  if (!parsed.success) {
+    res.status(400).json({ error: "Invalid input" });
+    return;
+  }
+
+  const email = parsed.data.email.trim().toLowerCase();
+  const buildingWith = parsed.data.buildingWith?.trim() || null;
+
+  try {
+    const inserted = await db
+      .insert(waitlistTable)
+      .values({ email, buildingWith })
+      .onConflictDoNothing({ target: waitlistTable.email })
+      .returning({ id: waitlistTable.id });
+
+    const alreadyOnList = inserted.length === 0;
+    const data = CreateWaitlistSignupResponse.parse({
+      ok: true,
+      alreadyOnList,
+    });
+    res.status(alreadyOnList ? 200 : 201).json(data);
+  } catch (err) {
+    req.log.error(err, "Failed to create waitlist signup");
+    res.status(500).json({ error: "Failed to create waitlist signup" });
+  }
+});
 
 const BUILDING_LABELS: Record<string, string> = {
   startup: "A startup product",

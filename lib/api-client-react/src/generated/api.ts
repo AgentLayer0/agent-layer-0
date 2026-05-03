@@ -5,18 +5,27 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import type {
+  MutationFunction,
   QueryFunction,
   QueryKey,
+  UseMutationOptions,
+  UseMutationResult,
   UseQueryOptions,
   UseQueryResult,
 } from "@tanstack/react-query";
 
-import type { HealthStatus, WaitlistStats } from "./api.schemas";
+import type {
+  ErrorResponse,
+  HealthStatus,
+  WaitlistSignupInput,
+  WaitlistSignupResponse,
+  WaitlistStats,
+} from "./api.schemas";
 
 import { customFetch } from "../custom-fetch";
-import type { ErrorType } from "../custom-fetch";
+import type { ErrorType, BodyType } from "../custom-fetch";
 
 type AwaitedInput<T> = PromiseLike<T> | T;
 
@@ -99,6 +108,93 @@ export function useHealthCheck<
 
   return { ...query, queryKey: queryOptions.queryKey };
 }
+
+/**
+ * Adds an email (and optional building category) to the waitlist
+ * @summary Create a waitlist signup
+ */
+export const getCreateWaitlistSignupUrl = () => {
+  return `/api/waitlist`;
+};
+
+export const createWaitlistSignup = async (
+  waitlistSignupInput: WaitlistSignupInput,
+  options?: RequestInit,
+): Promise<WaitlistSignupResponse> => {
+  return customFetch<WaitlistSignupResponse>(getCreateWaitlistSignupUrl(), {
+    ...options,
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...options?.headers },
+    body: JSON.stringify(waitlistSignupInput),
+  });
+};
+
+export const getCreateWaitlistSignupMutationOptions = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createWaitlistSignup>>,
+    TError,
+    { data: BodyType<WaitlistSignupInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationOptions<
+  Awaited<ReturnType<typeof createWaitlistSignup>>,
+  TError,
+  { data: BodyType<WaitlistSignupInput> },
+  TContext
+> => {
+  const mutationKey = ["createWaitlistSignup"];
+  const { mutation: mutationOptions, request: requestOptions } = options
+    ? options.mutation &&
+      "mutationKey" in options.mutation &&
+      options.mutation.mutationKey
+      ? options
+      : { ...options, mutation: { ...options.mutation, mutationKey } }
+    : { mutation: { mutationKey }, request: undefined };
+
+  const mutationFn: MutationFunction<
+    Awaited<ReturnType<typeof createWaitlistSignup>>,
+    { data: BodyType<WaitlistSignupInput> }
+  > = (props) => {
+    const { data } = props ?? {};
+
+    return createWaitlistSignup(data, requestOptions);
+  };
+
+  return { mutationFn, ...mutationOptions };
+};
+
+export type CreateWaitlistSignupMutationResult = NonNullable<
+  Awaited<ReturnType<typeof createWaitlistSignup>>
+>;
+export type CreateWaitlistSignupMutationBody = BodyType<WaitlistSignupInput>;
+export type CreateWaitlistSignupMutationError = ErrorType<ErrorResponse>;
+
+/**
+ * @summary Create a waitlist signup
+ */
+export const useCreateWaitlistSignup = <
+  TError = ErrorType<ErrorResponse>,
+  TContext = unknown,
+>(options?: {
+  mutation?: UseMutationOptions<
+    Awaited<ReturnType<typeof createWaitlistSignup>>,
+    TError,
+    { data: BodyType<WaitlistSignupInput> },
+    TContext
+  >;
+  request?: SecondParameter<typeof customFetch>;
+}): UseMutationResult<
+  Awaited<ReturnType<typeof createWaitlistSignup>>,
+  TError,
+  { data: BodyType<WaitlistSignupInput> },
+  TContext
+> => {
+  return useMutation(getCreateWaitlistSignupMutationOptions(options));
+};
 
 /**
  * Returns count and percentage breakdown of waitlist signups by building category
