@@ -1,7 +1,7 @@
 function DottedZero({ color = "#ffffff" }: { color?: string }) {
   // JetBrains Mono "0" has a baked-in slash; capital "O" is identical in shape without it.
-  // A single filled dot is centered in the counter of the O using the cap-height midpoint
-  // (≈ 42% of the 1em line box) rather than 50% which would sit below the glyph's center.
+  // At weight 800 the O counter's visual center sits at ≈ 50% of the line-box height
+  // (verified by rendering at 200 px with pixel-level reference lines).
   return (
     <span style={{ position: "relative", display: "inline-block", color }}>
       O
@@ -9,7 +9,7 @@ function DottedZero({ color = "#ffffff" }: { color?: string }) {
         aria-hidden="true"
         style={{
           position: "absolute",
-          top: "42%",
+          top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
           width: "0.12em",
