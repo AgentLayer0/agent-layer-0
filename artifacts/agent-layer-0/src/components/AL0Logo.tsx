@@ -1,23 +1,36 @@
 function DottedZero({ color = "#ffffff" }: { color?: string }) {
+  // Custom-drawn "0" so we don't inherit JetBrains Mono's slashed-zero glyph.
+  // Renders as an SVG inline with the surrounding text, sized in em units.
   return (
-    <span style={{ position: "relative", display: "inline-block", color }}>
-      0
-      {/* Centered dot — the "inner eye" of the zero */}
-      <span
-        aria-hidden="true"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "0.18em",
-          height: "0.18em",
-          borderRadius: "50%",
-          background: color,
-          pointerEvents: "none",
-        }}
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 60 80"
+      style={{
+        display: "inline-block",
+        width: "0.6em",
+        height: "0.8em",
+        verticalAlign: "baseline",
+        marginBottom: "-0.07em",
+        overflow: "visible",
+      }}
+      role="img"
+      aria-label="0"
+    >
+      {/* Outer ring — the "0" */}
+      <rect
+        x="6"
+        y="6"
+        width="48"
+        height="68"
+        rx="24"
+        ry="24"
+        fill="none"
+        stroke={color}
+        strokeWidth="12"
       />
-    </span>
+      {/* Centered dot — the "inner eye" */}
+      <circle cx="30" cy="40" r="6" fill={color} />
+    </svg>
   );
 }
 
