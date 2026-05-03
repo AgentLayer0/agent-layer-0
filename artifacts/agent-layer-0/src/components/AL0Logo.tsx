@@ -1,28 +1,25 @@
 function DottedZero({ color = "#ffffff" }: { color?: string }) {
-  // JetBrains Mono's "0" digit has a built-in diagonal slash that can't be suppressed
-  // via font-feature-settings in the Google Fonts subset. Capital "O" is identical in
-  // shape to the digit zero in this font but has no slash. The pill+dot overlay adds
-  // the sensor-mark detail from the cover art.
+  // JetBrains Mono "0" has a baked-in slash; capital "O" is identical in shape without it.
+  // A single filled dot is centered in the counter of the O using the cap-height midpoint
+  // (≈ 42% of the 1em line box) rather than 50% which would sit below the glyph's center.
   return (
     <span style={{ position: "relative", display: "inline-block", color }}>
       O
-      <svg
+      <span
         aria-hidden="true"
-        viewBox="0 0 14 24"
         style={{
           position: "absolute",
-          top: "50%",
+          top: "42%",
           left: "50%",
-          transform: "translate(-50%, -52%)",
-          width: "0.28em",
-          height: "0.48em",
+          transform: "translate(-50%, -50%)",
+          width: "0.12em",
+          height: "0.12em",
+          borderRadius: "50%",
+          background: color,
+          display: "block",
           pointerEvents: "none",
-          overflow: "visible",
         }}
-      >
-        <rect x="1" y="1" width="12" height="22" rx="6" fill="none" stroke={color} strokeWidth="2" />
-        <circle cx="7" cy="9" r="2.5" fill={color} />
-      </svg>
+      />
     </span>
   );
 }
