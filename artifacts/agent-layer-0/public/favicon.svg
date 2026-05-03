@@ -1,10 +1,18 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Dark background -->
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'JetBrains Mono';
+        font-weight: 800;
+        src: url('data:font/woff2;base64,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') format('woff2');
+      }
+    </style>
+  </defs>
+
   <rect width="180" height="180" rx="36" fill="#0d0d10"/>
 
-  <!-- [ 0 ] — system monospace, no external font dependency -->
   <text
-    font-family="'Courier New', Courier, monospace"
+    font-family="'JetBrains Mono', monospace"
     font-weight="800"
     font-size="80"
     text-anchor="middle"
@@ -13,7 +21,6 @@
     y="92"
   ><tspan fill="#E8541C" opacity="0.9">[</tspan><tspan fill="#ffffff">0</tspan><tspan fill="#E8541C" opacity="0.9">]</tspan></text>
 
-  <!-- Dotted-zero detail: oversized pill + dot so it survives 32px rasterisation -->
   <rect x="82" y="72" width="16" height="28" rx="8" fill="none" stroke="#ffffff" stroke-width="2.5"/>
   <circle cx="90" cy="78" r="4" fill="#ffffff"/>
 </svg>
