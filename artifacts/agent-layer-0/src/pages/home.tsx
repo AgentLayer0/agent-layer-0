@@ -212,7 +212,7 @@ export default function Home() {
               size="lg"
               className="w-full sm:w-auto h-12 px-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_24px_-6px_rgba(232,84,28,0.55)] hover:shadow-[0_0_36px_-6px_rgba(232,84,28,0.75)] transition-all"
             >
-              Notify Me When It Launches
+              Request Early Access
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </a>
@@ -290,7 +290,7 @@ export default function Home() {
               size="lg"
               className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_20px_-6px_rgba(232,84,28,0.5)] hover:shadow-[0_0_32px_-6px_rgba(232,84,28,0.7)] transition-all"
             >
-              {submitting ? "Joining…" : "Join Agent Layer 0"}
+              {submitting ? "Requesting…" : "Be the first to get the SDK"}
             </Button>
             {errorMsg && (
               <p className="text-sm text-red-400 font-mono">{errorMsg}</p>
