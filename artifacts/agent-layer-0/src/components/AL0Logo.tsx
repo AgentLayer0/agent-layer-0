@@ -1,36 +1,40 @@
 function DottedZero({ color = "#ffffff" }: { color?: string }) {
-  // Custom-drawn "0" so we don't inherit JetBrains Mono's slashed-zero glyph.
-  // Renders as an SVG inline with the surrounding text, sized in em units.
+  // "0" in transparent keeps the exact advance width and line metrics of the font.
+  // The SVG fills that character cell and draws a clean ring + dot in the cap-height zone.
+  // Cap height in JetBrains Mono ≈ 73% of em; baseline ≈ 76.5% from the top of the 1em box.
+  // So the glyph body spans viewBox rows ~3 → ~77 (in a 0-100 viewBox).
   return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 60 80"
-      style={{
-        display: "inline-block",
-        width: "0.6em",
-        height: "0.8em",
-        verticalAlign: "baseline",
-        marginBottom: "-0.07em",
-        overflow: "visible",
-      }}
-      role="img"
-      aria-label="0"
-    >
-      {/* Outer ring — the "0" */}
-      <rect
-        x="6"
-        y="6"
-        width="48"
-        height="68"
-        rx="24"
-        ry="24"
-        fill="none"
-        stroke={color}
-        strokeWidth="12"
-      />
-      {/* Centered dot — the "inner eye" */}
-      <circle cx="30" cy="40" r="6" fill={color} />
-    </svg>
+    <span style={{ position: "relative", display: "inline-block" }}>
+      <span style={{ color: "transparent" }} aria-hidden="true">0</span>
+      <svg
+        aria-label="0"
+        role="img"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          overflow: "visible",
+        }}
+      >
+        {/* Ring centred in the cap-height zone (y: 3–77 of 100) */}
+        <rect
+          x="10"
+          y="4"
+          width="80"
+          height="72"
+          rx="36"
+          ry="36"
+          fill="none"
+          stroke={color}
+          strokeWidth="20"
+        />
+        {/* Centered dot */}
+        <circle cx="50" cy="40" r="6" fill={color} />
+      </svg>
+    </span>
   );
 }
 
