@@ -22,6 +22,6 @@
   </text>
 
   <!-- Dotted-zero detail: pill outline + dot centred in the zero counter -->
-  <rect x="85" y="76" width="10" height="18" rx="5" fill="none" stroke="#0d0d10" stroke-width="1.5"/>
-  <circle cx="90" cy="81" r="2.5" fill="#0d0d10"/>
+  <rect x="85" y="76" width="10" height="18" rx="5" fill="none" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="90" cy="81" r="2.5" fill="#ffffff"/>
 </svg>
