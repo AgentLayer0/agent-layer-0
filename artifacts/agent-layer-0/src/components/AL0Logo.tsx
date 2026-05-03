@@ -54,7 +54,7 @@ export function AL0Wordmark({ size = "md", className, showFull = false, variant 
       >
         <span style={{ color: "#E8541C", opacity: 0.9 }}>[</span>
         {variant === "full" ? (
-          <span style={{ color: "#ffffff" }}>Agent Layer <DottedZero /></span>
+          <span style={{ color: "#ffffff" }}>Agent Layer 0</span>
         ) : (
           <span style={{ color: "#ffffff" }}>AL<DottedZero /></span>
         )}
