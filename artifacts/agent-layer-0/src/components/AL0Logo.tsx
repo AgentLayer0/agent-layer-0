@@ -1,38 +1,5 @@
 function DottedZero({ color = "#ffffff" }: { color?: string }) {
-  // Literal "0" character — correct size automatically matches A and L.
-  // fontFeatureSettings "zero" 0 suppresses JetBrains Mono's slashed-zero variant.
-  // Portrait pill outline + dot overlay matches the cover-art sensor mark.
-  return (
-    <span
-      style={{
-        position: "relative",
-        display: "inline-block",
-        fontFeatureSettings: '"zero" 0',
-        color,
-      }}
-    >
-      0
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 14 26"
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -54%)",
-          width: "0.26em",
-          height: "0.46em",
-          pointerEvents: "none",
-          overflow: "visible",
-        }}
-      >
-        {/* Portrait pill outline — the sensor body */}
-        <rect x="1" y="1" width="12" height="24" rx="6" ry="6" fill="none" stroke={color} strokeWidth="2.2" />
-        {/* Dot in the upper half of the pill */}
-        <circle cx="7" cy="10" r="2.8" fill={color} />
-      </svg>
-    </span>
-  );
+  return <span style={{ color }}>0</span>;
 }
 
 interface AL0WordmarkProps {
