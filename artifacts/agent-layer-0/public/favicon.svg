@@ -1,27 +1,19 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&amp;display=swap');
-    </style>
-  </defs>
-
   <!-- Dark background -->
   <rect width="180" height="180" rx="36" fill="#0d0d10"/>
 
-  <!-- [ 0 ] — single monospace text block, centred; tspans carry per-char colour -->
+  <!-- [ 0 ] — system monospace, no external font dependency -->
   <text
-    font-family="'JetBrains Mono', 'Courier New', monospace"
+    font-family="'Courier New', Courier, monospace"
     font-weight="800"
-    font-size="78"
+    font-size="80"
     text-anchor="middle"
     dominant-baseline="central"
     x="90"
     y="92"
-  >
-    <tspan fill="#E8541C" opacity="0.9">[</tspan><tspan fill="#ffffff">0</tspan><tspan fill="#E8541C" opacity="0.9">]</tspan>
-  </text>
+  ><tspan fill="#E8541C" opacity="0.9">[</tspan><tspan fill="#ffffff">0</tspan><tspan fill="#E8541C" opacity="0.9">]</tspan></text>
 
-  <!-- Dotted-zero detail: pill outline + dot centred in the zero counter -->
-  <rect x="85" y="76" width="10" height="18" rx="5" fill="none" stroke="#ffffff" stroke-width="1.5"/>
-  <circle cx="90" cy="81" r="2.5" fill="#ffffff"/>
+  <!-- Dotted-zero detail: oversized pill + dot so it survives 32px rasterisation -->
+  <rect x="82" y="72" width="16" height="28" rx="8" fill="none" stroke="#ffffff" stroke-width="2.5"/>
+  <circle cx="90" cy="78" r="4" fill="#ffffff"/>
 </svg>
