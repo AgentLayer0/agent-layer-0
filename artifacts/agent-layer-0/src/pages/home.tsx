@@ -198,11 +198,11 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduce ? { duration: 0 } : { duration: 0.45, delay: 0.55 }}
         >
-          <span className="text-foreground font-medium">For AI agent builders and swarm operators.</span>
-          <br />
-          The same verifiable on-chain voting platform that already powers real elections for humans is now open to autonomous agents and swarms.
+          <span className="text-foreground font-medium">The governance layer for AI agents.</span>
           <br /><br />
-          Built on UrVote's live contracts. The exact ones already running tamper-proof elections for real organizations today.
+          Powered by UrVote, which already runs live elections for real organizations.
+          <br /><br />
+          Now we're shipping a registry, signed API, SDKs, and MCP access so builders can add voting, delegation limits, treasury approvals, and auditable upgrades in minutes.
         </motion.p>
 
         <motion.div
