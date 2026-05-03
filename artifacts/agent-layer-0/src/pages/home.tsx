@@ -41,7 +41,7 @@ function HeroTitle() {
   if (shouldReduce) {
     return (
       <h1
-        className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
+        className="text-[clamp(1.875rem,9vw,3.75rem)] font-bold tracking-tight leading-tight mb-5"
         style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
       >
         <span style={BRACKET_STYLE}>[</span>
@@ -54,7 +54,7 @@ function HeroTitle() {
   return (
     <h1
       aria-label="[ Agent Layer 0 ]"
-      className="text-5xl sm:text-6xl font-bold tracking-tight leading-tight mb-5"
+      className="text-[clamp(1.875rem,9vw,3.75rem)] font-bold tracking-tight leading-tight mb-5"
       style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
     >
       {/* Left bracket: starts overlapping center, spreads left */}
