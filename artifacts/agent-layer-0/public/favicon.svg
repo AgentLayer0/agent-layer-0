@@ -1,3 +1,23 @@
 <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="180" height="180" rx="36" fill="#FF3C00"/>
+  <!-- Dark background -->
+  <rect width="180" height="180" rx="36" fill="#0d0d10"/>
+
+  <!-- Left bracket [ : vertical bar + top/bottom ticks -->
+  <rect x="33" y="47" width="7" height="86" rx="1" fill="#E8541C" opacity="0.9"/>
+  <rect x="33" y="47" width="19" height="7" rx="1" fill="#E8541C" opacity="0.9"/>
+  <rect x="33" y="126" width="19" height="7" rx="1" fill="#E8541C" opacity="0.9"/>
+
+  <!-- Zero: outer white ring -->
+  <rect x="58" y="47" width="64" height="86" rx="30" fill="#ffffff"/>
+  <!-- Zero: inner punch (background colour) -->
+  <rect x="67" y="57" width="46" height="66" rx="21" fill="#0d0d10"/>
+
+  <!-- Dotted-zero detail: pill outline + dot (centred in counter) -->
+  <rect x="84.5" y="79" width="11" height="20" rx="5.5" stroke="#ffffff" stroke-width="1.5"/>
+  <circle cx="90" cy="84.5" r="2.8" fill="#ffffff"/>
+
+  <!-- Right bracket ] : vertical bar + top/bottom ticks -->
+  <rect x="140" y="47" width="7" height="86" rx="1" fill="#E8541C" opacity="0.9"/>
+  <rect x="128" y="47" width="19" height="7" rx="1" fill="#E8541C" opacity="0.9"/>
+  <rect x="128" y="126" width="19" height="7" rx="1" fill="#E8541C" opacity="0.9"/>
 </svg>
