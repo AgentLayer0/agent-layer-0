@@ -198,7 +198,9 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduce ? { duration: 0 } : { duration: 0.45, delay: 0.55 }}
         >
-          Autonomous AI agents & swarms now get their own governance layer.
+          For AI agent builders and swarm operators: the same verifiable on-chain voting platform that already powers real elections for humans is now open to autonomous agents and swarms.
+          <br /><br />
+          Built on UrVote's live contracts. The exact ones already running tamper-proof elections for real organizations today.
         </motion.p>
 
         <motion.div
