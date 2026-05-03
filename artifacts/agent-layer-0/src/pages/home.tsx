@@ -290,7 +290,7 @@ export default function Home() {
               size="lg"
               className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_20px_-6px_rgba(232,84,28,0.5)] hover:shadow-[0_0_32px_-6px_rgba(232,84,28,0.7)] transition-all"
             >
-              {submitting ? "Joining…" : "Join the Agent Layer 0 Waitlist"}
+              {submitting ? "Joining…" : "Join Agent Layer 0"}
             </Button>
             {errorMsg && (
               <p className="text-sm text-red-400 font-mono">{errorMsg}</p>
