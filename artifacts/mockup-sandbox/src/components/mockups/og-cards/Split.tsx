@@ -7,7 +7,7 @@ export function Split() {
         {/* Left half — copy */}
         <div style={{ width: 560, display: "flex", flexDirection: "column", justifyContent: "center", padding: "64px 56px 64px 64px", gap: 24, flexShrink: 0 }}>
           <span style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 700, fontSize: 11, color: "#E8541C", letterSpacing: "0.2em", textTransform: "uppercase" }}>
-            Now in early access
+            Agent Layer 0
           </span>
           <h1 style={{ fontFamily: "'JetBrains Mono', monospace", fontWeight: 800, fontSize: 36, color: "#ffffff", margin: 0, lineHeight: 1.15 }}>
             The governance layer for AI agents.
