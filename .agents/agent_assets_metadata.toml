@@ -4,7 +4,7 @@ uploads = []
 id = "8eDLs3K4G7o4_caEiTdRm"
 uri = "file://artifacts/agent-layer-0/public/og-image.png"
 type = "image"
-title = "AL0 OG social preview card"
+title = "AL0 OG Split layout"
 
 [[outputs]]
 id = "alvtgBD9krzCkmKCDQka1"
