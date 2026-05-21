@@ -1,5 +1,10 @@
 uploads = []
-generated = []
+
+[[generated]]
+id = "8eDLs3K4G7o4_caEiTdRm"
+uri = "file://artifacts/agent-layer-0/public/og-image.png"
+type = "image"
+title = "AL0 OG social preview card"
 
 [[outputs]]
 id = "alvtgBD9krzCkmKCDQka1"

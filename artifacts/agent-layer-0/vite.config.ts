@@ -26,9 +26,21 @@ if (!basePath) {
   );
 }
 
+const siteUrl = (() => {
+  const domains = process.env.REPLIT_DOMAINS ?? "";
+  const first = domains.split(",")[0]?.trim();
+  return first ? `https://${first}` : "";
+})();
+
 export default defineConfig({
   base: basePath,
   plugins: [
+    {
+      name: "inject-site-url",
+      transformIndexHtml(html: string) {
+        return html.replace(/%SITE_URL%/g, siteUrl);
+      },
+    },
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
