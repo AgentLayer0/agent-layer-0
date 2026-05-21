@@ -6,5 +6,8 @@ export const modules: ModuleMap = {
   "./components/mockups/al0-logos/Layers.tsx": () => import("../components/mockups/al0-logos/Layers.tsx"),
   "./components/mockups/al0-logos/Typographic.tsx": () => import("../components/mockups/al0-logos/Typographic.tsx"),
   "./components/mockups/al0-social/TwitterCover.tsx": () => import("../components/mockups/al0-social/TwitterCover.tsx"),
-  "./components/mockups/al0-social/TwitterProfile.tsx": () => import("../components/mockups/al0-social/TwitterProfile.tsx")
+  "./components/mockups/al0-social/TwitterProfile.tsx": () => import("../components/mockups/al0-social/TwitterProfile.tsx"),
+  "./components/mockups/og-cards/Centered.tsx": () => import("../components/mockups/og-cards/Centered.tsx"),
+  "./components/mockups/og-cards/LeftAccent.tsx": () => import("../components/mockups/og-cards/LeftAccent.tsx"),
+  "./components/mockups/og-cards/Split.tsx": () => import("../components/mockups/og-cards/Split.tsx")
 };
