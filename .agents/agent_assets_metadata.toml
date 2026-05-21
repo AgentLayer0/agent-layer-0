@@ -17,3 +17,9 @@ id = "Hwvlz1qdh780DpuuHBntU"
 uri = "file://exports/al0-twitter-profile.png"
 type = "image"
 title = "AL0 Profile Pic — [ 0 ] (400×400 PNG)"
+
+[[outputs]]
+id = "JNcrdlv9Qso03kPmkBXOJ"
+uri = "file://artifacts/agent-layer-0/public/og-image.png"
+type = "image"
+title = "Agent Layer 0 — OG Social Preview"
