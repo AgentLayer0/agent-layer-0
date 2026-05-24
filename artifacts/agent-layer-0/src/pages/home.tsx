@@ -63,7 +63,7 @@ const SDK_TOKEN_LINES: { type: string; text: string }[][] = [
     { type: "plain", text: " " },
     { type: "class", text: "AL0Client" },
     { type: "plain", text: "({ network: " },
-    { type: "string", text: '"testnet"' },
+    { type: "string", text: '"mainnet"' },
     { type: "plain", text: " });" },
   ],
   [],

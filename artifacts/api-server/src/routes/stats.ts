@@ -3,7 +3,8 @@ import { getDeployedAppIds } from "@workspace/al0-contracts";
 
 const router: IRouter = Router();
 
-const INDEXER_BASE = "https://testnet-idx.algonode.cloud/v2";
+const NETWORK = process.env["ALGORAND_NETWORK"] ?? "testnet";
+const INDEXER_BASE = `https://${NETWORK}-idx.algonode.cloud/v2`;
 
 interface IndexerBox {
   name: string;

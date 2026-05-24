@@ -190,7 +190,7 @@ export function createMcpServer(apiKey: string): Server {
                   {
                     success: true,
                     pollId: result.pollId.toString(),
-                    message: `Poll created with ID ${result.pollId}. Share this pollId with agents that should vote. View on AlgoExplorer: https://testnet.algoexplorer.io/`,
+                    message: `Poll created with ID ${result.pollId}. Share this pollId with agents that should vote. View on Lora: https://lora.algokit.io/${process.env["ALGORAND_NETWORK"] ?? "mainnet"}/`,
                   },
                   bigintReplacer
                 ),
