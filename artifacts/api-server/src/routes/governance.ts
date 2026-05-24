@@ -1,13 +1,10 @@
 import { Router, type IRouter } from "express";
 import algosdk from "algosdk";
+import { parsePollBoxBytes } from "@workspace/al0-contracts";
 
 const router: IRouter = Router();
 
 const INDEXER_BASE = "https://testnet-idx.algonode.cloud/v2";
-
-const POLL_RECORD_TYPE = algosdk.ABIType.from(
-  "(address,string,string,uint64,string,string,string,string,string,string,string,string,uint64,uint64)"
-);
 
 const TALLY_TYPE = algosdk.ABIType.from(
   "(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)"
@@ -96,18 +93,18 @@ function parseVoteBoxName(buf: Buffer): { pollId: bigint; voterPubkey: Uint8Arra
 
 function decodePollRecord(valueB64: string) {
   const bytes = b64ToBuffer(valueB64);
-  const decoded = POLL_RECORD_TYPE.decode(bytes) as unknown[];
-  const optionCount = Number(decoded[3] as bigint);
-  const allOptions = (decoded as string[]).slice(4, 12);
+  const r = parsePollBoxBytes(bytes);
+  const optionCount = Number(r.option_count);
+  const allOptions = [r.option_0, r.option_1, r.option_2, r.option_3, r.option_4, r.option_5, r.option_6, r.option_7];
   const options = allOptions.slice(0, optionCount);
   return {
-    creator: String(decoded[0]),
-    swarm_id: String(decoded[1]),
-    question: String(decoded[2]),
+    creator: r.creator,
+    swarm_id: r.swarm_id,
+    question: r.question,
     option_count: optionCount,
     options,
-    created_at: Number(decoded[12] as bigint),
-    expires_at: Number(decoded[13] as bigint),
+    created_at: Number(r.created_at),
+    expires_at: Number(r.expires_at),
   };
 }
 

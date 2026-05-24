@@ -135,20 +135,37 @@ router.post(
 
     const typedOptions = options as [string, string, ...string[]];
     const pollClient = new PollFactoryClient(appIds.pollFactoryAppId, algod);
-    const { pollId, txId: pollTxId } = await pollClient.createPoll(
-      sender,
-      signer,
-      { swarm_id, question, options: typedOptions, expires_at },
-      appIds.agentRegistryAppId,
-    );
+    let pollId: bigint;
+    let pollTxId: string;
+    let initTxId: string;
+    try {
+      ({ pollId, txId: pollTxId } = await pollClient.createPoll(
+        sender,
+        signer,
+        { swarm_id, question, options: typedOptions, expires_at },
+        appIds.agentRegistryAppId,
+      ));
 
-    const ballotClient = new BallotBoxClient(appIds.ballotBoxAppId, algod);
-    const { txId: initTxId } = await ballotClient.initPoll(
-      sender,
-      signer,
-      { poll_id: Number(pollId) },
-      appIds.pollFactoryAppId,
-    );
+      const ballotClient = new BallotBoxClient(appIds.ballotBoxAppId, algod);
+      ({ txId: initTxId } = await ballotClient.initPoll(
+        sender,
+        signer,
+        { poll_id: Number(pollId) },
+        appIds.pollFactoryAppId,
+      ));
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("balance") && msg.includes("below min")) {
+        req.log.error({ sender }, "relay/poll failed — relay wallet balance below minimum");
+        res.status(503).json({
+          error: "Relay wallet has insufficient ALGO balance. Top up: " + sender,
+        });
+      } else {
+        req.log.error({ err, swarm_id }, "relay/poll Algorand error");
+        res.status(502).json({ error: "Algorand transaction failed: " + msg });
+      }
+      return;
+    }
 
     await db.insert(relayTransactionsTable).values([
       { apiKeyId, txType: "poll", algoTxId: pollTxId, status: "confirmed" },
@@ -222,7 +239,24 @@ router.post(
     const sender = makeRelayAddress();
     const signer = makeRelaySigner();
     const ballotClient = new BallotBoxClient(appIds.ballotBoxAppId, algod);
-    const { txId } = await ballotClient.castVote(sender, signer, { poll_id, option_index });
+    let txId: string;
+    try {
+      ({ txId } = await ballotClient.castVote(sender, signer, { poll_id, option_index }));
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("balance") && msg.includes("below min")) {
+        req.log.error({ sender }, "relay/vote failed — relay wallet balance below minimum");
+        res.status(503).json({
+          error: "Relay wallet has insufficient ALGO balance. Top up: " + sender,
+        });
+      } else if (msg.includes("has already voted") || msg.includes("box already exists")) {
+        res.status(409).json({ error: "This swarm has already voted on poll " + poll_id });
+      } else {
+        req.log.error({ err, poll_id }, "relay/vote Algorand error");
+        res.status(502).json({ error: "Algorand transaction failed: " + msg });
+      }
+      return;
+    }
 
     await db.insert(relayTransactionsTable).values({
       apiKeyId,

@@ -32,7 +32,9 @@ import type { PollRecord, PollMeta } from "../types.js";
 import {
   refsCreatePoll,
   refsPollLookup,
+  pollBoxKey,
 } from "./boxes.js";
+import { BOX_MBR, mbrTopUp, parsePollBoxBytes } from "./utils.js";
 
 // ─── Method definitions (from ARC-32 ABI) ────────────────────────────────────
 
@@ -190,6 +192,14 @@ export class PollFactoryClient {
     while (paddedOptions.length < 8) paddedOptions.push(EMPTY);
 
     const atc = new algosdk.AtomicTransactionComposer();
+
+    // Fund the PollFactory app account for the new poll box MBR.
+    const topUp = await mbrTopUp(
+      this.algod, this.appId, BOX_MBR.POLL_FACTORY_POLL,
+      sender, suggestedParams, signer,
+    );
+    if (topUp) atc.addTransaction(topUp);
+
     atc.addMethodCall({
       appID: this.appId,
       method: M.create_poll,
@@ -225,35 +235,11 @@ export class PollFactoryClient {
    * @returns Full PollRecord for the given poll ID.
    */
   async getPoll(args: GetPollArgs): Promise<PollRecord> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_poll,
-      methodArgs: [BigInt(args.poll_id)],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-      boxes: refsPollLookup(args.poll_id),
-    });
-    const simResult = await atc.simulate(this.algod);
-    const raw = simResult.methodResults[0]!.returnValue as unknown[];
-    return {
-      creator: raw[0] as string,
-      swarm_id: raw[1] as string,
-      question: raw[2] as string,
-      option_count: raw[3] as bigint,
-      option_0: raw[4] as string,
-      option_1: raw[5] as string,
-      option_2: raw[6] as string,
-      option_3: raw[7] as string,
-      option_4: raw[8] as string,
-      option_5: raw[9] as string,
-      option_6: raw[10] as string,
-      option_7: raw[11] as string,
-      created_at: raw[12] as bigint,
-      expires_at: raw[13] as bigint,
-    };
+    const boxName = pollBoxKey(args.poll_id);
+    const boxResult = await this.algod
+      .getApplicationBoxByName(this.appId, boxName)
+      .do();
+    return parsePollBoxBytes(boxResult.value);
   }
 
   /**
@@ -268,23 +254,12 @@ export class PollFactoryClient {
    * @returns PollMeta { expires_at, option_count }
    */
   async getPollMeta(args: GetPollMetaArgs): Promise<PollMeta> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_poll_meta,
-      methodArgs: [BigInt(args.poll_id)],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-      boxes: refsPollLookup(args.poll_id),
-    });
-    const simResult = await atc.simulate(this.algod);
-    const raw = simResult.methodResults[0]!.returnValue as unknown[];
-    return {
-      expires_at: raw[0] as bigint,
-      option_count: raw[1] as bigint,
-    };
+    const boxName = pollBoxKey(args.poll_id);
+    const boxResult = await this.algod
+      .getApplicationBoxByName(this.appId, boxName)
+      .do();
+    const r = parsePollBoxBytes(boxResult.value);
+    return { expires_at: r.expires_at, option_count: r.option_count };
   }
 
   /**
@@ -295,19 +270,17 @@ export class PollFactoryClient {
    * @returns True if the poll exists and has not expired.
    */
   async isActive(args: IsActiveArgs): Promise<boolean> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.is_active,
-      methodArgs: [BigInt(args.poll_id)],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-      boxes: refsPollLookup(args.poll_id),
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as boolean;
+    try {
+      const boxName = pollBoxKey(args.poll_id);
+      const boxResult = await this.algod
+        .getApplicationBoxByName(this.appId, boxName)
+        .do();
+      const r = parsePollBoxBytes(boxResult.value);
+      const nowSec = BigInt(Math.floor(Date.now() / 1000));
+      return r.expires_at > nowSec;
+    } catch {
+      return false;
+    }
   }
 
   /**
@@ -318,39 +291,34 @@ export class PollFactoryClient {
    * @returns The poll ID that will be assigned to the next poll.
    */
   async getNextPollId(): Promise<bigint> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_next_poll_id,
-      methodArgs: [],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as bigint;
+    return this._readGlobalUint("next_poll_id");
   }
 
   /**
-   * get_registry_app_id()uint64  [readonly — uses simulate]
-   *
-   * Reads only global state — no box refs required.
+   * get_registry_app_id()uint64  [readonly — reads global state directly]
    *
    * @returns The AgentRegistry app ID this factory is linked to.
    */
   async getRegistryAppId(): Promise<bigint> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_registry_app_id,
-      methodArgs: [],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as bigint;
+    return this._readGlobalUint("registry_app_id");
+  }
+
+  /**
+   * Read a uint global-state value by key name directly from the algod REST API.
+   * Avoids simulate which does not decode ABI return values in algosdk v3.
+   */
+  private async _readGlobalUint(keyName: string): Promise<bigint> {
+    const info = await this.algod.getApplicationByID(this.appId).do();
+    const globalState = (info.params.globalState ?? []) as Array<{
+      key: Uint8Array;
+      value: { type: number; uint: bigint | string };
+    }>;
+    const target = Buffer.from(keyName, "utf8");
+    for (const entry of globalState) {
+      if (Buffer.from(entry.key).equals(target)) {
+        return BigInt(entry.value.uint);
+      }
+    }
+    throw new Error(`Global state key "${keyName}" not found in app ${this.appId}`);
   }
 }

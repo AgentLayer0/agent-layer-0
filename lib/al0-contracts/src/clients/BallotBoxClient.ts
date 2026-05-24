@@ -37,9 +37,18 @@ import {
   refsCastVote,
   refsTallyLookup,
   refsVoteLookup,
+  tallyBoxKey,
+  voteBoxKey,
 } from "./boxes.js";
+import { BOX_MBR, mbrTopUp } from "./utils.js";
 
 // ─── Method definitions (from ARC-32 ABI) ────────────────────────────────────
+
+// ─── ABI types for direct box decoding (avoids broken simulate in algosdk v3) ─
+
+const TALLY_TYPE = algosdk.ABIType.from(
+  "(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)"
+);
 
 const M = {
   bootstrap: new algosdk.ABIMethod({
@@ -183,6 +192,15 @@ export class BallotBoxClient {
   ): Promise<{ txId: string }> {
     const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
     const atc = new algosdk.AtomicTransactionComposer();
+
+    // Fund the BallotBox app account for the new meta + tally box MBRs.
+    const topUp = await mbrTopUp(
+      this.algod, this.appId,
+      BOX_MBR.BALLOT_BOX_META + BOX_MBR.BALLOT_BOX_TALLY,
+      sender, suggestedParams, signer,
+    );
+    if (topUp) atc.addTransaction(topUp);
+
     atc.addMethodCall({
       appID: this.appId,
       method: M.init_poll,
@@ -223,6 +241,14 @@ export class BallotBoxClient {
   ): Promise<{ txId: string }> {
     const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
     const atc = new algosdk.AtomicTransactionComposer();
+
+    // Fund the BallotBox app account for the new vote box MBR.
+    const topUp = await mbrTopUp(
+      this.algod, this.appId, BOX_MBR.BALLOT_BOX_VOTE,
+      sender, suggestedParams, signer,
+    );
+    if (topUp) atc.addTransaction(topUp);
+
     atc.addMethodCall({
       appID: this.appId,
       method: M.cast_vote,
@@ -244,19 +270,11 @@ export class BallotBoxClient {
    * @returns Per-option vote counts for the given poll.
    */
   async getTally(args: GetTallyArgs): Promise<TallyRecord> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_tally,
-      methodArgs: [BigInt(args.poll_id)],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-      boxes: refsTallyLookup(args.poll_id),
-    });
-    const simResult = await atc.simulate(this.algod);
-    const raw = simResult.methodResults[0]!.returnValue as unknown[];
+    const boxName = tallyBoxKey(args.poll_id);
+    const boxResult = await this.algod
+      .getApplicationBoxByName(this.appId, boxName)
+      .do();
+    const raw = TALLY_TYPE.decode(boxResult.value) as unknown[];
     return {
       tally_0: raw[0] as bigint,
       tally_1: raw[1] as bigint,
@@ -277,19 +295,13 @@ export class BallotBoxClient {
    * @returns True if the given voter has already cast a vote on this poll.
    */
   async hasVoted(args: HasVotedArgs): Promise<boolean> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.has_voted,
-      methodArgs: [BigInt(args.poll_id), args.voter],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-      boxes: refsVoteLookup(args.poll_id, args.voter),
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as boolean;
+    try {
+      const boxName = voteBoxKey(args.poll_id, args.voter);
+      await this.algod.getApplicationBoxByName(this.appId, boxName).do();
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /**
@@ -300,19 +312,11 @@ export class BallotBoxClient {
    * @returns The option index the given voter chose. Reverts if they have not voted.
    */
   async getVote(args: GetVoteArgs): Promise<bigint> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_vote,
-      methodArgs: [BigInt(args.poll_id), args.voter],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-      boxes: refsVoteLookup(args.poll_id, args.voter),
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as bigint;
+    const boxName = voteBoxKey(args.poll_id, args.voter);
+    const boxResult = await this.algod
+      .getApplicationBoxByName(this.appId, boxName)
+      .do();
+    return new DataView(boxResult.value.buffer).getBigUint64(0, false);
   }
 
   /**
@@ -323,39 +327,32 @@ export class BallotBoxClient {
    * @returns Total votes cast across all polls.
    */
   async getTotalVotes(): Promise<bigint> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_total_votes,
-      methodArgs: [],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as bigint;
+    return this._readGlobalUint("total_votes");
   }
 
   /**
-   * get_factory_app_id()uint64  [readonly — uses simulate]
+   * get_factory_app_id()uint64
    *
-   * Reads only global state — no box refs required.
+   * Reads only global state — no simulate needed.
    *
    * @returns The PollFactory app ID this BallotBox is linked to.
    */
   async getFactoryAppId(): Promise<bigint> {
-    const suggestedParams = await this.algod.getTransactionParams().do();
-    const atc = new algosdk.AtomicTransactionComposer();
-    atc.addMethodCall({
-      appID: this.appId,
-      method: M.get_factory_app_id,
-      methodArgs: [],
-      sender: algosdk.ALGORAND_ZERO_ADDRESS_STRING,
-      signer: algosdk.makeEmptyTransactionSigner(),
-      suggestedParams,
-    });
-    const simResult = await atc.simulate(this.algod);
-    return simResult.methodResults[0]!.returnValue as bigint;
+    return this._readGlobalUint("factory_app_id");
+  }
+
+  private async _readGlobalUint(keyName: string): Promise<bigint> {
+    const info = await this.algod.getApplicationByID(this.appId).do();
+    const globalState = (info.params.globalState ?? []) as Array<{
+      key: Uint8Array;
+      value: { type: number; uint: bigint | string };
+    }>;
+    const target = Buffer.from(keyName, "utf8");
+    for (const entry of globalState) {
+      if (Buffer.from(entry.key).equals(target)) {
+        return BigInt(entry.value.uint);
+      }
+    }
+    throw new Error(`Global state key "${keyName}" not found in app ${this.appId}`);
   }
 }
