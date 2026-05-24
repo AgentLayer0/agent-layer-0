@@ -869,9 +869,6 @@ importers:
 
   lib/al0-sdk:
     dependencies:
-      '@workspace/al0-contracts':
-        specifier: workspace:*
-        version: link:../al0-contracts
       algosdk:
         specifier: ^3.5.2
         version: 3.5.2
@@ -882,6 +879,12 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.3.5
+      '@workspace/al0-contracts':
+        specifier: workspace:*
+        version: link:../al0-contracts
+      esbuild:
+        specifier: 0.27.3
+        version: 0.27.3
       typescript:
         specifier: ^5.9.0
         version: 5.9.3
