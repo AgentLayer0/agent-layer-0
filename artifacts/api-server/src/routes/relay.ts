@@ -11,6 +11,7 @@ import {
 import { requireApiKey, type AuthenticatedRequest } from "../lib/api-key-auth";
 import { relayRateLimit } from "../lib/rate-limiter";
 import { getAlgodClient, makeRelayAddress, makeRelaySigner } from "../lib/relay-wallet";
+import { getOrCreateSwarmWallet, ensureSwarmFunded } from "../lib/swarm-wallet";
 import { requireAdmin } from "../lib/admin-auth";
 import { checkQuota } from "../lib/quota";
 
@@ -60,6 +61,11 @@ router.post(
 
     await db.insert(apiKeySwarms).values({ apiKeyId, swarmId: swarm_id });
 
+    // Pre-create the per-swarm Algorand wallet so the first vote is fast.
+    // getOrCreateSwarmWallet generates an account, encrypts the key, persists
+    // it to DB, and seeds it from the relay wallet in one call.
+    const swarmWallet = await getOrCreateSwarmWallet(swarm_id);
+
     await db.insert(relayTransactionsTable).values({
       apiKeyId,
       txType: "register",
@@ -67,7 +73,7 @@ router.post(
       status: "confirmed",
     });
 
-    req.log.info({ swarm_id, txId }, "relay/register submitted");
+    req.log.info({ swarm_id, txId, swarmAddress: swarmWallet.address }, "relay/register submitted");
 
     res.status(201).json({
       swarm_id,
@@ -235,23 +241,33 @@ router.post(
       return;
     }
 
-    const sender = makeRelayAddress();
-    const signer = makeRelaySigner();
+    // Resolve the per-swarm signing account (creates + funds on first vote if
+    // the swarm wallet was somehow not pre-created at registration time).
+    const swarmWallet = await getOrCreateSwarmWallet(authoritativeSwarmId);
+
+    // Ensure the swarm wallet has enough spendable ALGO to cover the MBR +
+    // fees for this vote. Tops up from the relay wallet if below threshold.
+    await ensureSwarmFunded(swarmWallet.address);
+
     const ballotClient = new BallotBoxClient(appIds.ballotBoxAppId, algod);
     let txId: string;
     try {
-      ({ txId } = await ballotClient.castVote(sender, signer, { poll_id, option_index }));
+      ({ txId } = await ballotClient.castVote(
+        swarmWallet.address,
+        swarmWallet.signer,
+        { poll_id, option_index },
+      ));
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       if (msg.includes("balance") && msg.includes("below min")) {
-        req.log.error({ sender }, "relay/vote failed — relay wallet balance below minimum");
+        req.log.error({ swarmAddress: swarmWallet.address }, "relay/vote failed — swarm wallet balance below minimum");
         res.status(503).json({
-          error: "Relay wallet has insufficient ALGO balance. Top up: " + sender,
+          error: "Swarm wallet has insufficient ALGO balance. Swarm: " + authoritativeSwarmId,
         });
       } else if (msg.includes("has already voted") || msg.includes("box already exists")) {
         res.status(409).json({ error: "This swarm has already voted on poll " + poll_id });
       } else {
-        req.log.error({ err, poll_id }, "relay/vote Algorand error");
+        req.log.error({ err, poll_id, swarmAddress: swarmWallet.address }, "relay/vote Algorand error");
         res.status(502).json({ error: "Algorand transaction failed: " + msg });
       }
       return;

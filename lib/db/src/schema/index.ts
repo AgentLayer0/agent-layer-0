@@ -19,3 +19,4 @@
 
 export * from "./waitlist";
 export * from "./api-keys";
+export * from "./swarm-wallets";
