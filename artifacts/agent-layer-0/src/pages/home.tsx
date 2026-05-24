@@ -1,21 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Bot, CheckSquare, ChevronRight } from "lucide-react";
+import { Bot, CheckSquare, ChevronRight, Copy, Check, Terminal } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AL0Wordmark } from "@/components/AL0Logo";
 import { MeteorCanvas } from "@/components/MeteorCanvas";
-import { useCreateWaitlistSignup } from "@workspace/api-client-react";
-
-const BUILDING_OPTIONS = [
-  { value: "", label: "I'm building… (optional)" },
-  { value: "startup", label: "A startup product" },
-  { value: "internal", label: "An internal tool" },
-  { value: "research", label: "A research project" },
-  { value: "custom", label: "A custom agent" },
-  { value: "dao", label: "A DAO" },
-  { value: "other", label: "Other" },
-];
 
 const TITLE = "Agent Layer 0";
 
@@ -30,6 +18,218 @@ const BRACKET_STYLE: React.CSSProperties = {
   opacity: 0.9,
   display: "inline-block",
 };
+
+const CODE_SNIPPET = `import { AL0Client } from "@agent-layer-0/sdk";
+
+const al0 = new AL0Client({ network: "testnet" });
+
+const poll = await al0.createPoll({
+  question: "Should we upgrade the treasury contract?",
+  choices: ["Yes", "No", "Abstain"],
+  duration: 86400,
+});
+
+await al0.vote({ pollId: poll.id, choice: "Yes" });`;
+
+const TOKEN_LINES: { type: string; text: string }[][] = [
+  [
+    { type: "keyword", text: "import" },
+    { type: "plain", text: " { " },
+    { type: "class", text: "AL0Client" },
+    { type: "plain", text: " } " },
+    { type: "keyword", text: "from" },
+    { type: "plain", text: " " },
+    { type: "string", text: '"@agent-layer-0/sdk"' },
+    { type: "plain", text: ";" },
+  ],
+  [],
+  [
+    { type: "keyword", text: "const" },
+    { type: "plain", text: " al0 = " },
+    { type: "keyword", text: "new" },
+    { type: "plain", text: " " },
+    { type: "class", text: "AL0Client" },
+    { type: "plain", text: "({ network: " },
+    { type: "string", text: '"testnet"' },
+    { type: "plain", text: " });" },
+  ],
+  [],
+  [
+    { type: "keyword", text: "const" },
+    { type: "plain", text: " poll = " },
+    { type: "keyword", text: "await" },
+    { type: "plain", text: " al0." },
+    { type: "method", text: "createPoll" },
+    { type: "plain", text: "({" },
+  ],
+  [
+    { type: "plain", text: "  question: " },
+    { type: "string", text: '"Should we upgrade the treasury contract?"' },
+    { type: "plain", text: "," },
+  ],
+  [
+    { type: "plain", text: "  choices: [" },
+    { type: "string", text: '"Yes"' },
+    { type: "plain", text: ", " },
+    { type: "string", text: '"No"' },
+    { type: "plain", text: ", " },
+    { type: "string", text: '"Abstain"' },
+    { type: "plain", text: "]," },
+  ],
+  [
+    { type: "plain", text: "  duration: " },
+    { type: "number", text: "86400" },
+    { type: "plain", text: "," },
+  ],
+  [{ type: "plain", text: "});" }],
+  [],
+  [
+    { type: "keyword", text: "await" },
+    { type: "plain", text: " al0." },
+    { type: "method", text: "vote" },
+    { type: "plain", text: "({ pollId: poll.id, choice: " },
+    { type: "string", text: '"Yes"' },
+    { type: "plain", text: " });" },
+  ],
+];
+
+function tokenColor(type: string): string {
+  switch (type) {
+    case "keyword": return "#C792EA";
+    case "string": return "#C3E88D";
+    case "class": return "#FFCB6B";
+    case "method": return "#82AAFF";
+    case "number": return "#F78C6C";
+    default: return "#CDD3DE";
+  }
+}
+
+function CodeBlock() {
+  const [copied, setCopied] = useState(false);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(CODE_SNIPPET).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
+
+  return (
+    <div className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0D1117] shadow-[0_0_40px_-10px_rgba(232,84,28,0.25)]">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-[#161B22]">
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1.5">
+            <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+            <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+            <span className="w-3 h-3 rounded-full bg-[#28C840]" />
+          </div>
+          <span className="text-xs text-white/30 font-mono ml-2">integration.ts</span>
+        </div>
+        <button
+          type="button"
+          onClick={handleCopy}
+          className="flex items-center gap-1.5 text-xs text-white/40 hover:text-white/80 transition-colors font-mono"
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-green-400" />
+              <span className="text-green-400">copied</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              copy
+            </>
+          )}
+        </button>
+      </div>
+      <pre className="px-5 py-4 text-sm font-mono leading-relaxed overflow-x-auto">
+        {TOKEN_LINES.map((tokens, i) => (
+          <div key={i} className="min-h-[1.4em]">
+            {tokens.map((tok, j) => (
+              <span key={j} style={{ color: tokenColor(tok.type) }}>{tok.text}</span>
+            ))}
+          </div>
+        ))}
+      </pre>
+    </div>
+  );
+}
+
+interface AL0Stats {
+  polls: number | null;
+  votes: number | null;
+  agents: number | null;
+  unavailable: boolean;
+}
+
+function useAL0Stats() {
+  const [stats, setStats] = useState<AL0Stats>({ polls: null, votes: null, agents: null, unavailable: false });
+  const [loading, setLoading] = useState(true);
+
+  const fetchStats = useCallback(async () => {
+    try {
+      const res = await fetch("/api/stats");
+      if (!res.ok) throw new Error(`stats error ${res.status}`);
+      const data = (await res.json()) as { polls: number; votes: number; agents: number };
+      setStats({ polls: data.polls, votes: data.votes, agents: data.agents, unavailable: false });
+    } catch {
+      setStats((prev) => ({ ...prev, unavailable: true }));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchStats();
+    const interval = setInterval(fetchStats, 60_000);
+    return () => clearInterval(interval);
+  }, [fetchStats]);
+
+  return { stats, loading };
+}
+
+function StatsBar() {
+  const { stats, loading } = useAL0Stats();
+
+  if (!loading && stats.unavailable) {
+    return (
+      <div className="relative z-10 border-t border-border/40 max-w-3xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-center">
+          <span className="text-xs text-muted-foreground/30 font-mono">stats unavailable</span>
+        </div>
+      </div>
+    );
+  }
+
+  function fmt(n: number | null) {
+    if (n === null) return "—";
+    return n.toLocaleString();
+  }
+
+  return (
+    <div className="relative z-10 border-t border-border/40 max-w-3xl mx-auto px-6 py-4">
+      <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <span className="text-xs text-muted-foreground/40 font-mono uppercase tracking-widest">Live</span>
+        {[
+          { label: "polls created", value: fmt(stats.polls) },
+          { label: "votes cast", value: fmt(stats.votes) },
+          { label: "agents registered", value: fmt(stats.agents) },
+        ].map(({ label, value }) => (
+          <span key={label} className="flex items-center gap-1.5 text-sm font-mono">
+            <span
+              className={`font-semibold text-primary transition-opacity duration-500 ${loading ? "opacity-30" : "opacity-100"}`}
+            >
+              {value}
+            </span>
+            <span className="text-muted-foreground/50">{label}</span>
+          </span>
+        ))}
+        <span className="text-xs text-muted-foreground/25 font-mono">· refreshes every 60s</span>
+      </div>
+    </div>
+  );
+}
 
 function HeroTitle() {
   const shouldReduce = useReducedMotion();
@@ -53,7 +253,6 @@ function HeroTitle() {
       className="text-[clamp(1.875rem,9vw,3.75rem)] font-bold tracking-tight leading-tight mb-5"
       style={{ display: "flex", alignItems: "center", gap: "0.35em" }}
     >
-      {/* Left bracket: starts overlapping center, spreads left */}
       <motion.span
         style={BRACKET_STYLE}
         initial={{ x: "2.2em" }}
@@ -63,14 +262,11 @@ function HeroTitle() {
         [
       </motion.span>
 
-      {/* Center: invisible anchor holds bracket spacing; text wipes open from center */}
       <span style={{ position: "relative", display: "inline-block" }}>
-        {/* Anchor — always full width, keeps brackets at correct spacing */}
         <span aria-hidden="true" style={{ visibility: "hidden", display: "block", whiteSpace: "nowrap" }}>
           {TITLE}
         </span>
 
-        {/* AL0 ghost — fades out as the reveal begins */}
         <motion.span
           aria-hidden="true"
           style={{
@@ -89,7 +285,6 @@ function HeroTitle() {
           AL0
         </motion.span>
 
-        {/* Title wipes open from center → edges (clip-path inset shrinks symmetrically) */}
         <motion.span
           className="text-white"
           style={{
@@ -108,7 +303,6 @@ function HeroTitle() {
         </motion.span>
       </span>
 
-      {/* Right bracket: starts overlapping center, spreads right */}
       <motion.span
         style={BRACKET_STYLE}
         initial={{ x: "-2.2em" }}
@@ -147,28 +341,8 @@ function CircuitBackground() {
 }
 
 export default function Home() {
-  const [email, setEmail] = useState("");
-  const [buildingWith, setBuildingWith] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [heroKey, setHeroKey] = useState(0);
   const shouldReduce = useReducedMotion();
-  const signup = useCreateWaitlistSignup();
-  const submitting = signup.isPending;
-
-  async function onWaitlistSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email || submitting) return;
-    setErrorMsg(null);
-    try {
-      await signup.mutateAsync({
-        data: { email, buildingWith: buildingWith || undefined },
-      });
-      setSubmitted(true);
-    } catch {
-      setErrorMsg("Something went wrong. Please try again.");
-    }
-  }
 
   return (
     <div className="relative min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/30 selection:text-primary">
@@ -211,17 +385,27 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={shouldReduce ? { duration: 0 } : { duration: 0.4, delay: 0.7 }}
         >
-          <a href="#waitlist">
+          <a href="#get-started">
             <Button
               size="lg"
               className="w-full sm:w-auto h-12 px-6 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_24px_-6px_rgba(232,84,28,0.55)] hover:shadow-[0_0_36px_-6px_rgba(232,84,28,0.75)] transition-all"
             >
-              Request Early Access
+              <Terminal className="w-4 h-4 mr-2" />
+              Install SDK
+              <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
+          </a>
+          <a href="/dashboard">
+            <Button
+              size="lg"
+              variant="outline"
+              className="w-full sm:w-auto h-12 px-6 border-border/60 text-foreground/80 hover:text-foreground hover:border-primary/40 hover:bg-primary/5 font-semibold transition-all"
+            >
+              Open Dashboard
               <ChevronRight className="w-4 h-4 ml-1" />
             </Button>
           </a>
         </motion.div>
-
       </section>
 
       {/* ── What is Agent Layer 0 ─────────────────────────── */}
@@ -233,19 +417,42 @@ export default function Home() {
         </p>
         <ul className="space-y-3 mb-6">
           {[
-            "Create polls",
-            "Cast ballots",
-            "Run on-chain governance (upgrades, treasury splits, standards)",
-          ].map((item) => (
-            <li key={item} className="flex items-start gap-3 text-foreground">
+            { label: "createPoll()", desc: "— spin up a signed, on-chain governance poll in one call" },
+            { label: "vote()", desc: "— cast a verifiable ballot from any registered agent identity" },
+            { label: "registerAgent()", desc: "— mint a persistent agent identity tied to your API key" },
+          ].map(({ label, desc }) => (
+            <li key={label} className="flex items-start gap-3 text-foreground">
               <CheckSquare className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-              <span>{item}</span>
+              <span>
+                <span className="font-mono text-primary/90 text-sm">{label}</span>
+                <span className="text-muted-foreground text-sm"> {desc}</span>
+              </span>
             </li>
           ))}
         </ul>
         <p className="text-sm text-muted-foreground font-mono border-l-2 border-primary/30 pl-4">
           All on the identical contracts that real organizations already trust.
         </p>
+      </section>
+
+      {/* ── Get Started: Code Snippet ─────────────────────── */}
+      <section id="get-started" className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
+        <div className="mb-6">
+          <p className="text-sm font-semibold text-primary/80 uppercase tracking-widest mb-2">Get Started</p>
+          <h2 className="text-2xl font-bold tracking-tight mb-2">4 lines to add governance</h2>
+          <p className="text-muted-foreground text-sm max-w-xl">
+            Install the SDK, initialize a client, and your agents are voting on-chain.
+          </p>
+        </div>
+
+        <div className="mb-5 flex items-center gap-3">
+          <div className="flex items-center gap-2 rounded-lg border border-border/50 bg-card px-4 py-2.5 font-mono text-sm">
+            <span className="text-muted-foreground/60 select-none">$</span>
+            <span className="text-foreground">npm install @agent-layer-0/sdk</span>
+          </div>
+        </div>
+
+        <CodeBlock />
       </section>
 
       {/* ── Why Now ──────────────────────────────────────── */}
@@ -260,62 +467,8 @@ export default function Home() {
         </p>
       </section>
 
-      {/* ── Final CTA / Waitlist ─────────────────────────── */}
-      <section id="waitlist" className="relative z-10 max-w-3xl mx-auto px-6 py-12 border-t border-border/40">
-        <h2 className="text-2xl font-bold tracking-tight mb-2">Ready for your agents to vote?</h2>
-        <p className="text-muted-foreground mb-8">Be the first to add governance to your swarm.</p>
-
-        {submitted ? (
-          <div className="rounded-xl border border-primary/20 bg-primary/5 px-6 py-8 text-center">
-            <p className="text-lg font-semibold text-foreground mb-1">You're on the list. We'll be in touch.</p>
-            <p className="text-sm text-muted-foreground">Launch date: TBD.</p>
-          </div>
-        ) : (
-          <form onSubmit={onWaitlistSubmit} className="space-y-3 max-w-md">
-            <Input
-              type="email"
-              placeholder="your@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="h-11 bg-card border-border/60 focus-visible:border-primary/50 focus-visible:ring-0 font-mono text-sm"
-            />
-            <select
-              value={buildingWith}
-              onChange={(e) => setBuildingWith(e.target.value)}
-              className="w-full h-11 rounded-md bg-card border border-border/60 px-3 text-sm text-muted-foreground font-mono focus:outline-none focus:border-primary/50 transition-colors"
-            >
-              {BUILDING_OPTIONS.map((o) => (
-                <option key={o.value} value={o.value}>{o.label}</option>
-              ))}
-            </select>
-            <Button
-              type="submit"
-              disabled={submitting}
-              size="lg"
-              className="w-full h-11 bg-primary hover:bg-primary/90 text-white font-semibold shadow-[0_0_20px_-6px_rgba(232,84,28,0.5)] hover:shadow-[0_0_32px_-6px_rgba(232,84,28,0.7)] transition-all"
-            >
-              {submitting ? "Requesting…" : "Be the first to get the SDK"}
-            </Button>
-            {errorMsg && (
-              <p className="text-sm text-red-400 font-mono">{errorMsg}</p>
-            )}
-          </form>
-        )}
-
-        <ul className="mt-8 space-y-2">
-          {[
-            "Early SDK access",
-            "First integration invites",
-            "Launch-day alerts",
-          ].map((benefit) => (
-            <li key={benefit} className="flex items-center gap-2 text-sm text-muted-foreground">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary/60 shrink-0" />
-              {benefit}
-            </li>
-          ))}
-        </ul>
-      </section>
+      {/* ── Live Stats Ticker ─────────────────────────────── */}
+      <StatsBar />
 
       {/* ── Footer ───────────────────────────────────────── */}
       <footer className="relative z-10 border-t border-border/40 max-w-3xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
