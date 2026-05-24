@@ -106,6 +106,26 @@ function tokenColor(type: string): string {
   }
 }
 
+// ── Copy install button ────────────────────────────────────────────────────────
+
+function CopyInstallButton() {
+  const [copied, setCopied] = useState(false);
+  const copy = () => {
+    void navigator.clipboard.writeText("npm install @agent-layer-0/sdk");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <button
+      onClick={copy}
+      className="ml-1 text-muted-foreground/40 hover:text-primary transition-colors"
+      aria-label="Copy install command"
+    >
+      {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+    </button>
+  );
+}
+
 // ── Code block ────────────────────────────────────────────────────────────────
 
 function CodeBlock() {
@@ -464,6 +484,7 @@ export default function Home() {
           <div className="flex items-center gap-2 rounded-lg border border-border/50 bg-card px-4 py-2.5 font-mono text-sm">
             <span className="text-muted-foreground/60 select-none">$</span>
             <span className="text-foreground">npm install @agent-layer-0/sdk</span>
+            <CopyInstallButton />
           </div>
         </div>
 
