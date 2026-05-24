@@ -664,16 +664,7 @@ export default function Home() {
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-0">
             Register swarms, create polls, cast verifiable votes — all on Algorand.
-            Built on{" "}
-            <a
-              href="https://www.urvote.ca"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground/60 hover:text-primary transition-colors underline-offset-2 hover:underline"
-            >
-              UrVote
-            </a>
-            , which already runs live elections for real organizations.
+            Permanent. Auditable. No middleware.
           </p>
           <InlineStats />
         </motion.div>
