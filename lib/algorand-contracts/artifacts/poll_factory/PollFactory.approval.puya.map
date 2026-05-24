@@ -1,0 +1,4001 @@
+{
+  "version": 3,
+  "sources": [
+    "../../contracts/poll_factory.py"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAyDA;;;AACQ;AAA4B;AAA5B;AACA;AAA+B;AAA/B;;AAfR;;;AAAA;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;;;;;;;AAAA;AAAA;AAoBK;;AAAA;AAAA;AAAA;;AAAA;AApBL;;;AAoBK;;;AAAA;AAAA;AAgBA;;AAAA;AAAA;AAAA;;AAAA;AApCL;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAAA;;;AAoCK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAwEA;;AAAA;AAAA;AAAA;;AAAA;AA5GL;;;AA4GK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAMA;;AAAA;AAAA;AAAA;;AAAA;AAlHL;;;AAkHK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAgBA;;AAAA;AAAA;AAAA;;AAAA;AAlIL;;;AAkIK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AASA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAKA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAhJL;;AAAA;;;;;;;;;AAAA;AAAA;AAoBA;;;AAWe;;AAAc;;AAAd;AAAP;AACO;AAAA;AAAA;AAAA;AAAA;AAAP;AACO;;AAAA;AAAP;AAAA;AACA;AAAA;AAAA;;AAER;;;AAgCe;AAAA;AAAA;AAAA;AAAP;AACO;;AAAA;AAAA;AAAyB;;;AAAzB;AAAP;AACA;;AAAI;AACG;AAAK;;AAAL;AAAP;AACY;;AAAL;AAAP;AACO;;AAAA;AAAoB;;AAApB;AAAP;AAGc;AAGH;AAAA;AAAA;AAAA;;;AAHG;;;;;;;;;;;;AAAA;;;;AAAA;;;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAKS;;AAAhB;AAAP;AAEsB;AAAA;AAAA;AAAA;AAAZ;AACV;AAAA;AAAA;AAAA;AAAqB;AAArB;AAAA;AAAA;AAAA;AAGyB;;AAYE;;AAAZ;AAbN;AAAA;;;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;AAAA;;;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAAA;;AAAA;AAgBT;AAAA;;AAAA;AAAA;AAAA;;AAAA;AAAA;AAEI;;;;;;;;;;;;;;;;;AAAJ;AAEA;AAER;;;AAG0B;AAAX;;AAAA;AAAA;AAAA;AAAA;;AAAP;AACO;AAAA;AAAP;AAER;;;AAS0B;AAAX;;AAAA;AAAA;AAAA;AAAA;;AAAP;AACS;AAAA;AAEM;AAAA;;;AACE;AAAA;;;AAFV;AAAP;AAKR;;;AAG0B;AAAf;;AAAA;AAAA;AAAA;AAAA;;AAAA;;;AACQ;;;AAAP;AAAA;AAEA;;AAAA;AAAA;AAAA;;;AAAA;AAAwC;;AAAxC;AADG;;;AAAA;AAAA;;AAAA;AAAP;AAAA;AAIR;;;AAG2B;AAAA;AAAA;AAAA;AAAZ;AAAP;AAER;;;AAG2B;AAAA;AAAA;AAAA;AAAZ;AAAP",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "contracts.poll_factory.PollFactory.approval_program",
+      "params": {},
+      "block": "contracts.poll_factory.PollFactory.approval_program",
+      "stack_in": [],
+      "op": "intcblock 0 1"
+    },
+    "5": {
+      "op": "bytecblock 0x151f7c75 \"registry_app_id\" \"next_poll_id\" 0x703a"
+    },
+    "44": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "46": {
+      "op": "bnz main_after_if_else@2",
+      "stack_out": []
+    },
+    "49": {
+      "callsub": "contracts.poll_factory.PollFactory.__init__",
+      "op": "callsub __init__"
+    },
+    "52": {
+      "block": "main_after_if_else@2",
+      "stack_in": [],
+      "callsub": "contracts.poll_factory.PollFactory.__puya_arc4_router__",
+      "op": "callsub __puya_arc4_router__",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "55": {
+      "op": "return",
+      "stack_out": []
+    },
+    "56": {
+      "subroutine": "contracts.poll_factory.PollFactory.__init__",
+      "params": {},
+      "block": "__init__",
+      "stack_in": [],
+      "op": "proto 0 0"
+    },
+    "59": {
+      "op": "bytec_2 // \"next_poll_id\"",
+      "defined_out": [
+        "\"next_poll_id\""
+      ],
+      "stack_out": [
+        "\"next_poll_id\""
+      ]
+    },
+    "60": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "\"next_poll_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "\"next_poll_id\"",
+        "0"
+      ]
+    },
+    "61": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "62": {
+      "op": "bytec_1 // \"registry_app_id\"",
+      "defined_out": [
+        "\"registry_app_id\""
+      ],
+      "stack_out": [
+        "\"registry_app_id\""
+      ]
+    },
+    "63": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "\"registry_app_id\"",
+        "0"
+      ]
+    },
+    "64": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "65": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "66": {
+      "subroutine": "contracts.poll_factory.PollFactory.__puya_arc4_router__",
+      "params": {},
+      "block": "__puya_arc4_router__",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "69": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "71": {
+      "op": "bz __puya_arc4_router___bare_routing@11",
+      "stack_out": []
+    },
+    "74": {
+      "op": "pushbytess 0xa0cadf8a 0xf0e03632 0x7cafe26e 0x120bcdf4 0x63c3232e 0x8524e778 0xc028726e // method \"bootstrap(uint64)void\", method \"create_poll(string,string,string,string,string,string,string,string,string,string,uint64,uint64)uint64\", method \"get_poll(uint64)(address,string,string,uint64,string,string,string,string,string,string,string,string,uint64,uint64)\", method \"get_poll_meta(uint64)(uint64,uint64)\", method \"is_active(uint64)bool\", method \"get_next_poll_id()uint64\", method \"get_registry_app_id()uint64\""
+    },
+    "111": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(bootstrap(uint64)void)",
+        "Method(create_poll(string,string,string,string,string,string,string,string,string,string,uint64,uint64)uint64)",
+        "Method(get_next_poll_id()uint64)",
+        "Method(get_poll(uint64)(address,string,string,uint64,string,string,string,string,string,string,string,string,uint64,uint64))",
+        "Method(get_poll_meta(uint64)(uint64,uint64))",
+        "Method(get_registry_app_id()uint64)",
+        "Method(is_active(uint64)bool)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(bootstrap(uint64)void)",
+        "Method(create_poll(string,string,string,string,string,string,string,string,string,string,uint64,uint64)uint64)",
+        "Method(get_poll(uint64)(address,string,string,uint64,string,string,string,string,string,string,string,string,uint64,uint64))",
+        "Method(get_poll_meta(uint64)(uint64,uint64))",
+        "Method(is_active(uint64)bool)",
+        "Method(get_next_poll_id()uint64)",
+        "Method(get_registry_app_id()uint64)",
+        "tmp%2#0"
+      ]
+    },
+    "114": {
+      "op": "match __puya_arc4_router___bootstrap_route@2 __puya_arc4_router___create_poll_route@3 __puya_arc4_router___get_poll_route@4 __puya_arc4_router___get_poll_meta_route@5 __puya_arc4_router___is_active_route@6 __puya_arc4_router___get_next_poll_id_route@7 __puya_arc4_router___get_registry_app_id_route@8",
+      "stack_out": []
+    },
+    "130": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "131": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "132": {
+      "block": "__puya_arc4_router___bootstrap_route@2",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "134": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "135": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "136": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "138": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "139": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "142": {
+      "callsub": "contracts.poll_factory.PollFactory.bootstrap",
+      "op": "callsub bootstrap",
+      "stack_out": []
+    },
+    "145": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "146": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "147": {
+      "block": "__puya_arc4_router___create_poll_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "149": {
+      "op": "!",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "150": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "151": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "153": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "154": {
+      "op": "txna ApplicationArgs 1"
+    },
+    "157": {
+      "op": "txna ApplicationArgs 2"
+    },
+    "160": {
+      "op": "txna ApplicationArgs 3"
+    },
+    "163": {
+      "op": "txna ApplicationArgs 4"
+    },
+    "166": {
+      "op": "txna ApplicationArgs 5"
+    },
+    "169": {
+      "op": "txna ApplicationArgs 6"
+    },
+    "172": {
+      "op": "txna ApplicationArgs 7"
+    },
+    "175": {
+      "op": "txna ApplicationArgs 8"
+    },
+    "178": {
+      "op": "txna ApplicationArgs 9"
+    },
+    "181": {
+      "op": "txna ApplicationArgs 10"
+    },
+    "184": {
+      "op": "txna ApplicationArgs 11"
+    },
+    "187": {
+      "op": "txna ApplicationArgs 12",
+      "defined_out": [
+        "tmp%12#0",
+        "tmp%13#0",
+        "tmp%14#0",
+        "tmp%15#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%18#0",
+        "tmp%19#0",
+        "tmp%20#0",
+        "tmp%21#0",
+        "tmp%22#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "tmp%12#0",
+        "tmp%13#0",
+        "tmp%14#0",
+        "tmp%15#0",
+        "tmp%16#0",
+        "tmp%17#0",
+        "tmp%18#0",
+        "tmp%19#0",
+        "tmp%20#0",
+        "tmp%21#0",
+        "tmp%22#0",
+        "tmp%23#0"
+      ]
+    },
+    "190": {
+      "callsub": "contracts.poll_factory.PollFactory.create_poll",
+      "op": "callsub create_poll",
+      "defined_out": [
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "tmp%24#0"
+      ]
+    },
+    "193": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "tmp%24#0",
+        "0x151f7c75"
+      ]
+    },
+    "194": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%24#0"
+      ]
+    },
+    "195": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "tmp%25#0"
+      ]
+    },
+    "196": {
+      "op": "log",
+      "stack_out": []
+    },
+    "197": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "198": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "199": {
+      "block": "__puya_arc4_router___get_poll_route@4",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%26#0"
+      ],
+      "stack_out": [
+        "tmp%26#0"
+      ]
+    },
+    "201": {
+      "op": "!",
+      "defined_out": [
+        "tmp%27#0"
+      ],
+      "stack_out": [
+        "tmp%27#0"
+      ]
+    },
+    "202": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "203": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%28#0"
+      ],
+      "stack_out": [
+        "tmp%28#0"
+      ]
+    },
+    "205": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "206": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%30#0"
+      ],
+      "stack_out": [
+        "tmp%30#0"
+      ]
+    },
+    "209": {
+      "callsub": "contracts.poll_factory.PollFactory.get_poll",
+      "op": "callsub get_poll",
+      "defined_out": [
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "tmp%31#0"
+      ]
+    },
+    "212": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "tmp%31#0",
+        "0x151f7c75"
+      ]
+    },
+    "213": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%31#0"
+      ]
+    },
+    "214": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%32#0"
+      ],
+      "stack_out": [
+        "tmp%32#0"
+      ]
+    },
+    "215": {
+      "op": "log",
+      "stack_out": []
+    },
+    "216": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "217": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "218": {
+      "block": "__puya_arc4_router___get_poll_meta_route@5",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%33#0"
+      ],
+      "stack_out": [
+        "tmp%33#0"
+      ]
+    },
+    "220": {
+      "op": "!",
+      "defined_out": [
+        "tmp%34#0"
+      ],
+      "stack_out": [
+        "tmp%34#0"
+      ]
+    },
+    "221": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "222": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%35#0"
+      ],
+      "stack_out": [
+        "tmp%35#0"
+      ]
+    },
+    "224": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "225": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%37#0"
+      ],
+      "stack_out": [
+        "tmp%37#0"
+      ]
+    },
+    "228": {
+      "callsub": "contracts.poll_factory.PollFactory.get_poll_meta",
+      "op": "callsub get_poll_meta",
+      "defined_out": [
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0"
+      ]
+    },
+    "231": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%38#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "0x151f7c75"
+      ]
+    },
+    "232": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%38#0"
+      ]
+    },
+    "233": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%39#0"
+      ],
+      "stack_out": [
+        "tmp%39#0"
+      ]
+    },
+    "234": {
+      "op": "log",
+      "stack_out": []
+    },
+    "235": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "236": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "237": {
+      "block": "__puya_arc4_router___is_active_route@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%40#0"
+      ],
+      "stack_out": [
+        "tmp%40#0"
+      ]
+    },
+    "239": {
+      "op": "!",
+      "defined_out": [
+        "tmp%41#0"
+      ],
+      "stack_out": [
+        "tmp%41#0"
+      ]
+    },
+    "240": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "241": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%42#0"
+      ],
+      "stack_out": [
+        "tmp%42#0"
+      ]
+    },
+    "243": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "244": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%44#0"
+      ],
+      "stack_out": [
+        "tmp%44#0"
+      ]
+    },
+    "247": {
+      "callsub": "contracts.poll_factory.PollFactory.is_active",
+      "op": "callsub is_active",
+      "defined_out": [
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0"
+      ]
+    },
+    "250": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%45#0"
+      ],
+      "stack_out": [
+        "tmp%45#0",
+        "0x151f7c75"
+      ]
+    },
+    "251": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%45#0"
+      ]
+    },
+    "252": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%46#0"
+      ],
+      "stack_out": [
+        "tmp%46#0"
+      ]
+    },
+    "253": {
+      "op": "log",
+      "stack_out": []
+    },
+    "254": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "255": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "256": {
+      "block": "__puya_arc4_router___get_next_poll_id_route@7",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%47#0"
+      ],
+      "stack_out": [
+        "tmp%47#0"
+      ]
+    },
+    "258": {
+      "op": "!",
+      "defined_out": [
+        "tmp%48#0"
+      ],
+      "stack_out": [
+        "tmp%48#0"
+      ]
+    },
+    "259": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "260": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%49#0"
+      ],
+      "stack_out": [
+        "tmp%49#0"
+      ]
+    },
+    "262": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "263": {
+      "callsub": "contracts.poll_factory.PollFactory.get_next_poll_id",
+      "op": "callsub get_next_poll_id",
+      "defined_out": [
+        "tmp%51#0"
+      ],
+      "stack_out": [
+        "tmp%51#0"
+      ]
+    },
+    "266": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%51#0"
+      ],
+      "stack_out": [
+        "tmp%51#0",
+        "0x151f7c75"
+      ]
+    },
+    "267": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%51#0"
+      ]
+    },
+    "268": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%52#0"
+      ],
+      "stack_out": [
+        "tmp%52#0"
+      ]
+    },
+    "269": {
+      "op": "log",
+      "stack_out": []
+    },
+    "270": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "271": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "272": {
+      "block": "__puya_arc4_router___get_registry_app_id_route@8",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%53#0"
+      ],
+      "stack_out": [
+        "tmp%53#0"
+      ]
+    },
+    "274": {
+      "op": "!",
+      "defined_out": [
+        "tmp%54#0"
+      ],
+      "stack_out": [
+        "tmp%54#0"
+      ]
+    },
+    "275": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "276": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%55#0"
+      ],
+      "stack_out": [
+        "tmp%55#0"
+      ]
+    },
+    "278": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "279": {
+      "callsub": "contracts.poll_factory.PollFactory.get_registry_app_id",
+      "op": "callsub get_registry_app_id",
+      "defined_out": [
+        "tmp%57#0"
+      ],
+      "stack_out": [
+        "tmp%57#0"
+      ]
+    },
+    "282": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%57#0"
+      ],
+      "stack_out": [
+        "tmp%57#0",
+        "0x151f7c75"
+      ]
+    },
+    "283": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%57#0"
+      ]
+    },
+    "284": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%58#0"
+      ],
+      "stack_out": [
+        "tmp%58#0"
+      ]
+    },
+    "285": {
+      "op": "log",
+      "stack_out": []
+    },
+    "286": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "287": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "288": {
+      "block": "__puya_arc4_router___bare_routing@11",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%59#0"
+      ],
+      "stack_out": [
+        "tmp%59#0"
+      ]
+    },
+    "290": {
+      "op": "bnz __puya_arc4_router___after_if_else@15",
+      "stack_out": []
+    },
+    "293": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%60#0"
+      ],
+      "stack_out": [
+        "tmp%60#0"
+      ]
+    },
+    "295": {
+      "op": "!",
+      "defined_out": [
+        "tmp%61#0"
+      ],
+      "stack_out": [
+        "tmp%61#0"
+      ]
+    },
+    "296": {
+      "op": "assert // is creating",
+      "stack_out": []
+    },
+    "297": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "298": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "299": {
+      "block": "__puya_arc4_router___after_if_else@15",
+      "stack_in": [],
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "300": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "301": {
+      "subroutine": "contracts.poll_factory.PollFactory.bootstrap",
+      "params": {
+        "registry_app_id#0": "bytes"
+      },
+      "block": "bootstrap",
+      "stack_in": [],
+      "op": "proto 1 0"
+    },
+    "304": {
+      "op": "txn Sender"
+    },
+    "306": {
+      "op": "global CreatorAddress",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "308": {
+      "op": "==",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "309": {
+      "op": "assert // only creator can bootstrap",
+      "stack_out": []
+    },
+    "310": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "311": {
+      "op": "bytec_1 // \"registry_app_id\"",
+      "defined_out": [
+        "\"registry_app_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"registry_app_id\""
+      ]
+    },
+    "312": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "313": {
+      "op": "assert // check self.registry_app_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "314": {
+      "op": "!",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "315": {
+      "op": "assert // already bootstrapped",
+      "stack_out": []
+    },
+    "316": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "registry_app_id#0 (copy)"
+      ],
+      "stack_out": [
+        "registry_app_id#0 (copy)"
+      ]
+    },
+    "318": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "319": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%4#0",
+        "tmp%4#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%4#0",
+        "tmp%4#0 (copy)"
+      ]
+    },
+    "320": {
+      "op": "assert // invalid registry app id",
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "321": {
+      "op": "bytec_1 // \"registry_app_id\"",
+      "stack_out": [
+        "tmp%4#0",
+        "\"registry_app_id\""
+      ]
+    },
+    "322": {
+      "op": "swap",
+      "stack_out": [
+        "\"registry_app_id\"",
+        "tmp%4#0"
+      ]
+    },
+    "323": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "324": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "325": {
+      "subroutine": "contracts.poll_factory.PollFactory.create_poll",
+      "params": {
+        "swarm_id#0": "bytes",
+        "question#0": "bytes",
+        "option_0#0": "bytes",
+        "option_1#0": "bytes",
+        "option_2#0": "bytes",
+        "option_3#0": "bytes",
+        "option_4#0": "bytes",
+        "option_5#0": "bytes",
+        "option_6#0": "bytes",
+        "option_7#0": "bytes",
+        "option_count#0": "bytes",
+        "expires_at#0": "bytes"
+      },
+      "block": "create_poll",
+      "stack_in": [],
+      "op": "proto 12 1"
+    },
+    "328": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "329": {
+      "op": "bytec_1 // \"registry_app_id\"",
+      "defined_out": [
+        "\"registry_app_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"registry_app_id\""
+      ]
+    },
+    "330": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "331": {
+      "op": "assert // check self.registry_app_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "332": {
+      "op": "assert // not bootstrapped",
+      "stack_out": []
+    },
+    "333": {
+      "op": "frame_dig -11",
+      "defined_out": [
+        "question#0 (copy)"
+      ],
+      "stack_out": [
+        "question#0 (copy)"
+      ]
+    },
+    "335": {
+      "op": "len",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "336": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ]
+    },
+    "337": {
+      "op": "pushint 256 // 256",
+      "defined_out": [
+        "256",
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)",
+        "256"
+      ]
+    },
+    "340": {
+      "op": "<=",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%2#0"
+      ]
+    },
+    "341": {
+      "op": "assert // question too long",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "342": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "option_count#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "option_count#0 (copy)"
+      ]
+    },
+    "344": {
+      "op": "btoi",
+      "defined_out": [
+        "n#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "n#0"
+      ]
+    },
+    "345": {
+      "op": "dup",
+      "defined_out": [
+        "n#0",
+        "n#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "n#0",
+        "n#0 (copy)"
+      ]
+    },
+    "346": {
+      "op": "pushint 2 // 2",
+      "defined_out": [
+        "2",
+        "n#0",
+        "n#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "n#0",
+        "n#0 (copy)",
+        "2"
+      ]
+    },
+    "348": {
+      "op": ">=",
+      "defined_out": [
+        "n#0",
+        "tmp%1#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "n#0",
+        "tmp%3#0"
+      ]
+    },
+    "349": {
+      "op": "assert // at least 2 options required",
+      "stack_out": [
+        "tmp%1#0",
+        "n#0"
+      ]
+    },
+    "350": {
+      "op": "pushint 8 // 8",
+      "defined_out": [
+        "8",
+        "n#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "n#0",
+        "8"
+      ]
+    },
+    "352": {
+      "op": "<=",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%4#0"
+      ]
+    },
+    "353": {
+      "op": "assert // max 8 options",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "354": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "expires_at#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "expires_at#0 (copy)"
+      ]
+    },
+    "356": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%5#0"
+      ]
+    },
+    "357": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%5#0",
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%5#0",
+        "tmp%6#0"
+      ]
+    },
+    "359": {
+      "op": ">",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%7#0"
+      ]
+    },
+    "360": {
+      "op": "assert // expiry must be in the future",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "361": {
+      "op": "itxn_begin"
+    },
+    "362": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%1#0",
+        "0"
+      ]
+    },
+    "363": {
+      "op": "bytec_1 // \"registry_app_id\"",
+      "stack_out": [
+        "tmp%1#0",
+        "0",
+        "\"registry_app_id\""
+      ]
+    },
+    "364": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "365": {
+      "op": "assert // check self.registry_app_id exists",
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%1#0"
+      ]
+    },
+    "366": {
+      "op": "itxn_field ApplicationID",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "368": {
+      "op": "pushbytes 0x48fcacce // method \"get_owner(string)address\"",
+      "defined_out": [
+        "Method(get_owner(string)address)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "Method(get_owner(string)address)"
+      ]
+    },
+    "374": {
+      "op": "itxn_field ApplicationArgs",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "376": {
+      "op": "frame_dig -12",
+      "defined_out": [
+        "swarm_id#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "swarm_id#0 (copy)"
+      ]
+    },
+    "378": {
+      "op": "itxn_field ApplicationArgs",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "380": {
+      "op": "pushint 6 // appl",
+      "defined_out": [
+        "appl",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "appl"
+      ]
+    },
+    "382": {
+      "op": "itxn_field TypeEnum",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "384": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%1#0",
+        "0"
+      ]
+    },
+    "385": {
+      "op": "itxn_field Fee",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "387": {
+      "op": "itxn_submit"
+    },
+    "388": {
+      "op": "itxn LastLog"
+    },
+    "390": {
+      "op": "dup",
+      "defined_out": [
+        "awst_tmp%0#0",
+        "awst_tmp%0#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "awst_tmp%0#0",
+        "awst_tmp%0#0 (copy)"
+      ]
+    },
+    "391": {
+      "op": "extract 4 0",
+      "defined_out": [
+        "awst_tmp%0#0",
+        "owner#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "awst_tmp%0#0",
+        "owner#0"
+      ]
+    },
+    "394": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%1#0",
+        "owner#0",
+        "awst_tmp%0#0"
+      ]
+    },
+    "395": {
+      "op": "extract 0 4",
+      "defined_out": [
+        "owner#0",
+        "tmp%1#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "owner#0",
+        "tmp%9#0"
+      ]
+    },
+    "398": {
+      "op": "bytec_0 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "owner#0",
+        "tmp%1#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "owner#0",
+        "tmp%9#0",
+        "0x151f7c75"
+      ]
+    },
+    "399": {
+      "op": "==",
+      "defined_out": [
+        "owner#0",
+        "tmp%1#0",
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "owner#0",
+        "tmp%10#0"
+      ]
+    },
+    "400": {
+      "op": "assert // ARC4 prefix is valid",
+      "stack_out": [
+        "tmp%1#0",
+        "owner#0"
+      ]
+    },
+    "401": {
+      "op": "txn Sender",
+      "defined_out": [
+        "owner#0",
+        "tmp%1#0",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "owner#0",
+        "tmp%11#0"
+      ]
+    },
+    "403": {
+      "op": "==",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%12#0"
+      ]
+    },
+    "404": {
+      "op": "assert // caller is not the registered swarm owner",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "405": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%1#0",
+        "0"
+      ]
+    },
+    "406": {
+      "op": "bytec_2 // \"next_poll_id\"",
+      "defined_out": [
+        "\"next_poll_id\"",
+        "0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "0",
+        "\"next_poll_id\""
+      ]
+    },
+    "407": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%2#0",
+        "maybe_value%2#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%2#0",
+        "maybe_exists%2#0"
+      ]
+    },
+    "408": {
+      "op": "assert // check self.next_poll_id exists",
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%2#0"
+      ]
+    },
+    "409": {
+      "op": "itob",
+      "defined_out": [
+        "poll_id#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0"
+      ]
+    },
+    "410": {
+      "op": "intc_0 // 0",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "0"
+      ]
+    },
+    "411": {
+      "op": "bytec_2 // \"next_poll_id\"",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "0",
+        "\"next_poll_id\""
+      ]
+    },
+    "412": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%3#0",
+        "maybe_value%3#0",
+        "poll_id#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "maybe_value%3#0",
+        "maybe_exists%3#0"
+      ]
+    },
+    "413": {
+      "op": "assert // check self.next_poll_id exists",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "maybe_value%3#0"
+      ]
+    },
+    "414": {
+      "op": "intc_1 // 1",
+      "defined_out": [
+        "1",
+        "maybe_value%3#0",
+        "poll_id#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "maybe_value%3#0",
+        "1"
+      ]
+    },
+    "415": {
+      "op": "+",
+      "defined_out": [
+        "new_state_value%0#0",
+        "poll_id#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "new_state_value%0#0"
+      ]
+    },
+    "416": {
+      "op": "bytec_2 // \"next_poll_id\"",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "new_state_value%0#0",
+        "\"next_poll_id\""
+      ]
+    },
+    "417": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "\"next_poll_id\"",
+        "new_state_value%0#0"
+      ]
+    },
+    "418": {
+      "op": "app_global_put",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0"
+      ]
+    },
+    "419": {
+      "op": "txn Sender",
+      "defined_out": [
+        "poll_id#0",
+        "tmp%1#0",
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "tmp%13#0"
+      ]
+    },
+    "421": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "poll_id#0",
+        "tmp%1#0",
+        "tmp%13#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "tmp%13#0",
+        "to_encode%0#0"
+      ]
+    },
+    "423": {
+      "op": "itob",
+      "defined_out": [
+        "poll_id#0",
+        "tmp%1#0",
+        "tmp%13#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "tmp%13#0",
+        "val_as_bytes%1#0"
+      ]
+    },
+    "424": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "tmp%13#0"
+      ]
+    },
+    "425": {
+      "op": "pushbytes 0x004c",
+      "defined_out": [
+        "0x004c",
+        "poll_id#0",
+        "tmp%1#0",
+        "tmp%13#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "tmp%13#0",
+        "0x004c"
+      ]
+    },
+    "429": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%2#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0"
+      ]
+    },
+    "430": {
+      "op": "frame_dig -12",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "swarm_id#0 (copy)"
+      ]
+    },
+    "432": {
+      "op": "len",
+      "defined_out": [
+        "data_length%0#0",
+        "encoded_tuple_buffer%2#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "data_length%0#0"
+      ]
+    },
+    "433": {
+      "op": "pushint 76 // 76",
+      "defined_out": [
+        "76",
+        "data_length%0#0",
+        "encoded_tuple_buffer%2#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "data_length%0#0",
+        "76"
+      ]
+    },
+    "435": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%1#0",
+        "encoded_tuple_buffer%2#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "current_tail_offset%1#0"
+      ]
+    },
+    "436": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%1#0",
+        "current_tail_offset%1#0 (copy)",
+        "encoded_tuple_buffer%2#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "current_tail_offset%1#0",
+        "current_tail_offset%1#0 (copy)"
+      ]
+    },
+    "437": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%1#0",
+        "current_tail_offset%1#0",
+        "encoded_tuple_buffer%2#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "current_tail_offset%1#0",
+        "as_bytes%1#0"
+      ]
+    },
+    "438": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%1#0",
+        "encoded_tuple_buffer%2#0",
+        "offset_as_uint16%1#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%2#0",
+        "current_tail_offset%1#0",
+        "offset_as_uint16%1#0"
+      ]
+    },
+    "441": {
+      "op": "uncover 2",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%1#0",
+        "offset_as_uint16%1#0",
+        "encoded_tuple_buffer%2#0"
+      ]
+    },
+    "443": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%1#0",
+        "encoded_tuple_buffer%2#0",
+        "offset_as_uint16%1#0"
+      ]
+    },
+    "444": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%1#0",
+        "encoded_tuple_buffer%3#0",
+        "poll_id#0",
+        "tmp%1#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%1#0",
+        "encoded_tuple_buffer%3#0"
+      ]
+    },
+    "445": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%3#0",
+        "current_tail_offset%1#0"
+      ]
+    },
+    "446": {
+      "op": "uncover 4",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%3#0",
+        "current_tail_offset%1#0",
+        "tmp%1#0"
+      ]
+    },
+    "448": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%3#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%3#0",
+        "current_tail_offset%2#0"
+      ]
+    },
+    "449": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%3#0"
+      ]
+    },
+    "450": {
+      "op": "frame_dig -2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%3#0",
+        "option_count#0 (copy)"
+      ]
+    },
+    "452": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0"
+      ]
+    },
+    "453": {
+      "op": "dig 1",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "current_tail_offset%2#0 (copy)",
+        "encoded_tuple_buffer%4#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0",
+        "current_tail_offset%2#0 (copy)"
+      ]
+    },
+    "455": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%2#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0",
+        "as_bytes%2#0"
+      ]
+    },
+    "456": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0",
+        "offset_as_uint16%2#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%4#0",
+        "offset_as_uint16%2#0"
+      ]
+    },
+    "459": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%5#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%5#0"
+      ]
+    },
+    "460": {
+      "op": "frame_dig -10",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%5#0",
+        "option_0#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%5#0",
+        "option_0#0 (copy)"
+      ]
+    },
+    "462": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%2#0",
+        "data_length%2#0",
+        "encoded_tuple_buffer%5#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%2#0",
+        "encoded_tuple_buffer%5#0",
+        "data_length%2#0"
+      ]
+    },
+    "463": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%5#0",
+        "data_length%2#0",
+        "current_tail_offset%2#0"
+      ]
+    },
+    "465": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%5#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%5#0",
+        "current_tail_offset%3#0"
+      ]
+    },
+    "466": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%3#0",
+        "current_tail_offset%3#0 (copy)",
+        "encoded_tuple_buffer%5#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%5#0",
+        "current_tail_offset%3#0",
+        "current_tail_offset%3#0 (copy)"
+      ]
+    },
+    "467": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%3#0",
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%5#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%5#0",
+        "current_tail_offset%3#0",
+        "as_bytes%3#0"
+      ]
+    },
+    "468": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%5#0",
+        "offset_as_uint16%3#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%5#0",
+        "current_tail_offset%3#0",
+        "offset_as_uint16%3#0"
+      ]
+    },
+    "471": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%3#0",
+        "offset_as_uint16%3#0",
+        "encoded_tuple_buffer%5#0"
+      ]
+    },
+    "473": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%5#0",
+        "offset_as_uint16%3#0"
+      ]
+    },
+    "474": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%6#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%6#0"
+      ]
+    },
+    "475": {
+      "op": "frame_dig -9",
+      "defined_out": [
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%6#0",
+        "option_1#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%6#0",
+        "option_1#0 (copy)"
+      ]
+    },
+    "477": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%3#0",
+        "data_length%3#0",
+        "encoded_tuple_buffer%6#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%3#0",
+        "encoded_tuple_buffer%6#0",
+        "data_length%3#0"
+      ]
+    },
+    "478": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%6#0",
+        "data_length%3#0",
+        "current_tail_offset%3#0"
+      ]
+    },
+    "480": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%6#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%6#0",
+        "current_tail_offset%4#0"
+      ]
+    },
+    "481": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%4#0",
+        "current_tail_offset%4#0 (copy)",
+        "encoded_tuple_buffer%6#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%6#0",
+        "current_tail_offset%4#0",
+        "current_tail_offset%4#0 (copy)"
+      ]
+    },
+    "482": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%4#0",
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%6#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%6#0",
+        "current_tail_offset%4#0",
+        "as_bytes%4#0"
+      ]
+    },
+    "483": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%6#0",
+        "offset_as_uint16%4#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%6#0",
+        "current_tail_offset%4#0",
+        "offset_as_uint16%4#0"
+      ]
+    },
+    "486": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%4#0",
+        "offset_as_uint16%4#0",
+        "encoded_tuple_buffer%6#0"
+      ]
+    },
+    "488": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%6#0",
+        "offset_as_uint16%4#0"
+      ]
+    },
+    "489": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%7#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%7#0"
+      ]
+    },
+    "490": {
+      "op": "frame_dig -8",
+      "defined_out": [
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%7#0",
+        "option_2#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%7#0",
+        "option_2#0 (copy)"
+      ]
+    },
+    "492": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%4#0",
+        "data_length%4#0",
+        "encoded_tuple_buffer%7#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%4#0",
+        "encoded_tuple_buffer%7#0",
+        "data_length%4#0"
+      ]
+    },
+    "493": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%7#0",
+        "data_length%4#0",
+        "current_tail_offset%4#0"
+      ]
+    },
+    "495": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%7#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%7#0",
+        "current_tail_offset%5#0"
+      ]
+    },
+    "496": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%5#0",
+        "current_tail_offset%5#0 (copy)",
+        "encoded_tuple_buffer%7#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%7#0",
+        "current_tail_offset%5#0",
+        "current_tail_offset%5#0 (copy)"
+      ]
+    },
+    "497": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%5#0",
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%7#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%7#0",
+        "current_tail_offset%5#0",
+        "as_bytes%5#0"
+      ]
+    },
+    "498": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%7#0",
+        "offset_as_uint16%5#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%7#0",
+        "current_tail_offset%5#0",
+        "offset_as_uint16%5#0"
+      ]
+    },
+    "501": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%5#0",
+        "offset_as_uint16%5#0",
+        "encoded_tuple_buffer%7#0"
+      ]
+    },
+    "503": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%7#0",
+        "offset_as_uint16%5#0"
+      ]
+    },
+    "504": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%8#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%8#0"
+      ]
+    },
+    "505": {
+      "op": "frame_dig -7",
+      "defined_out": [
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%8#0",
+        "option_3#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%8#0",
+        "option_3#0 (copy)"
+      ]
+    },
+    "507": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%5#0",
+        "data_length%5#0",
+        "encoded_tuple_buffer%8#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%5#0",
+        "encoded_tuple_buffer%8#0",
+        "data_length%5#0"
+      ]
+    },
+    "508": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%8#0",
+        "data_length%5#0",
+        "current_tail_offset%5#0"
+      ]
+    },
+    "510": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%8#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%8#0",
+        "current_tail_offset%6#0"
+      ]
+    },
+    "511": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%6#0",
+        "current_tail_offset%6#0 (copy)",
+        "encoded_tuple_buffer%8#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%8#0",
+        "current_tail_offset%6#0",
+        "current_tail_offset%6#0 (copy)"
+      ]
+    },
+    "512": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%6#0",
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%8#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%8#0",
+        "current_tail_offset%6#0",
+        "as_bytes%6#0"
+      ]
+    },
+    "513": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%8#0",
+        "offset_as_uint16%6#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%8#0",
+        "current_tail_offset%6#0",
+        "offset_as_uint16%6#0"
+      ]
+    },
+    "516": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%6#0",
+        "offset_as_uint16%6#0",
+        "encoded_tuple_buffer%8#0"
+      ]
+    },
+    "518": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%8#0",
+        "offset_as_uint16%6#0"
+      ]
+    },
+    "519": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%9#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%9#0"
+      ]
+    },
+    "520": {
+      "op": "frame_dig -6",
+      "defined_out": [
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%9#0",
+        "option_4#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%9#0",
+        "option_4#0 (copy)"
+      ]
+    },
+    "522": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%6#0",
+        "data_length%6#0",
+        "encoded_tuple_buffer%9#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%6#0",
+        "encoded_tuple_buffer%9#0",
+        "data_length%6#0"
+      ]
+    },
+    "523": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%9#0",
+        "data_length%6#0",
+        "current_tail_offset%6#0"
+      ]
+    },
+    "525": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%9#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%9#0",
+        "current_tail_offset%7#0"
+      ]
+    },
+    "526": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%7#0",
+        "current_tail_offset%7#0 (copy)",
+        "encoded_tuple_buffer%9#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%9#0",
+        "current_tail_offset%7#0",
+        "current_tail_offset%7#0 (copy)"
+      ]
+    },
+    "527": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%7#0",
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%9#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%9#0",
+        "current_tail_offset%7#0",
+        "as_bytes%7#0"
+      ]
+    },
+    "528": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%9#0",
+        "offset_as_uint16%7#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%9#0",
+        "current_tail_offset%7#0",
+        "offset_as_uint16%7#0"
+      ]
+    },
+    "531": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%7#0",
+        "offset_as_uint16%7#0",
+        "encoded_tuple_buffer%9#0"
+      ]
+    },
+    "533": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%9#0",
+        "offset_as_uint16%7#0"
+      ]
+    },
+    "534": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%10#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%10#0"
+      ]
+    },
+    "535": {
+      "op": "frame_dig -5",
+      "defined_out": [
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%10#0",
+        "option_5#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%10#0",
+        "option_5#0 (copy)"
+      ]
+    },
+    "537": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%7#0",
+        "data_length%7#0",
+        "encoded_tuple_buffer%10#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%7#0",
+        "encoded_tuple_buffer%10#0",
+        "data_length%7#0"
+      ]
+    },
+    "538": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%10#0",
+        "data_length%7#0",
+        "current_tail_offset%7#0"
+      ]
+    },
+    "540": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%10#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%10#0",
+        "current_tail_offset%8#0"
+      ]
+    },
+    "541": {
+      "op": "dup",
+      "defined_out": [
+        "current_tail_offset%8#0",
+        "current_tail_offset%8#0 (copy)",
+        "encoded_tuple_buffer%10#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%10#0",
+        "current_tail_offset%8#0",
+        "current_tail_offset%8#0 (copy)"
+      ]
+    },
+    "542": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%8#0",
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%10#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%10#0",
+        "current_tail_offset%8#0",
+        "as_bytes%8#0"
+      ]
+    },
+    "543": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%10#0",
+        "offset_as_uint16%8#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%10#0",
+        "current_tail_offset%8#0",
+        "offset_as_uint16%8#0"
+      ]
+    },
+    "546": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%8#0",
+        "offset_as_uint16%8#0",
+        "encoded_tuple_buffer%10#0"
+      ]
+    },
+    "548": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%10#0",
+        "offset_as_uint16%8#0"
+      ]
+    },
+    "549": {
+      "op": "concat",
+      "defined_out": [
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%11#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%11#0"
+      ]
+    },
+    "550": {
+      "op": "frame_dig -4",
+      "defined_out": [
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%11#0",
+        "option_6#0 (copy)",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%11#0",
+        "option_6#0 (copy)"
+      ]
+    },
+    "552": {
+      "op": "len",
+      "defined_out": [
+        "current_tail_offset%8#0",
+        "data_length%8#0",
+        "encoded_tuple_buffer%11#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "current_tail_offset%8#0",
+        "encoded_tuple_buffer%11#0",
+        "data_length%8#0"
+      ]
+    },
+    "553": {
+      "op": "uncover 2",
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%11#0",
+        "data_length%8#0",
+        "current_tail_offset%8#0"
+      ]
+    },
+    "555": {
+      "op": "+",
+      "defined_out": [
+        "current_tail_offset%9#0",
+        "encoded_tuple_buffer%11#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%11#0",
+        "current_tail_offset%9#0"
+      ]
+    },
+    "556": {
+      "op": "itob",
+      "defined_out": [
+        "as_bytes%9#0",
+        "encoded_tuple_buffer%11#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%11#0",
+        "as_bytes%9#0"
+      ]
+    },
+    "557": {
+      "op": "extract 6 2",
+      "defined_out": [
+        "encoded_tuple_buffer%11#0",
+        "offset_as_uint16%9#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%11#0",
+        "offset_as_uint16%9#0"
+      ]
+    },
+    "560": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%12#0",
+        "poll_id#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "val_as_bytes%1#0",
+        "encoded_tuple_buffer%12#0"
+      ]
+    },
+    "561": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%12#0",
+        "val_as_bytes%1#0"
+      ]
+    },
+    "562": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%13#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%13#0"
+      ]
+    },
+    "563": {
+      "op": "frame_dig -1",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%13#0",
+        "expires_at#0 (copy)"
+      ]
+    },
+    "565": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%14#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%14#0"
+      ]
+    },
+    "566": {
+      "op": "frame_dig -12",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%14#0",
+        "swarm_id#0 (copy)"
+      ]
+    },
+    "568": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%15#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%15#0"
+      ]
+    },
+    "569": {
+      "op": "frame_dig -11",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%15#0",
+        "question#0 (copy)"
+      ]
+    },
+    "571": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%16#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%16#0"
+      ]
+    },
+    "572": {
+      "op": "frame_dig -10",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%16#0",
+        "option_0#0 (copy)"
+      ]
+    },
+    "574": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%17#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%17#0"
+      ]
+    },
+    "575": {
+      "op": "frame_dig -9",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%17#0",
+        "option_1#0 (copy)"
+      ]
+    },
+    "577": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%18#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%18#0"
+      ]
+    },
+    "578": {
+      "op": "frame_dig -8",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%18#0",
+        "option_2#0 (copy)"
+      ]
+    },
+    "580": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%19#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%19#0"
+      ]
+    },
+    "581": {
+      "op": "frame_dig -7",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%19#0",
+        "option_3#0 (copy)"
+      ]
+    },
+    "583": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%20#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%20#0"
+      ]
+    },
+    "584": {
+      "op": "frame_dig -6",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%20#0",
+        "option_4#0 (copy)"
+      ]
+    },
+    "586": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%21#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%21#0"
+      ]
+    },
+    "587": {
+      "op": "frame_dig -5",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%21#0",
+        "option_5#0 (copy)"
+      ]
+    },
+    "589": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%22#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%22#0"
+      ]
+    },
+    "590": {
+      "op": "frame_dig -4",
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%22#0",
+        "option_6#0 (copy)"
+      ]
+    },
+    "592": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%23#0",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%23#0"
+      ]
+    },
+    "593": {
+      "op": "frame_dig -3",
+      "defined_out": [
+        "encoded_tuple_buffer%23#0",
+        "option_7#0 (copy)",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "encoded_tuple_buffer%23#0",
+        "option_7#0 (copy)"
+      ]
+    },
+    "595": {
+      "op": "concat",
+      "defined_out": [
+        "poll_id#0",
+        "record#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "record#0"
+      ]
+    },
+    "596": {
+      "op": "bytec_3 // 0x703a",
+      "defined_out": [
+        "0x703a",
+        "poll_id#0",
+        "record#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "record#0",
+        "0x703a"
+      ]
+    },
+    "597": {
+      "op": "dig 2",
+      "defined_out": [
+        "0x703a",
+        "poll_id#0",
+        "poll_id#0 (copy)",
+        "record#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "record#0",
+        "0x703a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "599": {
+      "op": "concat",
+      "defined_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0"
+      ]
+    },
+    "600": {
+      "op": "dup",
+      "defined_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0",
+        "tmp%14#0 (copy)"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0",
+        "tmp%14#0 (copy)"
+      ]
+    },
+    "601": {
+      "op": "box_del",
+      "defined_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0",
+        "{box_del}"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0",
+        "{box_del}"
+      ]
+    },
+    "602": {
+      "op": "pop",
+      "stack_out": [
+        "poll_id#0",
+        "record#0",
+        "tmp%14#0"
+      ]
+    },
+    "603": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0",
+        "tmp%14#0",
+        "record#0"
+      ]
+    },
+    "604": {
+      "op": "box_put",
+      "stack_out": [
+        "poll_id#0"
+      ]
+    },
+    "605": {
+      "op": "pushbytes 0x414c303a504f4c4c3a435245415445",
+      "defined_out": [
+        "0x414c303a504f4c4c3a435245415445",
+        "poll_id#0"
+      ],
+      "stack_out": [
+        "poll_id#0",
+        "0x414c303a504f4c4c3a435245415445"
+      ]
+    },
+    "622": {
+      "op": "log",
+      "stack_out": [
+        "poll_id#0"
+      ]
+    },
+    "623": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "624": {
+      "subroutine": "contracts.poll_factory.PollFactory.get_poll",
+      "params": {
+        "poll_id#0": "bytes"
+      },
+      "block": "get_poll",
+      "stack_in": [],
+      "op": "proto 1 1"
+    },
+    "627": {
+      "op": "bytec_3 // 0x703a",
+      "defined_out": [
+        "0x703a"
+      ],
+      "stack_out": [
+        "0x703a"
+      ]
+    },
+    "628": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "0x703a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x703a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "630": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "631": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ]
+    },
+    "632": {
+      "op": "box_len",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "633": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "635": {
+      "op": "assert // poll not found",
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "636": {
+      "op": "box_get",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0"
+      ],
+      "stack_out": [
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "637": {
+      "op": "assert // check self.polls entry exists",
+      "stack_out": [
+        "maybe_value%1#0"
+      ]
+    },
+    "638": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "639": {
+      "subroutine": "contracts.poll_factory.PollFactory.get_poll_meta",
+      "params": {
+        "poll_id#0": "bytes"
+      },
+      "block": "get_poll_meta",
+      "stack_in": [],
+      "op": "proto 1 1"
+    },
+    "642": {
+      "op": "bytec_3 // 0x703a",
+      "defined_out": [
+        "0x703a"
+      ],
+      "stack_out": [
+        "0x703a"
+      ]
+    },
+    "643": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "0x703a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x703a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "645": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "646": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ]
+    },
+    "647": {
+      "op": "box_len",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "648": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "650": {
+      "op": "assert // poll not found",
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "651": {
+      "op": "box_get",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "record#0"
+      ],
+      "stack_out": [
+        "record#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "652": {
+      "op": "assert // check self.polls entry exists",
+      "stack_out": [
+        "record#0"
+      ]
+    },
+    "653": {
+      "op": "dup",
+      "defined_out": [
+        "record#0",
+        "record#0 (copy)"
+      ],
+      "stack_out": [
+        "record#0",
+        "record#0 (copy)"
+      ]
+    },
+    "654": {
+      "op": "extract 68 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "record#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "record#0",
+        "tmp%2#0"
+      ]
+    },
+    "657": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%2#0",
+        "record#0"
+      ]
+    },
+    "658": {
+      "op": "extract 36 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tmp%2#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%2#0",
+        "tmp%3#0"
+      ]
+    },
+    "661": {
+      "op": "concat",
+      "defined_out": [
+        "encoded_tuple_buffer%2#0"
+      ],
+      "stack_out": [
+        "encoded_tuple_buffer%2#0"
+      ]
+    },
+    "662": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "663": {
+      "subroutine": "contracts.poll_factory.PollFactory.is_active",
+      "params": {
+        "poll_id#0": "bytes"
+      },
+      "block": "is_active",
+      "stack_in": [],
+      "op": "proto 1 1"
+    },
+    "666": {
+      "op": "bytec_3 // 0x703a",
+      "defined_out": [
+        "0x703a"
+      ],
+      "stack_out": [
+        "0x703a"
+      ]
+    },
+    "667": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "0x703a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x703a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "669": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "670": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0"
+      ]
+    },
+    "671": {
+      "op": "box_len",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "672": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "674": {
+      "op": "bnz is_active_after_if_else@2",
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "677": {
+      "op": "pushbytes 0x00",
+      "defined_out": [
+        "0x00",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "0x00"
+      ]
+    },
+    "680": {
+      "op": "swap"
+    },
+    "681": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "682": {
+      "block": "is_active_after_if_else@2",
+      "stack_in": [
+        "tmp%0#0"
+      ],
+      "op": "frame_dig 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0"
+      ]
+    },
+    "684": {
+      "op": "box_get",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "685": {
+      "op": "assert // check self.polls entry exists",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%1#0"
+      ]
+    },
+    "686": {
+      "op": "extract 68 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%2#0"
+      ]
+    },
+    "689": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%3#0"
+      ]
+    },
+    "690": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%3#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%3#0",
+        "tmp%4#0"
+      ]
+    },
+    "692": {
+      "op": ">",
+      "defined_out": [
+        "tmp%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "to_encode%0#0"
+      ]
+    },
+    "693": {
+      "op": "pushbytes 0x00",
+      "defined_out": [
+        "0x00",
+        "tmp%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "to_encode%0#0",
+        "0x00"
+      ]
+    },
+    "696": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0",
+        "0x00",
+        "tmp%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "to_encode%0#0",
+        "0x00",
+        "0"
+      ]
+    },
+    "697": {
+      "op": "uncover 2",
+      "stack_out": [
+        "tmp%0#0",
+        "0x00",
+        "0",
+        "to_encode%0#0"
+      ]
+    },
+    "699": {
+      "op": "setbit",
+      "defined_out": [
+        "encoded_bool%1#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "encoded_bool%1#0"
+      ]
+    },
+    "700": {
+      "op": "swap"
+    },
+    "701": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "702": {
+      "subroutine": "contracts.poll_factory.PollFactory.get_next_poll_id",
+      "params": {},
+      "block": "get_next_poll_id",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "705": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "706": {
+      "op": "bytec_2 // \"next_poll_id\"",
+      "defined_out": [
+        "\"next_poll_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"next_poll_id\""
+      ]
+    },
+    "707": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "708": {
+      "op": "assert // check self.next_poll_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "709": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "710": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "711": {
+      "subroutine": "contracts.poll_factory.PollFactory.get_registry_app_id",
+      "params": {},
+      "block": "get_registry_app_id",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "714": {
+      "op": "intc_0 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "715": {
+      "op": "bytec_1 // \"registry_app_id\"",
+      "defined_out": [
+        "\"registry_app_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"registry_app_id\""
+      ]
+    },
+    "716": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "717": {
+      "op": "assert // check self.registry_app_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "718": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "719": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

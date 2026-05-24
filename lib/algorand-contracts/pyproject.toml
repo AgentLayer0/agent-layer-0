@@ -1,0 +1,12 @@
+[project]
+name = "al0-algorand-contracts"
+version = "0.1.0"
+description = "Algorand Python smart contracts for Agent Layer 0"
+requires-python = ">=3.12"
+dependencies = [
+    "algorand-python>=3.5.0,<4",
+    "puya>=0.6.0",
+]
+
+[tool.puya]
+out_dir = "artifacts"

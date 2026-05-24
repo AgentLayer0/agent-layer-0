@@ -1,0 +1,3731 @@
+{
+  "version": 3,
+  "sources": [
+    "../../contracts/ballot_box.py"
+  ],
+  "mappings": ";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAqEA;;;AACQ;AAA2B;AAA3B;AACA;AAA8B;AAA9B;;AAhBR;;;AAAA;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAAA;;;AAAA;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAwBK;;AAAA;AAAA;AAAA;;AAAA;AAxBL;;;AAwBK;;;AAAA;AAAA;AAgBA;;AAAA;AAAA;AAAA;;AAAA;AAxCL;;;AAwCK;;;AAAA;AAAA;AA2CA;;AAAA;AAAA;AAAA;;AAAA;AAnFL;;;AAAA;;;AAmFK;;;AAAA;AAAA;AAmCA;;AAAA;AAAA;AAAA;;AAAA;AAtHL;;;AAsHK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAMA;;AAAA;AAAA;AAAA;;AAAA;AA5HL;;;AAAA;;;AA4HK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAQA;;AAAA;AAAA;AAAA;;AAAA;AApIL;;;AAAA;;;AAoIK;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAUA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAKA;;AAAA;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAnJL;;AAAA;;;;;;;;;AAAA;AAAA;AAwBA;;;AAWe;;AAAc;;AAAd;AAAP;AACO;AAAA;AAAA;AAAA;AAAA;AAAP;AACO;;AAAA;AAAP;AAAA;AACA;AAAA;AAAA;;AAER;;;AAce;AAAA;AAAA;AAAA;AAAP;AACsB;;AAAf;;AAAA;AAAA;AAAA;AAAA;;AAAA;AAAP;AAGa;AAGF;AAAA;AAAA;AAAA;;;AAHE;;;;;;;;;;;;AAAA;;;AAAA;;;AAAA;AAAA;;AAAA;AAAA;;;AAAA;AAAA;;;AAAA;AAAA;AAAA;AAMN;AAAA;;;AAAA;AAAyB;;AAAzB;AAAP;AAEA;AAaA;AAAA;;AAAA;AAVQ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAUR;AAEI;;;;;;;;;;;;;;;;;;;;;;AAAJ;;AAER;;;AAe0B;;AAAX;;AAAA;AAAA;AAAA;AAAA;;AAAP;AAEO;AAAA;AACA;AAAA;;;AAAA;AAAyB;;AAAzB;AAAP;AACO;;AAAA;AAAsB;AAAA;;;AAAA;AAAtB;;AAAA;AAAP;AAEqB;;AACN;;AAAA;;AAAA;AAAf;AAAe;AAEY;AAAA;AAAA;;AACpB;AAAP;AAGA;;AAAA;AAEA;;AAAA;AAAA;;;AACA;AAAA;AAAA;AAAA;AAAoB;AAApB;AAAA;AAAA;AAAA;AAEI;;;;;;;;;;;;;;;;;AAAJ;;AAoCR;;;AAGgB;AAAA;;AAAA;AAAA;AAAA;AAAA;AAEhB;;AAAA;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AACC;;AAAgB;AAAhB;AAAb;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AACC;;AAAgB;;AAAhB;AAAb;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AACC;;AAAgB;;AAAhB;AAAb;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AACC;;AAAgB;;AAAhB;AAAb;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AACC;;AAAgB;;AAAhB;AAAb;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AACC;;AAAgB;AAAhB;AAAb;;;AACwC;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;;;;AAE4B;;AAAA;AAAA;;;AAAA;AAAuB;AAAvB;AAAZ;AAAhB;;AAAA;;AAEJ;;AAAA;;AAAA;;AAxDR;;;AAG0B;AAAX;;AAAA;AAAA;AAAA;AAAA;;AAAP;AACO;AAAA;AAAP;AAER;;;AAGuB;;AAAA;;AAAA;AAAf;;AAAe;AAEE;AAAA;;AACV;;;AAAA;AAAA;;AAAA;AAAP;AAER;;;AAGuB;;AAAA;;AAAA;AAAf;;AAAe;AAEM;AACrB;AAEO;;;AAAP;AAER;;;AAG2B;AAAA;AAAA;AAAA;AAAZ;AAAP;AAER;;;AAG2B;AAAA;AAAA;AAAA;AAAZ;AAAP",
+  "op_pc_offset": 0,
+  "pc_events": {
+    "1": {
+      "subroutine": "contracts.ballot_box.BallotBox.approval_program",
+      "params": {},
+      "block": "contracts.ballot_box.BallotBox.approval_program",
+      "stack_in": [],
+      "op": "intcblock 1 0 6"
+    },
+    "6": {
+      "op": "bytecblock \"factory_app_id\" 0x151f7c75 \"total_votes\" 0x743a 0x763a 0x6d3a"
+    },
+    "49": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "51": {
+      "op": "bnz main_after_if_else@2",
+      "stack_out": []
+    },
+    "54": {
+      "callsub": "contracts.ballot_box.BallotBox.__init__",
+      "op": "callsub __init__"
+    },
+    "57": {
+      "block": "main_after_if_else@2",
+      "stack_in": [],
+      "callsub": "contracts.ballot_box.BallotBox.__puya_arc4_router__",
+      "op": "callsub __puya_arc4_router__",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "60": {
+      "op": "return",
+      "stack_out": []
+    },
+    "61": {
+      "subroutine": "contracts.ballot_box.BallotBox.__init__",
+      "params": {},
+      "block": "__init__",
+      "stack_in": [],
+      "op": "proto 0 0"
+    },
+    "64": {
+      "op": "bytec_2 // \"total_votes\"",
+      "defined_out": [
+        "\"total_votes\""
+      ],
+      "stack_out": [
+        "\"total_votes\""
+      ]
+    },
+    "65": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "\"total_votes\"",
+        "0"
+      ],
+      "stack_out": [
+        "\"total_votes\"",
+        "0"
+      ]
+    },
+    "66": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "67": {
+      "op": "bytec_0 // \"factory_app_id\"",
+      "defined_out": [
+        "\"factory_app_id\""
+      ],
+      "stack_out": [
+        "\"factory_app_id\""
+      ]
+    },
+    "68": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "\"factory_app_id\"",
+        "0"
+      ]
+    },
+    "69": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "70": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "71": {
+      "subroutine": "contracts.ballot_box.BallotBox.__puya_arc4_router__",
+      "params": {},
+      "block": "__puya_arc4_router__",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "74": {
+      "op": "txn NumAppArgs",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "76": {
+      "op": "bz __puya_arc4_router___bare_routing@12",
+      "stack_out": []
+    },
+    "79": {
+      "op": "pushbytess 0xa0cadf8a 0x103686f7 0xba7746ac 0x306c1e55 0xeac2d913 0x42a41386 0xc2f97c85 0xec5a67f7 // method \"bootstrap(uint64)void\", method \"init_poll(uint64)void\", method \"cast_vote(uint64,uint64)void\", method \"get_tally(uint64)(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)\", method \"has_voted(uint64,address)bool\", method \"get_vote(uint64,address)uint64\", method \"get_total_votes()uint64\", method \"get_factory_app_id()uint64\""
+    },
+    "121": {
+      "op": "txna ApplicationArgs 0",
+      "defined_out": [
+        "Method(bootstrap(uint64)void)",
+        "Method(cast_vote(uint64,uint64)void)",
+        "Method(get_factory_app_id()uint64)",
+        "Method(get_tally(uint64)(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64))",
+        "Method(get_total_votes()uint64)",
+        "Method(get_vote(uint64,address)uint64)",
+        "Method(has_voted(uint64,address)bool)",
+        "Method(init_poll(uint64)void)",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "Method(bootstrap(uint64)void)",
+        "Method(init_poll(uint64)void)",
+        "Method(cast_vote(uint64,uint64)void)",
+        "Method(get_tally(uint64)(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64))",
+        "Method(has_voted(uint64,address)bool)",
+        "Method(get_vote(uint64,address)uint64)",
+        "Method(get_total_votes()uint64)",
+        "Method(get_factory_app_id()uint64)",
+        "tmp%2#0"
+      ]
+    },
+    "124": {
+      "op": "match __puya_arc4_router___bootstrap_route@2 __puya_arc4_router___init_poll_route@3 __puya_arc4_router___cast_vote_route@4 __puya_arc4_router___get_tally_route@5 __puya_arc4_router___has_voted_route@6 __puya_arc4_router___get_vote_route@7 __puya_arc4_router___get_total_votes_route@8 __puya_arc4_router___get_factory_app_id_route@9",
+      "stack_out": []
+    },
+    "142": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "143": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "144": {
+      "block": "__puya_arc4_router___bootstrap_route@2",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "146": {
+      "op": "!",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "147": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "148": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%5#0"
+      ]
+    },
+    "150": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "151": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%7#0"
+      ]
+    },
+    "154": {
+      "callsub": "contracts.ballot_box.BallotBox.bootstrap",
+      "op": "callsub bootstrap",
+      "stack_out": []
+    },
+    "157": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "158": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "159": {
+      "block": "__puya_arc4_router___init_poll_route@3",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%8#0"
+      ]
+    },
+    "161": {
+      "op": "!",
+      "defined_out": [
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%9#0"
+      ]
+    },
+    "162": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "163": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%10#0"
+      ]
+    },
+    "165": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "166": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%12#0"
+      ]
+    },
+    "169": {
+      "callsub": "contracts.ballot_box.BallotBox.init_poll",
+      "op": "callsub init_poll",
+      "stack_out": []
+    },
+    "172": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "173": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "174": {
+      "block": "__puya_arc4_router___cast_vote_route@4",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%13#0"
+      ]
+    },
+    "176": {
+      "op": "!",
+      "defined_out": [
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%14#0"
+      ]
+    },
+    "177": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "178": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%15#0"
+      ]
+    },
+    "180": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "181": {
+      "op": "txna ApplicationArgs 1"
+    },
+    "184": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "tmp%17#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%17#0",
+        "tmp%18#0"
+      ]
+    },
+    "187": {
+      "callsub": "contracts.ballot_box.BallotBox.cast_vote",
+      "op": "callsub cast_vote",
+      "stack_out": []
+    },
+    "190": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "191": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "192": {
+      "block": "__puya_arc4_router___get_tally_route@5",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%19#0"
+      ]
+    },
+    "194": {
+      "op": "!",
+      "defined_out": [
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%20#0"
+      ]
+    },
+    "195": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "196": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%21#0"
+      ]
+    },
+    "198": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "199": {
+      "op": "txna ApplicationArgs 1",
+      "defined_out": [
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "tmp%23#0"
+      ]
+    },
+    "202": {
+      "callsub": "contracts.ballot_box.BallotBox.get_tally",
+      "op": "callsub get_tally",
+      "defined_out": [
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "tmp%24#0"
+      ]
+    },
+    "205": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%24#0"
+      ],
+      "stack_out": [
+        "tmp%24#0",
+        "0x151f7c75"
+      ]
+    },
+    "206": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%24#0"
+      ]
+    },
+    "207": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%25#0"
+      ],
+      "stack_out": [
+        "tmp%25#0"
+      ]
+    },
+    "208": {
+      "op": "log",
+      "stack_out": []
+    },
+    "209": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "210": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "211": {
+      "block": "__puya_arc4_router___has_voted_route@6",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%26#0"
+      ],
+      "stack_out": [
+        "tmp%26#0"
+      ]
+    },
+    "213": {
+      "op": "!",
+      "defined_out": [
+        "tmp%27#0"
+      ],
+      "stack_out": [
+        "tmp%27#0"
+      ]
+    },
+    "214": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "215": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%28#0"
+      ],
+      "stack_out": [
+        "tmp%28#0"
+      ]
+    },
+    "217": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "218": {
+      "op": "txna ApplicationArgs 1"
+    },
+    "221": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "tmp%30#0",
+        "tmp%31#0"
+      ],
+      "stack_out": [
+        "tmp%30#0",
+        "tmp%31#0"
+      ]
+    },
+    "224": {
+      "callsub": "contracts.ballot_box.BallotBox.has_voted",
+      "op": "callsub has_voted",
+      "defined_out": [
+        "tmp%32#0"
+      ],
+      "stack_out": [
+        "tmp%32#0"
+      ]
+    },
+    "227": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%32#0"
+      ],
+      "stack_out": [
+        "tmp%32#0",
+        "0x151f7c75"
+      ]
+    },
+    "228": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%32#0"
+      ]
+    },
+    "229": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%33#0"
+      ],
+      "stack_out": [
+        "tmp%33#0"
+      ]
+    },
+    "230": {
+      "op": "log",
+      "stack_out": []
+    },
+    "231": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "232": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "233": {
+      "block": "__puya_arc4_router___get_vote_route@7",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%34#0"
+      ],
+      "stack_out": [
+        "tmp%34#0"
+      ]
+    },
+    "235": {
+      "op": "!",
+      "defined_out": [
+        "tmp%35#0"
+      ],
+      "stack_out": [
+        "tmp%35#0"
+      ]
+    },
+    "236": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "237": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%36#0"
+      ],
+      "stack_out": [
+        "tmp%36#0"
+      ]
+    },
+    "239": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "240": {
+      "op": "txna ApplicationArgs 1"
+    },
+    "243": {
+      "op": "txna ApplicationArgs 2",
+      "defined_out": [
+        "tmp%38#0",
+        "tmp%39#0"
+      ],
+      "stack_out": [
+        "tmp%38#0",
+        "tmp%39#0"
+      ]
+    },
+    "246": {
+      "callsub": "contracts.ballot_box.BallotBox.get_vote",
+      "op": "callsub get_vote",
+      "defined_out": [
+        "tmp%40#0"
+      ],
+      "stack_out": [
+        "tmp%40#0"
+      ]
+    },
+    "249": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%40#0"
+      ],
+      "stack_out": [
+        "tmp%40#0",
+        "0x151f7c75"
+      ]
+    },
+    "250": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%40#0"
+      ]
+    },
+    "251": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%41#0"
+      ],
+      "stack_out": [
+        "tmp%41#0"
+      ]
+    },
+    "252": {
+      "op": "log",
+      "stack_out": []
+    },
+    "253": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "254": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "255": {
+      "block": "__puya_arc4_router___get_total_votes_route@8",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%42#0"
+      ],
+      "stack_out": [
+        "tmp%42#0"
+      ]
+    },
+    "257": {
+      "op": "!",
+      "defined_out": [
+        "tmp%43#0"
+      ],
+      "stack_out": [
+        "tmp%43#0"
+      ]
+    },
+    "258": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "259": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%44#0"
+      ],
+      "stack_out": [
+        "tmp%44#0"
+      ]
+    },
+    "261": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "262": {
+      "callsub": "contracts.ballot_box.BallotBox.get_total_votes",
+      "op": "callsub get_total_votes",
+      "defined_out": [
+        "tmp%46#0"
+      ],
+      "stack_out": [
+        "tmp%46#0"
+      ]
+    },
+    "265": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%46#0"
+      ],
+      "stack_out": [
+        "tmp%46#0",
+        "0x151f7c75"
+      ]
+    },
+    "266": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%46#0"
+      ]
+    },
+    "267": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%47#0"
+      ],
+      "stack_out": [
+        "tmp%47#0"
+      ]
+    },
+    "268": {
+      "op": "log",
+      "stack_out": []
+    },
+    "269": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "270": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "271": {
+      "block": "__puya_arc4_router___get_factory_app_id_route@9",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%48#0"
+      ],
+      "stack_out": [
+        "tmp%48#0"
+      ]
+    },
+    "273": {
+      "op": "!",
+      "defined_out": [
+        "tmp%49#0"
+      ],
+      "stack_out": [
+        "tmp%49#0"
+      ]
+    },
+    "274": {
+      "op": "assert // OnCompletion is NoOp",
+      "stack_out": []
+    },
+    "275": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%50#0"
+      ],
+      "stack_out": [
+        "tmp%50#0"
+      ]
+    },
+    "277": {
+      "op": "assert // is not creating",
+      "stack_out": []
+    },
+    "278": {
+      "callsub": "contracts.ballot_box.BallotBox.get_factory_app_id",
+      "op": "callsub get_factory_app_id",
+      "defined_out": [
+        "tmp%52#0"
+      ],
+      "stack_out": [
+        "tmp%52#0"
+      ]
+    },
+    "281": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "tmp%52#0"
+      ],
+      "stack_out": [
+        "tmp%52#0",
+        "0x151f7c75"
+      ]
+    },
+    "282": {
+      "op": "swap",
+      "stack_out": [
+        "0x151f7c75",
+        "tmp%52#0"
+      ]
+    },
+    "283": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%53#0"
+      ],
+      "stack_out": [
+        "tmp%53#0"
+      ]
+    },
+    "284": {
+      "op": "log",
+      "stack_out": []
+    },
+    "285": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "286": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "287": {
+      "block": "__puya_arc4_router___bare_routing@12",
+      "stack_in": [],
+      "op": "txn OnCompletion",
+      "defined_out": [
+        "tmp%54#0"
+      ],
+      "stack_out": [
+        "tmp%54#0"
+      ]
+    },
+    "289": {
+      "op": "bnz __puya_arc4_router___after_if_else@16",
+      "stack_out": []
+    },
+    "292": {
+      "op": "txn ApplicationID",
+      "defined_out": [
+        "tmp%55#0"
+      ],
+      "stack_out": [
+        "tmp%55#0"
+      ]
+    },
+    "294": {
+      "op": "!",
+      "defined_out": [
+        "tmp%56#0"
+      ],
+      "stack_out": [
+        "tmp%56#0"
+      ]
+    },
+    "295": {
+      "op": "assert // is creating",
+      "stack_out": []
+    },
+    "296": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1"
+      ],
+      "stack_out": [
+        "1"
+      ]
+    },
+    "297": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "298": {
+      "block": "__puya_arc4_router___after_if_else@16",
+      "stack_in": [],
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "299": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "300": {
+      "subroutine": "contracts.ballot_box.BallotBox.bootstrap",
+      "params": {
+        "factory_app_id#0": "bytes"
+      },
+      "block": "bootstrap",
+      "stack_in": [],
+      "op": "proto 1 0"
+    },
+    "303": {
+      "op": "txn Sender"
+    },
+    "305": {
+      "op": "global CreatorAddress",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%1#0"
+      ]
+    },
+    "307": {
+      "op": "==",
+      "defined_out": [
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%2#0"
+      ]
+    },
+    "308": {
+      "op": "assert // only creator can bootstrap",
+      "stack_out": []
+    },
+    "309": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "310": {
+      "op": "bytec_0 // \"factory_app_id\"",
+      "defined_out": [
+        "\"factory_app_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"factory_app_id\""
+      ]
+    },
+    "311": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "312": {
+      "op": "assert // check self.factory_app_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "313": {
+      "op": "!",
+      "defined_out": [
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%3#0"
+      ]
+    },
+    "314": {
+      "op": "assert // already bootstrapped",
+      "stack_out": []
+    },
+    "315": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "factory_app_id#0 (copy)"
+      ],
+      "stack_out": [
+        "factory_app_id#0 (copy)"
+      ]
+    },
+    "317": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "318": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%4#0",
+        "tmp%4#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%4#0",
+        "tmp%4#0 (copy)"
+      ]
+    },
+    "319": {
+      "op": "assert // invalid factory app id",
+      "stack_out": [
+        "tmp%4#0"
+      ]
+    },
+    "320": {
+      "op": "bytec_0 // \"factory_app_id\"",
+      "stack_out": [
+        "tmp%4#0",
+        "\"factory_app_id\""
+      ]
+    },
+    "321": {
+      "op": "swap",
+      "stack_out": [
+        "\"factory_app_id\"",
+        "tmp%4#0"
+      ]
+    },
+    "322": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "323": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "324": {
+      "subroutine": "contracts.ballot_box.BallotBox.init_poll",
+      "params": {
+        "poll_id#0": "bytes"
+      },
+      "block": "init_poll",
+      "stack_in": [],
+      "op": "proto 1 0"
+    },
+    "327": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "328": {
+      "op": "bytec_0 // \"factory_app_id\"",
+      "defined_out": [
+        "\"factory_app_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"factory_app_id\""
+      ]
+    },
+    "329": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "330": {
+      "op": "assert // check self.factory_app_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "331": {
+      "op": "assert // not bootstrapped",
+      "stack_out": []
+    },
+    "332": {
+      "op": "bytec 5 // 0x6d3a",
+      "defined_out": [
+        "0x6d3a"
+      ],
+      "stack_out": [
+        "0x6d3a"
+      ]
+    },
+    "334": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "0x6d3a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x6d3a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "336": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "337": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%1#0 (copy)"
+      ]
+    },
+    "338": {
+      "op": "box_len",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "339": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "341": {
+      "op": "!",
+      "defined_out": [
+        "tmp%1#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "tmp%2#0"
+      ]
+    },
+    "342": {
+      "op": "assert // poll already initialised",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "343": {
+      "op": "itxn_begin"
+    },
+    "344": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "tmp%1#0",
+        "0"
+      ]
+    },
+    "345": {
+      "op": "bytec_0 // \"factory_app_id\"",
+      "stack_out": [
+        "tmp%1#0",
+        "0",
+        "\"factory_app_id\""
+      ]
+    },
+    "346": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%2#0",
+        "maybe_value%2#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%2#0",
+        "maybe_exists%2#0"
+      ]
+    },
+    "347": {
+      "op": "assert // check self.factory_app_id exists",
+      "stack_out": [
+        "tmp%1#0",
+        "maybe_value%2#0"
+      ]
+    },
+    "348": {
+      "op": "itxn_field ApplicationID",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "350": {
+      "op": "pushbytes 0x120bcdf4 // method \"get_poll_meta(uint64)(uint64,uint64)\"",
+      "defined_out": [
+        "Method(get_poll_meta(uint64)(uint64,uint64))",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "Method(get_poll_meta(uint64)(uint64,uint64))"
+      ]
+    },
+    "356": {
+      "op": "itxn_field ApplicationArgs",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "358": {
+      "op": "frame_dig -1",
+      "stack_out": [
+        "tmp%1#0",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "360": {
+      "op": "itxn_field ApplicationArgs",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "362": {
+      "op": "intc_2 // appl",
+      "defined_out": [
+        "appl",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "appl"
+      ]
+    },
+    "363": {
+      "op": "itxn_field TypeEnum",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "365": {
+      "op": "intc_1 // 0",
+      "stack_out": [
+        "tmp%1#0",
+        "0"
+      ]
+    },
+    "366": {
+      "op": "itxn_field Fee",
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "368": {
+      "op": "itxn_submit"
+    },
+    "369": {
+      "op": "itxn LastLog"
+    },
+    "371": {
+      "op": "dup",
+      "defined_out": [
+        "awst_tmp%0#0",
+        "awst_tmp%0#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "awst_tmp%0#0",
+        "awst_tmp%0#0 (copy)"
+      ]
+    },
+    "372": {
+      "op": "extract 4 0",
+      "defined_out": [
+        "awst_tmp%0#0",
+        "meta#0",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "awst_tmp%0#0",
+        "meta#0"
+      ]
+    },
+    "375": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "awst_tmp%0#0"
+      ]
+    },
+    "376": {
+      "op": "extract 0 4",
+      "defined_out": [
+        "meta#0",
+        "tmp%1#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%4#0"
+      ]
+    },
+    "379": {
+      "op": "bytec_1 // 0x151f7c75",
+      "defined_out": [
+        "0x151f7c75",
+        "meta#0",
+        "tmp%1#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%4#0",
+        "0x151f7c75"
+      ]
+    },
+    "380": {
+      "op": "==",
+      "defined_out": [
+        "meta#0",
+        "tmp%1#0",
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%5#0"
+      ]
+    },
+    "381": {
+      "op": "assert // ARC4 prefix is valid",
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0"
+      ]
+    },
+    "382": {
+      "op": "dup",
+      "defined_out": [
+        "meta#0",
+        "meta#0 (copy)",
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "meta#0 (copy)"
+      ]
+    },
+    "383": {
+      "op": "extract 0 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "meta#0",
+        "tmp%1#0",
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%6#0"
+      ]
+    },
+    "386": {
+      "op": "btoi",
+      "defined_out": [
+        "meta#0",
+        "tmp%1#0",
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%7#0"
+      ]
+    },
+    "387": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "meta#0",
+        "tmp%1#0",
+        "tmp%7#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%7#0",
+        "tmp%8#0"
+      ]
+    },
+    "389": {
+      "op": ">",
+      "defined_out": [
+        "meta#0",
+        "tmp%1#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0",
+        "tmp%9#0"
+      ]
+    },
+    "390": {
+      "op": "assert // poll already expired",
+      "stack_out": [
+        "tmp%1#0",
+        "meta#0"
+      ]
+    },
+    "391": {
+      "op": "box_put",
+      "stack_out": []
+    },
+    "392": {
+      "op": "bytec_3 // 0x743a",
+      "defined_out": [
+        "0x743a"
+      ],
+      "stack_out": [
+        "0x743a"
+      ]
+    },
+    "393": {
+      "op": "frame_dig -1",
+      "stack_out": [
+        "0x743a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "395": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0"
+      ]
+    },
+    "396": {
+      "op": "pushbytes 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "defined_out": [
+        "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%11#0",
+        "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ]
+    },
+    "462": {
+      "op": "box_put",
+      "stack_out": []
+    },
+    "463": {
+      "op": "pushbytes 0x414c303a42414c4c4f543a494e49545f504f4c4c",
+      "defined_out": [
+        "0x414c303a42414c4c4f543a494e49545f504f4c4c"
+      ],
+      "stack_out": [
+        "0x414c303a42414c4c4f543a494e49545f504f4c4c"
+      ]
+    },
+    "485": {
+      "op": "log",
+      "stack_out": []
+    },
+    "486": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "487": {
+      "subroutine": "contracts.ballot_box.BallotBox.cast_vote",
+      "params": {
+        "poll_id#0": "bytes",
+        "option_index#0": "bytes"
+      },
+      "block": "cast_vote",
+      "stack_in": [],
+      "op": "proto 2 0"
+    },
+    "490": {
+      "op": "bytec 5 // 0x6d3a",
+      "defined_out": [
+        "0x6d3a"
+      ],
+      "stack_out": [
+        "0x6d3a"
+      ]
+    },
+    "492": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "0x6d3a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x6d3a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "494": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "495": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ]
+    },
+    "496": {
+      "op": "box_len",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "497": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "499": {
+      "op": "assert // poll not initialised",
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "500": {
+      "op": "box_get",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "meta#0"
+      ],
+      "stack_out": [
+        "meta#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "501": {
+      "op": "assert // check self.poll_meta entry exists",
+      "stack_out": [
+        "meta#0"
+      ]
+    },
+    "502": {
+      "op": "dup",
+      "defined_out": [
+        "meta#0",
+        "meta#0 (copy)"
+      ],
+      "stack_out": [
+        "meta#0",
+        "meta#0 (copy)"
+      ]
+    },
+    "503": {
+      "op": "extract 0 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "meta#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "meta#0",
+        "tmp%2#0"
+      ]
+    },
+    "506": {
+      "op": "btoi",
+      "defined_out": [
+        "meta#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "meta#0",
+        "tmp%3#0"
+      ]
+    },
+    "507": {
+      "op": "global LatestTimestamp",
+      "defined_out": [
+        "meta#0",
+        "tmp%3#0",
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "meta#0",
+        "tmp%3#0",
+        "tmp%4#0"
+      ]
+    },
+    "509": {
+      "op": ">",
+      "defined_out": [
+        "meta#0",
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "meta#0",
+        "tmp%5#0"
+      ]
+    },
+    "510": {
+      "op": "assert // poll has expired",
+      "stack_out": [
+        "meta#0"
+      ]
+    },
+    "511": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "meta#0",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "meta#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "513": {
+      "op": "btoi",
+      "defined_out": [
+        "meta#0",
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "meta#0",
+        "tmp%6#0"
+      ]
+    },
+    "514": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%6#0",
+        "meta#0"
+      ]
+    },
+    "515": {
+      "op": "extract 8 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tmp%6#0",
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "tmp%7#0"
+      ]
+    },
+    "518": {
+      "op": "btoi",
+      "defined_out": [
+        "tmp%6#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "tmp%8#0"
+      ]
+    },
+    "519": {
+      "op": "dig 1",
+      "defined_out": [
+        "tmp%6#0",
+        "tmp%6#0 (copy)",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "tmp%8#0",
+        "tmp%6#0 (copy)"
+      ]
+    },
+    "521": {
+      "op": ">",
+      "defined_out": [
+        "tmp%6#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "tmp%9#0"
+      ]
+    },
+    "522": {
+      "op": "assert // invalid option index",
+      "stack_out": [
+        "tmp%6#0"
+      ]
+    },
+    "523": {
+      "op": "txn Sender",
+      "defined_out": [
+        "tmp%6#0",
+        "voter#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "voter#0"
+      ]
+    },
+    "525": {
+      "op": "bytec 4 // 0x763a",
+      "defined_out": [
+        "0x763a",
+        "tmp%6#0",
+        "voter#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "voter#0",
+        "0x763a"
+      ]
+    },
+    "527": {
+      "op": "frame_dig -2",
+      "stack_out": [
+        "tmp%6#0",
+        "voter#0",
+        "0x763a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "529": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%10#0",
+        "tmp%6#0",
+        "voter#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "voter#0",
+        "tmp%10#0"
+      ]
+    },
+    "530": {
+      "op": "swap",
+      "stack_out": [
+        "tmp%6#0",
+        "tmp%10#0",
+        "voter#0"
+      ]
+    },
+    "531": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%6#0",
+        "vote_box_key#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0"
+      ]
+    },
+    "532": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%6#0",
+        "vote_box_key#0",
+        "vote_box_key#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0",
+        "vote_box_key#0 (copy)"
+      ]
+    },
+    "533": {
+      "op": "box_get",
+      "defined_out": [
+        "_existing#0",
+        "already_voted#0",
+        "tmp%6#0",
+        "vote_box_key#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0",
+        "_existing#0",
+        "already_voted#0"
+      ]
+    },
+    "534": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0",
+        "already_voted#0"
+      ]
+    },
+    "536": {
+      "op": "!",
+      "defined_out": [
+        "tmp%11#0",
+        "tmp%6#0",
+        "vote_box_key#0"
+      ],
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0",
+        "tmp%11#0"
+      ]
+    },
+    "537": {
+      "op": "assert // already voted",
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0"
+      ]
+    },
+    "538": {
+      "op": "frame_dig -1",
+      "stack_out": [
+        "tmp%6#0",
+        "vote_box_key#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "540": {
+      "op": "box_put",
+      "stack_out": [
+        "tmp%6#0"
+      ]
+    },
+    "541": {
+      "op": "frame_dig -2",
+      "stack_out": [
+        "tmp%6#0",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "543": {
+      "op": "swap",
+      "stack_out": [
+        "poll_id#0 (copy)",
+        "tmp%6#0"
+      ]
+    },
+    "544": {
+      "callsub": "contracts.ballot_box.BallotBox._increment_tally",
+      "op": "callsub _increment_tally",
+      "stack_out": []
+    },
+    "547": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "548": {
+      "op": "bytec_2 // \"total_votes\"",
+      "defined_out": [
+        "\"total_votes\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"total_votes\""
+      ]
+    },
+    "549": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%2#0",
+        "maybe_value%2#0"
+      ],
+      "stack_out": [
+        "maybe_value%2#0",
+        "maybe_exists%2#0"
+      ]
+    },
+    "550": {
+      "op": "assert // check self.total_votes exists",
+      "stack_out": [
+        "maybe_value%2#0"
+      ]
+    },
+    "551": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "maybe_value%2#0"
+      ],
+      "stack_out": [
+        "maybe_value%2#0",
+        "1"
+      ]
+    },
+    "552": {
+      "op": "+",
+      "defined_out": [
+        "new_state_value%0#0"
+      ],
+      "stack_out": [
+        "new_state_value%0#0"
+      ]
+    },
+    "553": {
+      "op": "bytec_2 // \"total_votes\"",
+      "stack_out": [
+        "new_state_value%0#0",
+        "\"total_votes\""
+      ]
+    },
+    "554": {
+      "op": "swap",
+      "stack_out": [
+        "\"total_votes\"",
+        "new_state_value%0#0"
+      ]
+    },
+    "555": {
+      "op": "app_global_put",
+      "stack_out": []
+    },
+    "556": {
+      "op": "pushbytes 0x414c303a42414c4c4f543a564f5445",
+      "defined_out": [
+        "0x414c303a42414c4c4f543a564f5445"
+      ],
+      "stack_out": [
+        "0x414c303a42414c4c4f543a564f5445"
+      ]
+    },
+    "573": {
+      "op": "log",
+      "stack_out": []
+    },
+    "574": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "575": {
+      "subroutine": "contracts.ballot_box.BallotBox._increment_tally",
+      "params": {
+        "poll_id#0": "bytes",
+        "option_index#0": "uint64"
+      },
+      "block": "_increment_tally",
+      "stack_in": [],
+      "op": "proto 2 0"
+    },
+    "578": {
+      "op": "bytec_3 // 0x743a",
+      "defined_out": [
+        "0x743a"
+      ],
+      "stack_out": [
+        "0x743a"
+      ]
+    },
+    "579": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "0x743a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x743a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "581": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "582": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0"
+      ]
+    },
+    "583": {
+      "op": "box_get",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "tally#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "584": {
+      "op": "assert // check self.tallies entry exists",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "585": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)",
+        "tally#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "587": {
+      "op": "bnz _increment_tally_else_body@2",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "590": {
+      "op": "frame_dig 1",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "592": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "593": {
+      "op": "extract 0 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%0#0",
+        "tmp%2#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%2#0"
+      ]
+    },
+    "596": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%0#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%3#0"
+      ]
+    },
+    "597": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%0#0",
+        "tmp%3#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%3#0",
+        "1"
+      ]
+    },
+    "598": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "tmp%0#0",
+        "to_encode%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%0#0"
+      ]
+    },
+    "599": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "tmp%0#0",
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%0#0"
+      ]
+    },
+    "600": {
+      "op": "replace2 0",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "602": {
+      "op": "frame_bury 1",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "604": {
+      "op": "b _increment_tally_after_if_else@21"
+    },
+    "607": {
+      "block": "_increment_tally_else_body@2",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "609": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)",
+        "1"
+      ]
+    },
+    "610": {
+      "op": "==",
+      "defined_out": [
+        "tmp%4#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%4#0"
+      ]
+    },
+    "611": {
+      "op": "bz _increment_tally_else_body@4",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "614": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "616": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "617": {
+      "op": "extract 8 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%5#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%5#0"
+      ]
+    },
+    "620": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%6#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%6#0"
+      ]
+    },
+    "621": {
+      "op": "intc_0 // 1",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%6#0",
+        "1"
+      ]
+    },
+    "622": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%1#0"
+      ]
+    },
+    "623": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%1#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%1#0"
+      ]
+    },
+    "624": {
+      "op": "replace2 8",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "626": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "628": {
+      "op": "b _increment_tally_after_if_else@20"
+    },
+    "631": {
+      "block": "_increment_tally_else_body@4",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "633": {
+      "op": "pushint 2 // 2",
+      "defined_out": [
+        "2",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)",
+        "2"
+      ]
+    },
+    "635": {
+      "op": "==",
+      "defined_out": [
+        "tmp%7#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%7#0"
+      ]
+    },
+    "636": {
+      "op": "bz _increment_tally_else_body@6",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "639": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "641": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "642": {
+      "op": "extract 16 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%8#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%8#0"
+      ]
+    },
+    "645": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%9#0"
+      ]
+    },
+    "646": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%9#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%9#0",
+        "1"
+      ]
+    },
+    "647": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%2#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%2#0"
+      ]
+    },
+    "648": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%2#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%2#0"
+      ]
+    },
+    "649": {
+      "op": "replace2 16",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "651": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "653": {
+      "op": "b _increment_tally_after_if_else@20"
+    },
+    "656": {
+      "block": "_increment_tally_else_body@6",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "658": {
+      "op": "pushint 3 // 3",
+      "defined_out": [
+        "3",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)",
+        "3"
+      ]
+    },
+    "660": {
+      "op": "==",
+      "defined_out": [
+        "tmp%10#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%10#0"
+      ]
+    },
+    "661": {
+      "op": "bz _increment_tally_else_body@8",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "664": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "666": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "667": {
+      "op": "extract 24 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%11#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%11#0"
+      ]
+    },
+    "670": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%12#0"
+      ]
+    },
+    "671": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%12#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%12#0",
+        "1"
+      ]
+    },
+    "672": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%3#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%3#0"
+      ]
+    },
+    "673": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%3#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%3#0"
+      ]
+    },
+    "674": {
+      "op": "replace2 24",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "676": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "678": {
+      "op": "b _increment_tally_after_if_else@18"
+    },
+    "681": {
+      "block": "_increment_tally_else_body@8",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "683": {
+      "op": "pushint 4 // 4",
+      "defined_out": [
+        "4",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)",
+        "4"
+      ]
+    },
+    "685": {
+      "op": "==",
+      "defined_out": [
+        "tmp%13#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%13#0"
+      ]
+    },
+    "686": {
+      "op": "bz _increment_tally_else_body@10",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "689": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "691": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "692": {
+      "op": "extract 32 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%14#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%14#0"
+      ]
+    },
+    "695": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%15#0"
+      ]
+    },
+    "696": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%15#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%15#0",
+        "1"
+      ]
+    },
+    "697": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%4#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%4#0"
+      ]
+    },
+    "698": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%4#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%4#0"
+      ]
+    },
+    "699": {
+      "op": "replace2 32",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "701": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "703": {
+      "op": "b _increment_tally_after_if_else@18"
+    },
+    "706": {
+      "block": "_increment_tally_else_body@10",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "708": {
+      "op": "pushint 5 // 5",
+      "defined_out": [
+        "5",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)",
+        "5"
+      ]
+    },
+    "710": {
+      "op": "==",
+      "defined_out": [
+        "tmp%16#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%16#0"
+      ]
+    },
+    "711": {
+      "op": "bz _increment_tally_else_body@12",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "714": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "716": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "717": {
+      "op": "extract 40 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%17#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%17#0"
+      ]
+    },
+    "720": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%18#0"
+      ]
+    },
+    "721": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%18#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%18#0",
+        "1"
+      ]
+    },
+    "722": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%5#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%5#0"
+      ]
+    },
+    "723": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%5#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%5#0"
+      ]
+    },
+    "724": {
+      "op": "replace2 40",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "726": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "728": {
+      "op": "b _increment_tally_after_if_else@16"
+    },
+    "731": {
+      "block": "_increment_tally_else_body@12",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig -1",
+      "defined_out": [
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)"
+      ]
+    },
+    "733": {
+      "op": "intc_2 // 6",
+      "defined_out": [
+        "6",
+        "option_index#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "option_index#0 (copy)",
+        "6"
+      ]
+    },
+    "734": {
+      "op": "==",
+      "defined_out": [
+        "tmp%19#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%19#0"
+      ]
+    },
+    "735": {
+      "op": "bz _increment_tally_else_body@14",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "738": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "740": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "741": {
+      "op": "extract 48 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%20#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%20#0"
+      ]
+    },
+    "744": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%21#0"
+      ]
+    },
+    "745": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%21#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%21#0",
+        "1"
+      ]
+    },
+    "746": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%6#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%6#0"
+      ]
+    },
+    "747": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%6#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%6#0"
+      ]
+    },
+    "748": {
+      "op": "replace2 48",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "750": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "752": {
+      "op": "b _increment_tally_after_if_else@16"
+    },
+    "755": {
+      "block": "_increment_tally_else_body@14",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "757": {
+      "op": "dup",
+      "defined_out": [
+        "tally#0",
+        "tally#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tally#0 (copy)"
+      ]
+    },
+    "758": {
+      "op": "extract 56 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tally#0",
+        "tmp%22#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%22#0"
+      ]
+    },
+    "761": {
+      "op": "btoi",
+      "defined_out": [
+        "tally#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%23#0"
+      ]
+    },
+    "762": {
+      "op": "intc_0 // 1",
+      "defined_out": [
+        "1",
+        "tally#0",
+        "tmp%23#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "tmp%23#0",
+        "1"
+      ]
+    },
+    "763": {
+      "op": "+",
+      "defined_out": [
+        "tally#0",
+        "to_encode%7#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "to_encode%7#0"
+      ]
+    },
+    "764": {
+      "op": "itob",
+      "defined_out": [
+        "tally#0",
+        "val_as_bytes%7#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0",
+        "val_as_bytes%7#0"
+      ]
+    },
+    "765": {
+      "op": "replace2 56",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tally#0"
+      ]
+    },
+    "767": {
+      "op": "frame_bury 1",
+      "defined_out": [
+        "tally#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "769": {
+      "block": "_increment_tally_after_if_else@21",
+      "stack_in": [
+        "tmp%0#0",
+        "tally#0"
+      ],
+      "op": "frame_dig 0",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%0#0"
+      ]
+    },
+    "771": {
+      "op": "frame_dig 1",
+      "defined_out": [
+        "tally#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0",
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "773": {
+      "op": "box_put",
+      "stack_out": [
+        "tmp%0#0",
+        "tally#0"
+      ]
+    },
+    "774": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "775": {
+      "subroutine": "contracts.ballot_box.BallotBox.get_tally",
+      "params": {
+        "poll_id#0": "bytes"
+      },
+      "block": "get_tally",
+      "stack_in": [],
+      "op": "proto 1 1"
+    },
+    "778": {
+      "op": "bytec_3 // 0x743a",
+      "defined_out": [
+        "0x743a"
+      ],
+      "stack_out": [
+        "0x743a"
+      ]
+    },
+    "779": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "0x743a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x743a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "781": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "782": {
+      "op": "dup",
+      "defined_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "tmp%0#0 (copy)"
+      ]
+    },
+    "783": {
+      "op": "box_len",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0",
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "784": {
+      "op": "bury 1",
+      "stack_out": [
+        "tmp%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "786": {
+      "op": "assert // poll not found",
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "787": {
+      "op": "box_get",
+      "defined_out": [
+        "maybe_exists%1#0",
+        "maybe_value%1#0"
+      ],
+      "stack_out": [
+        "maybe_value%1#0",
+        "maybe_exists%1#0"
+      ]
+    },
+    "788": {
+      "op": "assert // check self.tallies entry exists",
+      "stack_out": [
+        "maybe_value%1#0"
+      ]
+    },
+    "789": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "790": {
+      "subroutine": "contracts.ballot_box.BallotBox.has_voted",
+      "params": {
+        "poll_id#0": "bytes",
+        "voter#0": "bytes"
+      },
+      "block": "has_voted",
+      "stack_in": [],
+      "op": "proto 2 1"
+    },
+    "793": {
+      "op": "bytec 4 // 0x763a",
+      "defined_out": [
+        "0x763a"
+      ],
+      "stack_out": [
+        "0x763a"
+      ]
+    },
+    "795": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "0x763a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x763a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "797": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "798": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "tmp%0#0",
+        "voter#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "voter#0 (copy)"
+      ]
+    },
+    "800": {
+      "op": "concat",
+      "defined_out": [
+        "vote_box_key#0"
+      ],
+      "stack_out": [
+        "vote_box_key#0"
+      ]
+    },
+    "801": {
+      "op": "box_get",
+      "defined_out": [
+        "_value#0",
+        "exists#0"
+      ],
+      "stack_out": [
+        "_value#0",
+        "exists#0"
+      ]
+    },
+    "802": {
+      "op": "bury 1",
+      "stack_out": [
+        "exists#0"
+      ]
+    },
+    "804": {
+      "op": "pushbytes 0x00",
+      "defined_out": [
+        "0x00",
+        "exists#0"
+      ],
+      "stack_out": [
+        "exists#0",
+        "0x00"
+      ]
+    },
+    "807": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0",
+        "0x00",
+        "exists#0"
+      ],
+      "stack_out": [
+        "exists#0",
+        "0x00",
+        "0"
+      ]
+    },
+    "808": {
+      "op": "uncover 2",
+      "stack_out": [
+        "0x00",
+        "0",
+        "exists#0"
+      ]
+    },
+    "810": {
+      "op": "setbit",
+      "defined_out": [
+        "encoded_bool%0#0"
+      ],
+      "stack_out": [
+        "encoded_bool%0#0"
+      ]
+    },
+    "811": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "812": {
+      "subroutine": "contracts.ballot_box.BallotBox.get_vote",
+      "params": {
+        "poll_id#0": "bytes",
+        "voter#0": "bytes"
+      },
+      "block": "get_vote",
+      "stack_in": [],
+      "op": "proto 2 1"
+    },
+    "815": {
+      "op": "bytec 4 // 0x763a",
+      "defined_out": [
+        "0x763a"
+      ],
+      "stack_out": [
+        "0x763a"
+      ]
+    },
+    "817": {
+      "op": "frame_dig -2",
+      "defined_out": [
+        "0x763a",
+        "poll_id#0 (copy)"
+      ],
+      "stack_out": [
+        "0x763a",
+        "poll_id#0 (copy)"
+      ]
+    },
+    "819": {
+      "op": "concat",
+      "defined_out": [
+        "tmp%0#0"
+      ],
+      "stack_out": [
+        "tmp%0#0"
+      ]
+    },
+    "820": {
+      "op": "frame_dig -1",
+      "defined_out": [
+        "tmp%0#0",
+        "voter#0 (copy)"
+      ],
+      "stack_out": [
+        "tmp%0#0",
+        "voter#0 (copy)"
+      ]
+    },
+    "822": {
+      "op": "concat",
+      "defined_out": [
+        "vote_box_key#0"
+      ],
+      "stack_out": [
+        "vote_box_key#0"
+      ]
+    },
+    "823": {
+      "op": "box_get",
+      "defined_out": [
+        "exists#0",
+        "vote_bytes#0"
+      ],
+      "stack_out": [
+        "vote_bytes#0",
+        "exists#0"
+      ]
+    },
+    "824": {
+      "op": "assert // voter has not voted on this poll",
+      "stack_out": [
+        "vote_bytes#0"
+      ]
+    },
+    "825": {
+      "op": "extract 0 8 // on error: Index access is out of bounds",
+      "defined_out": [
+        "tmp%1#0"
+      ],
+      "stack_out": [
+        "tmp%1#0"
+      ]
+    },
+    "828": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "829": {
+      "subroutine": "contracts.ballot_box.BallotBox.get_total_votes",
+      "params": {},
+      "block": "get_total_votes",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "832": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "833": {
+      "op": "bytec_2 // \"total_votes\"",
+      "defined_out": [
+        "\"total_votes\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"total_votes\""
+      ]
+    },
+    "834": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "835": {
+      "op": "assert // check self.total_votes exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "836": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "837": {
+      "retsub": true,
+      "op": "retsub"
+    },
+    "838": {
+      "subroutine": "contracts.ballot_box.BallotBox.get_factory_app_id",
+      "params": {},
+      "block": "get_factory_app_id",
+      "stack_in": [],
+      "op": "proto 0 1"
+    },
+    "841": {
+      "op": "intc_1 // 0",
+      "defined_out": [
+        "0"
+      ],
+      "stack_out": [
+        "0"
+      ]
+    },
+    "842": {
+      "op": "bytec_0 // \"factory_app_id\"",
+      "defined_out": [
+        "\"factory_app_id\"",
+        "0"
+      ],
+      "stack_out": [
+        "0",
+        "\"factory_app_id\""
+      ]
+    },
+    "843": {
+      "op": "app_global_get_ex",
+      "defined_out": [
+        "maybe_exists%0#0",
+        "maybe_value%0#0"
+      ],
+      "stack_out": [
+        "maybe_value%0#0",
+        "maybe_exists%0#0"
+      ]
+    },
+    "844": {
+      "op": "assert // check self.factory_app_id exists",
+      "stack_out": [
+        "maybe_value%0#0"
+      ]
+    },
+    "845": {
+      "op": "itob",
+      "defined_out": [
+        "val_as_bytes%0#0"
+      ],
+      "stack_out": [
+        "val_as_bytes%0#0"
+      ]
+    },
+    "846": {
+      "retsub": true,
+      "op": "retsub"
+    }
+  }
+}

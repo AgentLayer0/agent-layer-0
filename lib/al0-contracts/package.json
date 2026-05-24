@@ -1,0 +1,21 @@
+{
+  "name": "@workspace/al0-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "tsc --build"
+  },
+  "peerDependencies": {
+    "algosdk": "^3.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "algosdk": "^3.5.2",
+    "typescript": "^5.9.0"
+  }
+}

@@ -1,0 +1,712 @@
+#pragma version 10
+
+contracts.ballot_box.BallotBox.approval_program:
+    intcblock 1 0 6
+    bytecblock "factory_app_id" 0x151f7c75 "total_votes" 0x743a 0x763a 0x6d3a
+    txn ApplicationID
+    bnz main_after_if_else@2
+    callsub __init__
+
+main_after_if_else@2:
+    callsub __puya_arc4_router__
+    return
+
+
+// contracts.ballot_box.BallotBox.__init__() -> void:
+__init__:
+    // lib/algorand-contracts/contracts/ballot_box.py:70
+    // def __init__(self) -> None:
+    proto 0 0
+    // lib/algorand-contracts/contracts/ballot_box.py:71
+    // self.total_votes: UInt64 = UInt64(0)
+    bytec_2 // "total_votes"
+    intc_1 // 0
+    app_global_put
+    // lib/algorand-contracts/contracts/ballot_box.py:72
+    // self.factory_app_id: UInt64 = UInt64(0)
+    bytec_0 // "factory_app_id"
+    intc_1 // 0
+    app_global_put
+    retsub
+
+
+// contracts.ballot_box.BallotBox.__puya_arc4_router__() -> uint64:
+__puya_arc4_router__:
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    proto 0 1
+    txn NumAppArgs
+    bz __puya_arc4_router___bare_routing@12
+    pushbytess 0xa0cadf8a 0x103686f7 0xba7746ac 0x306c1e55 0xeac2d913 0x42a41386 0xc2f97c85 0xec5a67f7 // method "bootstrap(uint64)void", method "init_poll(uint64)void", method "cast_vote(uint64,uint64)void", method "get_tally(uint64)(uint64,uint64,uint64,uint64,uint64,uint64,uint64,uint64)", method "has_voted(uint64,address)bool", method "get_vote(uint64,address)uint64", method "get_total_votes()uint64", method "get_factory_app_id()uint64"
+    txna ApplicationArgs 0
+    match __puya_arc4_router___bootstrap_route@2 __puya_arc4_router___init_poll_route@3 __puya_arc4_router___cast_vote_route@4 __puya_arc4_router___get_tally_route@5 __puya_arc4_router___has_voted_route@6 __puya_arc4_router___get_vote_route@7 __puya_arc4_router___get_total_votes_route@8 __puya_arc4_router___get_factory_app_id_route@9
+    intc_1 // 0
+    retsub
+
+__puya_arc4_router___bootstrap_route@2:
+    // lib/algorand-contracts/contracts/ballot_box.py:80
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/ballot_box.py:80
+    // @arc4.abimethod
+    callsub bootstrap
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___init_poll_route@3:
+    // lib/algorand-contracts/contracts/ballot_box.py:96
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/ballot_box.py:96
+    // @arc4.abimethod
+    callsub init_poll
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___cast_vote_route@4:
+    // lib/algorand-contracts/contracts/ballot_box.py:139
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    // lib/algorand-contracts/contracts/ballot_box.py:139
+    // @arc4.abimethod
+    callsub cast_vote
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___get_tally_route@5:
+    // lib/algorand-contracts/contracts/ballot_box.py:174
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/ballot_box.py:174
+    // @arc4.abimethod(readonly=True)
+    callsub get_tally
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___has_voted_route@6:
+    // lib/algorand-contracts/contracts/ballot_box.py:180
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    // lib/algorand-contracts/contracts/ballot_box.py:180
+    // @arc4.abimethod(readonly=True)
+    callsub has_voted
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___get_vote_route@7:
+    // lib/algorand-contracts/contracts/ballot_box.py:188
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    // lib/algorand-contracts/contracts/ballot_box.py:188
+    // @arc4.abimethod(readonly=True)
+    callsub get_vote
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___get_total_votes_route@8:
+    // lib/algorand-contracts/contracts/ballot_box.py:198
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub get_total_votes
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___get_factory_app_id_route@9:
+    // lib/algorand-contracts/contracts/ballot_box.py:203
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub get_factory_app_id
+    bytec_1 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___bare_routing@12:
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@16
+    txn ApplicationID
+    !
+    assert // is creating
+    intc_0 // 1
+    retsub
+
+__puya_arc4_router___after_if_else@16:
+    // lib/algorand-contracts/contracts/ballot_box.py:56
+    // class BallotBox(ARC4Contract):
+    intc_1 // 0
+    retsub
+
+
+// contracts.ballot_box.BallotBox.bootstrap(factory_app_id: bytes) -> void:
+bootstrap:
+    // lib/algorand-contracts/contracts/ballot_box.py:80-81
+    // @arc4.abimethod
+    // def bootstrap(self, factory_app_id: arc4.UInt64) -> None:
+    proto 1 0
+    // lib/algorand-contracts/contracts/ballot_box.py:91
+    // assert Txn.sender == Global.creator_address, "only creator can bootstrap"
+    txn Sender
+    global CreatorAddress
+    ==
+    assert // only creator can bootstrap
+    // lib/algorand-contracts/contracts/ballot_box.py:92
+    // assert self.factory_app_id == UInt64(0), "already bootstrapped"
+    intc_1 // 0
+    bytec_0 // "factory_app_id"
+    app_global_get_ex
+    assert // check self.factory_app_id exists
+    !
+    assert // already bootstrapped
+    // lib/algorand-contracts/contracts/ballot_box.py:93
+    // assert factory_app_id.native > UInt64(0), "invalid factory app id"
+    frame_dig -1
+    btoi
+    dup
+    assert // invalid factory app id
+    // lib/algorand-contracts/contracts/ballot_box.py:94
+    // self.factory_app_id = factory_app_id.native
+    bytec_0 // "factory_app_id"
+    swap
+    app_global_put
+    retsub
+
+
+// contracts.ballot_box.BallotBox.init_poll(poll_id: bytes) -> void:
+init_poll:
+    // lib/algorand-contracts/contracts/ballot_box.py:96-97
+    // @arc4.abimethod
+    // def init_poll(self, poll_id: arc4.UInt64) -> None:
+    proto 1 0
+    // lib/algorand-contracts/contracts/ballot_box.py:110
+    // assert self.factory_app_id > UInt64(0), "not bootstrapped"
+    intc_1 // 0
+    bytec_0 // "factory_app_id"
+    app_global_get_ex
+    assert // check self.factory_app_id exists
+    assert // not bootstrapped
+    // lib/algorand-contracts/contracts/ballot_box.py:111
+    // assert poll_id not in self.poll_meta, "poll already initialised"
+    bytec 5 // 0x6d3a
+    frame_dig -1
+    concat
+    dup
+    box_len
+    bury 1
+    !
+    assert // poll already initialised
+    // lib/algorand-contracts/contracts/ballot_box.py:113-118
+    // # ── Fetch authoritative metadata from PollFactory ─────────────────────
+    // meta, _txn = arc4.abi_call[PollMeta](
+    //     "get_poll_meta(uint64)(uint64,uint64)",
+    //     poll_id,
+    //     app_id=self.factory_app_id,
+    // )
+    itxn_begin
+    // lib/algorand-contracts/contracts/ballot_box.py:117
+    // app_id=self.factory_app_id,
+    intc_1 // 0
+    bytec_0 // "factory_app_id"
+    app_global_get_ex
+    assert // check self.factory_app_id exists
+    itxn_field ApplicationID
+    // lib/algorand-contracts/contracts/ballot_box.py:113-118
+    // # ── Fetch authoritative metadata from PollFactory ─────────────────────
+    // meta, _txn = arc4.abi_call[PollMeta](
+    //     "get_poll_meta(uint64)(uint64,uint64)",
+    //     poll_id,
+    //     app_id=self.factory_app_id,
+    // )
+    pushbytes 0x120bcdf4 // method "get_poll_meta(uint64)(uint64,uint64)"
+    itxn_field ApplicationArgs
+    frame_dig -1
+    itxn_field ApplicationArgs
+    intc_2 // appl
+    itxn_field TypeEnum
+    intc_1 // 0
+    itxn_field Fee
+    itxn_submit
+    itxn LastLog
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_1 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    // lib/algorand-contracts/contracts/ballot_box.py:119-120
+    // # Verify the fetched poll is still active (not already expired at init time)
+    // assert meta.expires_at.native > Global.latest_timestamp, "poll already expired"
+    dup
+    extract 0 8 // on error: Index access is out of bounds
+    btoi
+    global LatestTimestamp
+    >
+    assert // poll already expired
+    // lib/algorand-contracts/contracts/ballot_box.py:122
+    // self.poll_meta[poll_id] = meta.copy()
+    box_put
+    // lib/algorand-contracts/contracts/ballot_box.py:135
+    // self.tallies[poll_id] = tally.copy()
+    bytec_3 // 0x743a
+    frame_dig -1
+    concat
+    // lib/algorand-contracts/contracts/ballot_box.py:125-134
+    // tally = TallyRecord(
+    //     tally_0=zero,
+    //     tally_1=zero,
+    //     tally_2=zero,
+    //     tally_3=zero,
+    //     tally_4=zero,
+    //     tally_5=zero,
+    //     tally_6=zero,
+    //     tally_7=zero,
+    // )
+    pushbytes 0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+    // lib/algorand-contracts/contracts/ballot_box.py:135
+    // self.tallies[poll_id] = tally.copy()
+    box_put
+    // lib/algorand-contracts/contracts/ballot_box.py:137
+    // log(b"AL0:BALLOT:INIT_POLL")
+    pushbytes 0x414c303a42414c4c4f543a494e49545f504f4c4c
+    log
+    retsub
+
+
+// contracts.ballot_box.BallotBox.cast_vote(poll_id: bytes, option_index: bytes) -> void:
+cast_vote:
+    // lib/algorand-contracts/contracts/ballot_box.py:139-140
+    // @arc4.abimethod
+    // def cast_vote(self, poll_id: arc4.UInt64, option_index: arc4.UInt64) -> None:
+    proto 2 0
+    // lib/algorand-contracts/contracts/ballot_box.py:154
+    // assert poll_id in self.poll_meta, "poll not initialised"
+    bytec 5 // 0x6d3a
+    frame_dig -2
+    concat
+    dup
+    box_len
+    bury 1
+    assert // poll not initialised
+    // lib/algorand-contracts/contracts/ballot_box.py:156
+    // meta = self.poll_meta[poll_id].copy()
+    box_get
+    assert // check self.poll_meta entry exists
+    // lib/algorand-contracts/contracts/ballot_box.py:157
+    // assert meta.expires_at.native > Global.latest_timestamp, "poll has expired"
+    dup
+    extract 0 8 // on error: Index access is out of bounds
+    btoi
+    global LatestTimestamp
+    >
+    assert // poll has expired
+    // lib/algorand-contracts/contracts/ballot_box.py:158
+    // assert option_index.native < meta.option_count.native, "invalid option index"
+    frame_dig -1
+    btoi
+    swap
+    extract 8 8 // on error: Index access is out of bounds
+    btoi
+    dig 1
+    >
+    assert // invalid option index
+    // lib/algorand-contracts/contracts/ballot_box.py:160
+    // voter = arc4.Address(Txn.sender)
+    txn Sender
+    // lib/algorand-contracts/contracts/ballot_box.py:161
+    // vote_box_key = b"v:" + poll_id.bytes + voter.bytes
+    bytec 4 // 0x763a
+    frame_dig -2
+    concat
+    swap
+    concat
+    // lib/algorand-contracts/contracts/ballot_box.py:163
+    // _existing, already_voted = op.Box.get(vote_box_key)
+    dup
+    box_get
+    bury 1
+    // lib/algorand-contracts/contracts/ballot_box.py:164
+    // assert not already_voted, "already voted"
+    !
+    assert // already voted
+    // lib/algorand-contracts/contracts/ballot_box.py:167
+    // op.Box.put(vote_box_key, vote.bytes)
+    frame_dig -1
+    box_put
+    // lib/algorand-contracts/contracts/ballot_box.py:169
+    // self._increment_tally(poll_id, option_index.native)
+    frame_dig -2
+    swap
+    callsub _increment_tally
+    // lib/algorand-contracts/contracts/ballot_box.py:170
+    // self.total_votes += UInt64(1)
+    intc_1 // 0
+    bytec_2 // "total_votes"
+    app_global_get_ex
+    assert // check self.total_votes exists
+    intc_0 // 1
+    +
+    bytec_2 // "total_votes"
+    swap
+    app_global_put
+    // lib/algorand-contracts/contracts/ballot_box.py:172
+    // log(b"AL0:BALLOT:VOTE")
+    pushbytes 0x414c303a42414c4c4f543a564f5445
+    log
+    retsub
+
+
+// contracts.ballot_box.BallotBox._increment_tally(poll_id: bytes, option_index: uint64) -> void:
+_increment_tally:
+    // lib/algorand-contracts/contracts/ballot_box.py:208-209
+    // @subroutine
+    // def _increment_tally(self, poll_id: arc4.UInt64, option_index: UInt64) -> None:
+    proto 2 0
+    // lib/algorand-contracts/contracts/ballot_box.py:211
+    // tally = self.tallies[poll_id].copy()
+    bytec_3 // 0x743a
+    frame_dig -2
+    concat
+    dup
+    box_get
+    assert // check self.tallies entry exists
+    // lib/algorand-contracts/contracts/ballot_box.py:213
+    // if option_index == UInt64(0):
+    frame_dig -1
+    bnz _increment_tally_else_body@2
+    // lib/algorand-contracts/contracts/ballot_box.py:214
+    // tally.tally_0 = arc4.UInt64(tally.tally_0.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 0 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 0
+    frame_bury 1
+    b _increment_tally_after_if_else@21
+
+_increment_tally_else_body@2:
+    // lib/algorand-contracts/contracts/ballot_box.py:215
+    // elif option_index == UInt64(1):
+    frame_dig -1
+    intc_0 // 1
+    ==
+    bz _increment_tally_else_body@4
+    // lib/algorand-contracts/contracts/ballot_box.py:216
+    // tally.tally_1 = arc4.UInt64(tally.tally_1.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 8 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 8
+    frame_bury 1
+    b _increment_tally_after_if_else@20
+
+_increment_tally_else_body@4:
+    // lib/algorand-contracts/contracts/ballot_box.py:217
+    // elif option_index == UInt64(2):
+    frame_dig -1
+    pushint 2 // 2
+    ==
+    bz _increment_tally_else_body@6
+    // lib/algorand-contracts/contracts/ballot_box.py:218
+    // tally.tally_2 = arc4.UInt64(tally.tally_2.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 16 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 16
+    frame_bury 1
+    b _increment_tally_after_if_else@20
+
+_increment_tally_else_body@6:
+    // lib/algorand-contracts/contracts/ballot_box.py:219
+    // elif option_index == UInt64(3):
+    frame_dig -1
+    pushint 3 // 3
+    ==
+    bz _increment_tally_else_body@8
+    // lib/algorand-contracts/contracts/ballot_box.py:220
+    // tally.tally_3 = arc4.UInt64(tally.tally_3.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 24 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 24
+    frame_bury 1
+    b _increment_tally_after_if_else@18
+
+_increment_tally_else_body@8:
+    // lib/algorand-contracts/contracts/ballot_box.py:221
+    // elif option_index == UInt64(4):
+    frame_dig -1
+    pushint 4 // 4
+    ==
+    bz _increment_tally_else_body@10
+    // lib/algorand-contracts/contracts/ballot_box.py:222
+    // tally.tally_4 = arc4.UInt64(tally.tally_4.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 32 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 32
+    frame_bury 1
+    b _increment_tally_after_if_else@18
+
+_increment_tally_else_body@10:
+    // lib/algorand-contracts/contracts/ballot_box.py:223
+    // elif option_index == UInt64(5):
+    frame_dig -1
+    pushint 5 // 5
+    ==
+    bz _increment_tally_else_body@12
+    // lib/algorand-contracts/contracts/ballot_box.py:224
+    // tally.tally_5 = arc4.UInt64(tally.tally_5.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 40 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 40
+    frame_bury 1
+    b _increment_tally_after_if_else@16
+
+_increment_tally_else_body@12:
+    // lib/algorand-contracts/contracts/ballot_box.py:225
+    // elif option_index == UInt64(6):
+    frame_dig -1
+    intc_2 // 6
+    ==
+    bz _increment_tally_else_body@14
+    // lib/algorand-contracts/contracts/ballot_box.py:226
+    // tally.tally_6 = arc4.UInt64(tally.tally_6.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 48 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 48
+    frame_bury 1
+    b _increment_tally_after_if_else@16
+
+_increment_tally_else_body@14:
+    // lib/algorand-contracts/contracts/ballot_box.py:228
+    // tally.tally_7 = arc4.UInt64(tally.tally_7.native + UInt64(1))
+    frame_dig 1
+    dup
+    extract 56 8 // on error: Index access is out of bounds
+    btoi
+    intc_0 // 1
+    +
+    itob
+    replace2 56
+    frame_bury 1
+
+_increment_tally_after_if_else@16:
+
+_increment_tally_after_if_else@18:
+
+_increment_tally_after_if_else@20:
+
+_increment_tally_after_if_else@21:
+    // lib/algorand-contracts/contracts/ballot_box.py:230
+    // self.tallies[poll_id] = tally.copy()
+    frame_dig 0
+    frame_dig 1
+    box_put
+    retsub
+
+
+// contracts.ballot_box.BallotBox.get_tally(poll_id: bytes) -> bytes:
+get_tally:
+    // lib/algorand-contracts/contracts/ballot_box.py:174-175
+    // @arc4.abimethod(readonly=True)
+    // def get_tally(self, poll_id: arc4.UInt64) -> TallyRecord:
+    proto 1 1
+    // lib/algorand-contracts/contracts/ballot_box.py:177
+    // assert poll_id in self.tallies, "poll not found"
+    bytec_3 // 0x743a
+    frame_dig -1
+    concat
+    dup
+    box_len
+    bury 1
+    assert // poll not found
+    // lib/algorand-contracts/contracts/ballot_box.py:178
+    // return self.tallies[poll_id].copy()
+    box_get
+    assert // check self.tallies entry exists
+    retsub
+
+
+// contracts.ballot_box.BallotBox.has_voted(poll_id: bytes, voter: bytes) -> bytes:
+has_voted:
+    // lib/algorand-contracts/contracts/ballot_box.py:180-181
+    // @arc4.abimethod(readonly=True)
+    // def has_voted(self, poll_id: arc4.UInt64, voter: arc4.Address) -> arc4.Bool:
+    proto 2 1
+    // lib/algorand-contracts/contracts/ballot_box.py:183
+    // vote_box_key = b"v:" + poll_id.bytes + voter.bytes
+    bytec 4 // 0x763a
+    frame_dig -2
+    concat
+    frame_dig -1
+    concat
+    // lib/algorand-contracts/contracts/ballot_box.py:185
+    // _value, exists = op.Box.get(vote_box_key)
+    box_get
+    bury 1
+    // lib/algorand-contracts/contracts/ballot_box.py:186
+    // return arc4.Bool(exists)
+    pushbytes 0x00
+    intc_1 // 0
+    uncover 2
+    setbit
+    retsub
+
+
+// contracts.ballot_box.BallotBox.get_vote(poll_id: bytes, voter: bytes) -> bytes:
+get_vote:
+    // lib/algorand-contracts/contracts/ballot_box.py:188-189
+    // @arc4.abimethod(readonly=True)
+    // def get_vote(self, poll_id: arc4.UInt64, voter: arc4.Address) -> arc4.UInt64:
+    proto 2 1
+    // lib/algorand-contracts/contracts/ballot_box.py:191
+    // vote_box_key = b"v:" + poll_id.bytes + voter.bytes
+    bytec 4 // 0x763a
+    frame_dig -2
+    concat
+    frame_dig -1
+    concat
+    // lib/algorand-contracts/contracts/ballot_box.py:193
+    // vote_bytes, exists = op.Box.get(vote_box_key)
+    box_get
+    // lib/algorand-contracts/contracts/ballot_box.py:194
+    // assert exists, "voter has not voted on this poll"
+    assert // voter has not voted on this poll
+    // lib/algorand-contracts/contracts/ballot_box.py:196
+    // return record.option_index
+    extract 0 8 // on error: Index access is out of bounds
+    retsub
+
+
+// contracts.ballot_box.BallotBox.get_total_votes() -> bytes:
+get_total_votes:
+    // lib/algorand-contracts/contracts/ballot_box.py:198-199
+    // @arc4.abimethod(readonly=True)
+    // def get_total_votes(self) -> arc4.UInt64:
+    proto 0 1
+    // lib/algorand-contracts/contracts/ballot_box.py:201
+    // return arc4.UInt64(self.total_votes)
+    intc_1 // 0
+    bytec_2 // "total_votes"
+    app_global_get_ex
+    assert // check self.total_votes exists
+    itob
+    retsub
+
+
+// contracts.ballot_box.BallotBox.get_factory_app_id() -> bytes:
+get_factory_app_id:
+    // lib/algorand-contracts/contracts/ballot_box.py:203-204
+    // @arc4.abimethod(readonly=True)
+    // def get_factory_app_id(self) -> arc4.UInt64:
+    proto 0 1
+    // lib/algorand-contracts/contracts/ballot_box.py:206
+    // return arc4.UInt64(self.factory_app_id)
+    intc_1 // 0
+    bytec_0 // "factory_app_id"
+    app_global_get_ex
+    assert // check self.factory_app_id exists
+    itob
+    retsub

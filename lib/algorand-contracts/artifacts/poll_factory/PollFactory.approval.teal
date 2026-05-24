@@ -1,0 +1,648 @@
+#pragma version 10
+
+contracts.poll_factory.PollFactory.approval_program:
+    intcblock 0 1
+    bytecblock 0x151f7c75 "registry_app_id" "next_poll_id" 0x703a
+    txn ApplicationID
+    bnz main_after_if_else@2
+    callsub __init__
+
+main_after_if_else@2:
+    callsub __puya_arc4_router__
+    return
+
+
+// contracts.poll_factory.PollFactory.__init__() -> void:
+__init__:
+    // lib/algorand-contracts/contracts/poll_factory.py:58
+    // def __init__(self) -> None:
+    proto 0 0
+    // lib/algorand-contracts/contracts/poll_factory.py:59
+    // self.next_poll_id: UInt64 = UInt64(0)
+    bytec_2 // "next_poll_id"
+    intc_0 // 0
+    app_global_put
+    // lib/algorand-contracts/contracts/poll_factory.py:60
+    // self.registry_app_id: UInt64 = UInt64(0)
+    bytec_1 // "registry_app_id"
+    intc_0 // 0
+    app_global_put
+    retsub
+
+
+// contracts.poll_factory.PollFactory.__puya_arc4_router__() -> uint64:
+__puya_arc4_router__:
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    proto 0 1
+    txn NumAppArgs
+    bz __puya_arc4_router___bare_routing@11
+    pushbytess 0xa0cadf8a 0xf0e03632 0x7cafe26e 0x120bcdf4 0x63c3232e 0x8524e778 0xc028726e // method "bootstrap(uint64)void", method "create_poll(string,string,string,string,string,string,string,string,string,string,uint64,uint64)uint64", method "get_poll(uint64)(address,string,string,uint64,string,string,string,string,string,string,string,string,uint64,uint64)", method "get_poll_meta(uint64)(uint64,uint64)", method "is_active(uint64)bool", method "get_next_poll_id()uint64", method "get_registry_app_id()uint64"
+    txna ApplicationArgs 0
+    match __puya_arc4_router___bootstrap_route@2 __puya_arc4_router___create_poll_route@3 __puya_arc4_router___get_poll_route@4 __puya_arc4_router___get_poll_meta_route@5 __puya_arc4_router___is_active_route@6 __puya_arc4_router___get_next_poll_id_route@7 __puya_arc4_router___get_registry_app_id_route@8
+    intc_0 // 0
+    retsub
+
+__puya_arc4_router___bootstrap_route@2:
+    // lib/algorand-contracts/contracts/poll_factory.py:65
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/poll_factory.py:65
+    // @arc4.abimethod
+    callsub bootstrap
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___create_poll_route@3:
+    // lib/algorand-contracts/contracts/poll_factory.py:81
+    // @arc4.abimethod
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    txna ApplicationArgs 1
+    txna ApplicationArgs 2
+    txna ApplicationArgs 3
+    txna ApplicationArgs 4
+    txna ApplicationArgs 5
+    txna ApplicationArgs 6
+    txna ApplicationArgs 7
+    txna ApplicationArgs 8
+    txna ApplicationArgs 9
+    txna ApplicationArgs 10
+    txna ApplicationArgs 11
+    txna ApplicationArgs 12
+    // lib/algorand-contracts/contracts/poll_factory.py:81
+    // @arc4.abimethod
+    callsub create_poll
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___get_poll_route@4:
+    // lib/algorand-contracts/contracts/poll_factory.py:153
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/poll_factory.py:153
+    // @arc4.abimethod(readonly=True)
+    callsub get_poll
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___get_poll_meta_route@5:
+    // lib/algorand-contracts/contracts/poll_factory.py:159
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/poll_factory.py:159
+    // @arc4.abimethod(readonly=True)
+    callsub get_poll_meta
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___is_active_route@6:
+    // lib/algorand-contracts/contracts/poll_factory.py:175
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    txna ApplicationArgs 1
+    // lib/algorand-contracts/contracts/poll_factory.py:175
+    // @arc4.abimethod(readonly=True)
+    callsub is_active
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___get_next_poll_id_route@7:
+    // lib/algorand-contracts/contracts/poll_factory.py:184
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub get_next_poll_id
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___get_registry_app_id_route@8:
+    // lib/algorand-contracts/contracts/poll_factory.py:189
+    // @arc4.abimethod(readonly=True)
+    txn OnCompletion
+    !
+    assert // OnCompletion is NoOp
+    txn ApplicationID
+    assert // is not creating
+    callsub get_registry_app_id
+    bytec_0 // 0x151f7c75
+    swap
+    concat
+    log
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___bare_routing@11:
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    txn OnCompletion
+    bnz __puya_arc4_router___after_if_else@15
+    txn ApplicationID
+    !
+    assert // is creating
+    intc_1 // 1
+    retsub
+
+__puya_arc4_router___after_if_else@15:
+    // lib/algorand-contracts/contracts/poll_factory.py:45
+    // class PollFactory(ARC4Contract):
+    intc_0 // 0
+    retsub
+
+
+// contracts.poll_factory.PollFactory.bootstrap(registry_app_id: bytes) -> void:
+bootstrap:
+    // lib/algorand-contracts/contracts/poll_factory.py:65-66
+    // @arc4.abimethod
+    // def bootstrap(self, registry_app_id: arc4.UInt64) -> None:
+    proto 1 0
+    // lib/algorand-contracts/contracts/poll_factory.py:76
+    // assert Txn.sender == Global.creator_address, "only creator can bootstrap"
+    txn Sender
+    global CreatorAddress
+    ==
+    assert // only creator can bootstrap
+    // lib/algorand-contracts/contracts/poll_factory.py:77
+    // assert self.registry_app_id == UInt64(0), "already bootstrapped"
+    intc_0 // 0
+    bytec_1 // "registry_app_id"
+    app_global_get_ex
+    assert // check self.registry_app_id exists
+    !
+    assert // already bootstrapped
+    // lib/algorand-contracts/contracts/poll_factory.py:78
+    // assert registry_app_id.native > UInt64(0), "invalid registry app id"
+    frame_dig -1
+    btoi
+    dup
+    assert // invalid registry app id
+    // lib/algorand-contracts/contracts/poll_factory.py:79
+    // self.registry_app_id = registry_app_id.native
+    bytec_1 // "registry_app_id"
+    swap
+    app_global_put
+    retsub
+
+
+// contracts.poll_factory.PollFactory.create_poll(swarm_id: bytes, question: bytes, option_0: bytes, option_1: bytes, option_2: bytes, option_3: bytes, option_4: bytes, option_5: bytes, option_6: bytes, option_7: bytes, option_count: bytes, expires_at: bytes) -> bytes:
+create_poll:
+    // lib/algorand-contracts/contracts/poll_factory.py:81-96
+    // @arc4.abimethod
+    // def create_poll(
+    //     self,
+    //     swarm_id: arc4.String,
+    //     question: arc4.String,
+    //     option_0: arc4.String,
+    //     option_1: arc4.String,
+    //     option_2: arc4.String,
+    //     option_3: arc4.String,
+    //     option_4: arc4.String,
+    //     option_5: arc4.String,
+    //     option_6: arc4.String,
+    //     option_7: arc4.String,
+    //     option_count: arc4.UInt64,
+    //     expires_at: arc4.UInt64,
+    // ) -> arc4.UInt64:
+    proto 12 1
+    // lib/algorand-contracts/contracts/poll_factory.py:113
+    // assert self.registry_app_id > UInt64(0), "not bootstrapped"
+    intc_0 // 0
+    bytec_1 // "registry_app_id"
+    app_global_get_ex
+    assert // check self.registry_app_id exists
+    assert // not bootstrapped
+    // lib/algorand-contracts/contracts/poll_factory.py:114
+    // assert question.bytes.length <= UInt64(256), "question too long"
+    frame_dig -11
+    len
+    dup
+    pushint 256 // 256
+    <=
+    assert // question too long
+    // lib/algorand-contracts/contracts/poll_factory.py:115
+    // n = option_count.native
+    frame_dig -2
+    btoi
+    // lib/algorand-contracts/contracts/poll_factory.py:116
+    // assert n >= UInt64(2), "at least 2 options required"
+    dup
+    pushint 2 // 2
+    >=
+    assert // at least 2 options required
+    // lib/algorand-contracts/contracts/poll_factory.py:117
+    // assert n <= UInt64(8), "max 8 options"
+    pushint 8 // 8
+    <=
+    assert // max 8 options
+    // lib/algorand-contracts/contracts/poll_factory.py:118
+    // assert expires_at.native > Global.latest_timestamp, "expiry must be in the future"
+    frame_dig -1
+    btoi
+    global LatestTimestamp
+    >
+    assert // expiry must be in the future
+    // lib/algorand-contracts/contracts/poll_factory.py:120-125
+    // # ── Verify caller is the registered swarm owner ───────────────────────
+    // owner, _txn = arc4.abi_call[arc4.Address](
+    //     "get_owner(string)address",
+    //     swarm_id,
+    //     app_id=self.registry_app_id,
+    // )
+    itxn_begin
+    // lib/algorand-contracts/contracts/poll_factory.py:124
+    // app_id=self.registry_app_id,
+    intc_0 // 0
+    bytec_1 // "registry_app_id"
+    app_global_get_ex
+    assert // check self.registry_app_id exists
+    itxn_field ApplicationID
+    // lib/algorand-contracts/contracts/poll_factory.py:120-125
+    // # ── Verify caller is the registered swarm owner ───────────────────────
+    // owner, _txn = arc4.abi_call[arc4.Address](
+    //     "get_owner(string)address",
+    //     swarm_id,
+    //     app_id=self.registry_app_id,
+    // )
+    pushbytes 0x48fcacce // method "get_owner(string)address"
+    itxn_field ApplicationArgs
+    frame_dig -12
+    itxn_field ApplicationArgs
+    pushint 6 // appl
+    itxn_field TypeEnum
+    intc_0 // 0
+    itxn_field Fee
+    itxn_submit
+    itxn LastLog
+    dup
+    extract 4 0
+    swap
+    extract 0 4
+    bytec_0 // 0x151f7c75
+    ==
+    assert // ARC4 prefix is valid
+    // lib/algorand-contracts/contracts/poll_factory.py:126
+    // assert owner.native == Txn.sender, "caller is not the registered swarm owner"
+    txn Sender
+    ==
+    assert // caller is not the registered swarm owner
+    // lib/algorand-contracts/contracts/poll_factory.py:128
+    // poll_id = arc4.UInt64(self.next_poll_id)
+    intc_0 // 0
+    bytec_2 // "next_poll_id"
+    app_global_get_ex
+    assert // check self.next_poll_id exists
+    itob
+    // lib/algorand-contracts/contracts/poll_factory.py:129
+    // self.next_poll_id += UInt64(1)
+    intc_0 // 0
+    bytec_2 // "next_poll_id"
+    app_global_get_ex
+    assert // check self.next_poll_id exists
+    intc_1 // 1
+    +
+    bytec_2 // "next_poll_id"
+    swap
+    app_global_put
+    // lib/algorand-contracts/contracts/poll_factory.py:132
+    // creator=arc4.Address(Txn.sender),
+    txn Sender
+    // lib/algorand-contracts/contracts/poll_factory.py:144
+    // created_at=arc4.UInt64(Global.latest_timestamp),
+    global LatestTimestamp
+    itob
+    // lib/algorand-contracts/contracts/poll_factory.py:131-146
+    // record = PollRecord(
+    //     creator=arc4.Address(Txn.sender),
+    //     swarm_id=swarm_id,
+    //     question=question,
+    //     option_count=option_count,
+    //     option_0=option_0,
+    //     option_1=option_1,
+    //     option_2=option_2,
+    //     option_3=option_3,
+    //     option_4=option_4,
+    //     option_5=option_5,
+    //     option_6=option_6,
+    //     option_7=option_7,
+    //     created_at=arc4.UInt64(Global.latest_timestamp),
+    //     expires_at=expires_at,
+    // )
+    swap
+    pushbytes 0x004c
+    concat
+    frame_dig -12
+    len
+    pushint 76 // 76
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    swap
+    uncover 4
+    +
+    swap
+    frame_dig -2
+    concat
+    dig 1
+    itob
+    extract 6 2
+    concat
+    frame_dig -10
+    len
+    uncover 2
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    frame_dig -9
+    len
+    uncover 2
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    frame_dig -8
+    len
+    uncover 2
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    frame_dig -7
+    len
+    uncover 2
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    frame_dig -6
+    len
+    uncover 2
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    frame_dig -5
+    len
+    uncover 2
+    +
+    dup
+    itob
+    extract 6 2
+    uncover 2
+    swap
+    concat
+    frame_dig -4
+    len
+    uncover 2
+    +
+    itob
+    extract 6 2
+    concat
+    swap
+    concat
+    frame_dig -1
+    concat
+    frame_dig -12
+    concat
+    frame_dig -11
+    concat
+    frame_dig -10
+    concat
+    frame_dig -9
+    concat
+    frame_dig -8
+    concat
+    frame_dig -7
+    concat
+    frame_dig -6
+    concat
+    frame_dig -5
+    concat
+    frame_dig -4
+    concat
+    frame_dig -3
+    concat
+    // lib/algorand-contracts/contracts/poll_factory.py:147
+    // self.polls[poll_id] = record.copy()
+    bytec_3 // 0x703a
+    dig 2
+    concat
+    dup
+    box_del
+    pop
+    swap
+    box_put
+    // lib/algorand-contracts/contracts/poll_factory.py:149
+    // log(b"AL0:POLL:CREATE")
+    pushbytes 0x414c303a504f4c4c3a435245415445
+    log
+    // lib/algorand-contracts/contracts/poll_factory.py:151
+    // return poll_id
+    retsub
+
+
+// contracts.poll_factory.PollFactory.get_poll(poll_id: bytes) -> bytes:
+get_poll:
+    // lib/algorand-contracts/contracts/poll_factory.py:153-154
+    // @arc4.abimethod(readonly=True)
+    // def get_poll(self, poll_id: arc4.UInt64) -> PollRecord:
+    proto 1 1
+    // lib/algorand-contracts/contracts/poll_factory.py:156
+    // assert poll_id in self.polls, "poll not found"
+    bytec_3 // 0x703a
+    frame_dig -1
+    concat
+    dup
+    box_len
+    bury 1
+    assert // poll not found
+    // lib/algorand-contracts/contracts/poll_factory.py:157
+    // return self.polls[poll_id].copy()
+    box_get
+    assert // check self.polls entry exists
+    retsub
+
+
+// contracts.poll_factory.PollFactory.get_poll_meta(poll_id: bytes) -> bytes:
+get_poll_meta:
+    // lib/algorand-contracts/contracts/poll_factory.py:159-160
+    // @arc4.abimethod(readonly=True)
+    // def get_poll_meta(self, poll_id: arc4.UInt64) -> PollMeta:
+    proto 1 1
+    // lib/algorand-contracts/contracts/poll_factory.py:168
+    // assert poll_id in self.polls, "poll not found"
+    bytec_3 // 0x703a
+    frame_dig -1
+    concat
+    dup
+    box_len
+    bury 1
+    assert // poll not found
+    // lib/algorand-contracts/contracts/poll_factory.py:169
+    // record = self.polls[poll_id].copy()
+    box_get
+    assert // check self.polls entry exists
+    // lib/algorand-contracts/contracts/poll_factory.py:171
+    // expires_at=record.expires_at,
+    dup
+    extract 68 8 // on error: Index access is out of bounds
+    // lib/algorand-contracts/contracts/poll_factory.py:172
+    // option_count=record.option_count,
+    swap
+    extract 36 8 // on error: Index access is out of bounds
+    // lib/algorand-contracts/contracts/poll_factory.py:170-173
+    // return PollMeta(
+    //     expires_at=record.expires_at,
+    //     option_count=record.option_count,
+    // )
+    concat
+    retsub
+
+
+// contracts.poll_factory.PollFactory.is_active(poll_id: bytes) -> bytes:
+is_active:
+    // lib/algorand-contracts/contracts/poll_factory.py:175-176
+    // @arc4.abimethod(readonly=True)
+    // def is_active(self, poll_id: arc4.UInt64) -> arc4.Bool:
+    proto 1 1
+    // lib/algorand-contracts/contracts/poll_factory.py:178
+    // if poll_id not in self.polls:
+    bytec_3 // 0x703a
+    frame_dig -1
+    concat
+    dup
+    box_len
+    bury 1
+    bnz is_active_after_if_else@2
+    // lib/algorand-contracts/contracts/poll_factory.py:179
+    // return arc4.Bool(False)
+    pushbytes 0x00
+    swap
+    retsub
+
+is_active_after_if_else@2:
+    // lib/algorand-contracts/contracts/poll_factory.py:181
+    // self.polls[poll_id].expires_at.native > Global.latest_timestamp
+    frame_dig 0
+    box_get
+    assert // check self.polls entry exists
+    extract 68 8 // on error: Index access is out of bounds
+    btoi
+    global LatestTimestamp
+    >
+    // lib/algorand-contracts/contracts/poll_factory.py:180-182
+    // return arc4.Bool(
+    //     self.polls[poll_id].expires_at.native > Global.latest_timestamp
+    // )
+    pushbytes 0x00
+    intc_0 // 0
+    uncover 2
+    setbit
+    swap
+    retsub
+
+
+// contracts.poll_factory.PollFactory.get_next_poll_id() -> bytes:
+get_next_poll_id:
+    // lib/algorand-contracts/contracts/poll_factory.py:184-185
+    // @arc4.abimethod(readonly=True)
+    // def get_next_poll_id(self) -> arc4.UInt64:
+    proto 0 1
+    // lib/algorand-contracts/contracts/poll_factory.py:187
+    // return arc4.UInt64(self.next_poll_id)
+    intc_0 // 0
+    bytec_2 // "next_poll_id"
+    app_global_get_ex
+    assert // check self.next_poll_id exists
+    itob
+    retsub
+
+
+// contracts.poll_factory.PollFactory.get_registry_app_id() -> bytes:
+get_registry_app_id:
+    // lib/algorand-contracts/contracts/poll_factory.py:189-190
+    // @arc4.abimethod(readonly=True)
+    // def get_registry_app_id(self) -> arc4.UInt64:
+    proto 0 1
+    // lib/algorand-contracts/contracts/poll_factory.py:192
+    // return arc4.UInt64(self.registry_app_id)
+    intc_0 // 0
+    bytec_1 // "registry_app_id"
+    app_global_get_ex
+    assert // check self.registry_app_id exists
+    itob
+    retsub
