@@ -34,7 +34,7 @@ import {
   refsPollLookup,
   pollBoxKey,
 } from "./boxes.js";
-import { BOX_MBR, mbrTopUp, parsePollBoxBytes } from "./utils.js";
+import { computePollBoxMbr, mbrTopUp, parsePollBoxBytes } from "./utils.js";
 
 // ─── Method definitions (from ARC-32 ABI) ────────────────────────────────────
 
@@ -194,8 +194,10 @@ export class PollFactoryClient {
     const atc = new algosdk.AtomicTransactionComposer();
 
     // Fund the PollFactory app account for the new poll box MBR.
+    // The MBR is variable — it depends on the actual string content.
+    const pollBoxMbr = computePollBoxMbr(args.swarm_id, args.question, args.options);
     const topUp = await mbrTopUp(
-      this.algod, this.appId, BOX_MBR.POLL_FACTORY_POLL,
+      this.algod, this.appId, pollBoxMbr,
       sender, suggestedParams, signer,
     );
     if (topUp) atc.addTransaction(topUp);

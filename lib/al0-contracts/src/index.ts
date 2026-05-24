@@ -16,6 +16,7 @@ export {
   PollFactoryClient,
   BallotBoxClient,
   parsePollBoxBytes,
+  computePollBoxMbr,
 } from "./clients/index.js";
 export type {
   RegisterSwarmArgs,

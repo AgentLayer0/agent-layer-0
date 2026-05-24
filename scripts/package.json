@@ -7,9 +7,11 @@
     "hello": "tsx ./src/hello.ts",
     "deploy-contracts": "tsx ./src/deploy-contracts.ts",
     "seed-products": "tsx ./src/seed-products.ts",
+    "simulate-swarm-vote": "tsx ./src/simulate-swarm-vote.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
+    "@workspace/al0-contracts": "workspace:*",
     "algosdk": "^3.3.0",
     "stripe": "*",
     "stripe-replit-sync": "*"

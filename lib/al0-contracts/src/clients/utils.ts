@@ -5,17 +5,64 @@ import type { PollRecord } from "../types.js";
  * Box MBR (minimum balance requirement) constants in microALGO.
  * Formula: 2500 + 400 * (key_bytes + value_bytes)
  *
- * PollFactory poll box:    key=10 ("p:"+uint64), value=167 (PollRecord)
- * BallotBox meta box:      key=10 ("m:"+uint64), value=16  (PollMeta: 2×uint64)
- * BallotBox tally box:     key=10 ("t:"+uint64), value=64  (TallyRecord: 8×uint64)
- * BallotBox vote box:      key=42 ("v:"+uint64+pubkey32), value=8 (VoteRecord: uint64)
+ * Fixed-size boxes:
+ *   BallotBox meta box:  key=10 ("m:"+uint64), value=16  (PollMeta: 2×uint64)
+ *   BallotBox tally box: key=10 ("t:"+uint64), value=64  (TallyRecord: 8×uint64)
+ *   BallotBox vote box:  key=42 ("v:"+uint64+pubkey32), value=8 (VoteRecord: uint64)
+ *
+ * PollFactory poll boxes are variable-size — use computePollBoxMbr() instead.
  */
 export const BOX_MBR = {
-  POLL_FACTORY_POLL: 73300n,
   BALLOT_BOX_META:   12900n,
   BALLOT_BOX_TALLY:  32100n,
   BALLOT_BOX_VOTE:   22500n,
 } as const;
+
+/**
+ * Compute the MBR (minimum balance requirement) for a PollFactory poll box.
+ *
+ * The poll box value size depends on the actual string content:
+ *
+ *   Head (76 bytes, fixed):
+ *     creator (32) + swarm_id offset (2) + question offset (2) +
+ *     option_count (8) + 8×option offsets (16) + created_at (8) + expires_at (8)
+ *
+ *   Tail (variable):
+ *     ARC-4 strings: each is a 2-byte uint16 length + UTF-8 bytes.
+ *     Unused option slots (option_count < 8) are empty ARC-4 strings = 2 bytes each.
+ *
+ *   Box key: 2 bytes prefix ("p:") + 8 bytes poll_id uint64 = 10 bytes.
+ *
+ * A 10 000 µALGO safety buffer is added to cover any minor formula variance
+ * and to ensure the payment is always sufficient.
+ */
+export function computePollBoxMbr(
+  swarm_id: string,
+  question: string,
+  options: string[],
+): bigint {
+  const enc = new TextEncoder();
+  const KEY_BYTES  = 10; // "p:" (2) + uint64 (8)
+  const HEAD_BYTES = 76; // fixed struct head
+
+  const swarmBytes    = enc.encode(swarm_id).length;
+  const questionBytes = enc.encode(question).length;
+
+  const optionTailBytes = options.reduce(
+    (sum, opt) => sum + 2 + enc.encode(opt).length,
+    0,
+  );
+  const emptySlots     = 8 - options.length;
+  const emptyTailBytes = emptySlots * 2; // ARC-4 empty string = 0x0000
+
+  const valueTailBytes = (2 + swarmBytes) + (2 + questionBytes) + optionTailBytes + emptyTailBytes;
+  const valueBytes     = HEAD_BYTES + valueTailBytes;
+
+  const mbr = 2500n + 400n * BigInt(KEY_BYTES + valueBytes);
+
+  // Add a 10 000 µALGO safety buffer
+  return mbr + 10_000n;
+}
 
 /**
  * Compute and return a TransactionWithSigner that tops up the app account's

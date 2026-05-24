@@ -1,4 +1,4 @@
-export { parsePollBoxBytes } from "./utils.js";
+export { parsePollBoxBytes, computePollBoxMbr } from "./utils.js";
 export { AgentRegistryClient } from "./AgentRegistryClient.js";
 export type {
   RegisterSwarmArgs,

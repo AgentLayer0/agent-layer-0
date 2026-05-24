@@ -155,13 +155,12 @@ router.post(
       ));
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
+      req.log.error({ err: msg, sender, swarm_id }, "relay/poll Algorand error (raw)");
       if (msg.includes("balance") && msg.includes("below min")) {
-        req.log.error({ sender }, "relay/poll failed — relay wallet balance below minimum");
         res.status(503).json({
-          error: "Relay wallet has insufficient ALGO balance. Top up: " + sender,
+          error: "Algorand account balance below minimum: " + msg,
         });
       } else {
-        req.log.error({ err, swarm_id }, "relay/poll Algorand error");
         res.status(502).json({ error: "Algorand transaction failed: " + msg });
       }
       return;
