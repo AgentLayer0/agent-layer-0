@@ -388,13 +388,13 @@ export default function Home() {
           <AL0Wordmark size="md" />
         </button>
 
-        <Link
-          href="/steps"
+        <a
+          href="/dashboard/"
           className="text-sm font-mono text-white/40 hover:text-white/80 transition-colors flex items-center gap-1.5"
         >
-          Integration guide
+          Dashboard
           <ChevronRight className="w-3.5 h-3.5" />
-        </Link>
+        </a>
       </nav>
 
       {/* ── Hero ─────────────────────────────────────────── */}
