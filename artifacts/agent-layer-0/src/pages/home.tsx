@@ -539,7 +539,7 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {t === "sdk" ? "TypeScript SDK" : "MCP"}
+            {t === "sdk" ? "SDK" : "MCP"}
           </button>
         ))}
       </div>
