@@ -257,7 +257,7 @@ async function main(): Promise<void> {
   );
 
   const output = {
-    network: "testnet",
+    network: process.env["ALGORAND_NETWORK"] ?? "testnet",
     agentRegistryAppId,
     pollFactoryAppId,
     ballotBoxAppId,

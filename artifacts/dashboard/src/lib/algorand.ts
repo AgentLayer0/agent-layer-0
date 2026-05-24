@@ -66,10 +66,10 @@ export interface ParsedAgent {
   valueDecoded: string;
 }
 
-const INDEXER_BASE = "https://testnet-idx.algonode.cloud/v2";
-const ALGOEXPLORER_TX = "https://testnet.algoexplorer.io/tx";
-const ALGOEXPLORER_ADDR = "https://testnet.algoexplorer.io/address";
-const ALGOEXPLORER_APP = "https://testnet.algoexplorer.io/application";
+const INDEXER_BASE = "https://mainnet-idx.algonode.cloud/v2";
+const ALGOEXPLORER_TX = "https://lora.algokit.io/mainnet/transaction";
+const ALGOEXPLORER_ADDR = "https://lora.algokit.io/mainnet/account";
+const ALGOEXPLORER_APP = "https://lora.algokit.io/mainnet/application";
 
 export { ALGOEXPLORER_TX, ALGOEXPLORER_ADDR, ALGOEXPLORER_APP };
 

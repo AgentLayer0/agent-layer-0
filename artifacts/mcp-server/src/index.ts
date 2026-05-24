@@ -235,7 +235,7 @@ async function handleRegisterSwarm(raw: unknown): Promise<string> {
     `Swarm ID:   ${result["swarm_id"]}\n` +
     `App ID:     ${result["appId"]}\n` +
     `Tx ID:      ${result["txId"]}\n` +
-    `AlgoExplorer: https://testnet.algoexplorer.io/tx/${result["txId"]}`
+    `Lora: https://lora.algokit.io/${process.env["ALGORAND_NETWORK"] ?? "mainnet"}/transaction/${result["txId"]}`
   );
 }
 

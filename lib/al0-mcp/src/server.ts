@@ -113,7 +113,7 @@ export function createMcpServer(apiKey: string): Server {
             pollId: {
               type: "number",
               description:
-                "The numeric poll ID returned by create_poll or visible on AlgoExplorer.",
+                "The numeric poll ID returned by create_poll or visible on Lora (lora.algokit.io).",
             },
             optionIndex: {
               type: "number",
@@ -134,7 +134,7 @@ export function createMcpServer(apiKey: string): Server {
             pollId: {
               type: "number",
               description:
-                "The numeric poll ID returned by create_poll or visible on AlgoExplorer.",
+                "The numeric poll ID returned by create_poll or visible on Lora (lora.algokit.io).",
             },
           },
           required: ["pollId"],
