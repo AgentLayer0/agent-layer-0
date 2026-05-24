@@ -129,7 +129,7 @@ const MCP_TOKEN_LINES: { type: string; text: string }[][] = [
     { type: "plain", text: "      " },
     { type: "class", text: '"url"' },
     { type: "plain", text: ": " },
-    { type: "string", text: '"https://your-domain.replit.app/api/mcp"' },
+    { type: "string", text: '"https://agentlayer0.io/api/mcp"' },
     { type: "plain", text: "," },
   ],
   [
@@ -510,7 +510,7 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
   "mcpServers": {
     "agent-layer-0": {
       "type": "http",
-      "url": "https://your-domain.replit.app/api/mcp",
+      "url": "https://agentlayer0.io/api/mcp",
       "headers": {
         "Authorization": "Bearer al0_sk_..."
       }
@@ -539,7 +539,7 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            {t === "sdk" ? "TypeScript SDK" : "Claude / MCP"}
+            {t === "sdk" ? "TypeScript SDK" : "MCP"}
           </button>
         ))}
       </div>
