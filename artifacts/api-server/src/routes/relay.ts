@@ -12,10 +12,11 @@ import { requireApiKey, type AuthenticatedRequest } from "../lib/api-key-auth";
 import { relayRateLimit } from "../lib/rate-limiter";
 import { getAlgodClient, makeRelayAddress, makeRelaySigner } from "../lib/relay-wallet";
 import { requireAdmin } from "../lib/admin-auth";
+import { checkQuota } from "../lib/quota";
 
 const router: IRouter = Router();
 
-const relayMiddleware = [requireApiKey, relayRateLimit];
+const relayMiddleware = [requireApiKey, relayRateLimit, checkQuota];
 
 router.post(
   "/relay/register",

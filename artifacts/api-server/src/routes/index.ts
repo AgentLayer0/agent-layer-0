@@ -5,6 +5,7 @@ import adminRouter from "./admin";
 import keysRouter from "./keys";
 import relayRouter from "./relay";
 import governanceRouter from "./governance";
+import { billingRouter } from "./billing";
 
 const router: IRouter = Router();
 
@@ -14,5 +15,6 @@ router.use(adminRouter);
 router.use(keysRouter);
 router.use(relayRouter);
 router.use(governanceRouter);
+router.use(billingRouter);
 
 export default router;

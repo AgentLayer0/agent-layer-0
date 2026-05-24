@@ -6,10 +6,13 @@
   "scripts": {
     "hello": "tsx ./src/hello.ts",
     "deploy-contracts": "tsx ./src/deploy-contracts.ts",
+    "seed-products": "tsx ./src/seed-products.ts",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "algosdk": "^3.3.0"
+    "algosdk": "^3.3.0",
+    "stripe": "*",
+    "stripe-replit-sync": "*"
   },
   "devDependencies": {
     "@types/node": "catalog:",

@@ -14,6 +14,7 @@ runButton = "Project"
 [agent]
 stack = "PNPM_WORKSPACE"
 expertMode = true
+integrations = ["stripe:1.0.0"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
@@ -37,3 +38,9 @@ externalPort = 80
 
 [nix]
 channel = "stable-25_05"
+
+[userenv]
+
+[userenv.shared]
+STRIPE_PRO_PRICE_ID = "price_1Taa4GPtfrW3TqrkgoNDG3Lq"
+STRIPE_SCALE_PRICE_ID = "price_1Taa4HPtfrW3TqrksRo3BSnw"

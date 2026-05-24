@@ -2,6 +2,14 @@ import { pgTable, serial, text, timestamp, integer } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod/v4";
 
+export const PLAN_QUOTAS = {
+  free: 500,
+  pro: 10_000,
+  scale: 100_000,
+} as const;
+
+export type Plan = keyof typeof PLAN_QUOTAS;
+
 export const apiKeysTable = pgTable("api_keys", {
   id: serial("id").primaryKey(),
   hashedKey: text("hashed_key").notNull().unique(),
@@ -10,6 +18,10 @@ export const apiKeysTable = pgTable("api_keys", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   lastUsedAt: timestamp("last_used_at", { withTimezone: true }),
   revokedAt: timestamp("revoked_at", { withTimezone: true }),
+  plan: text("plan").notNull().default("free"),
+  stripeCustomerId: text("stripe_customer_id"),
+  txCountThisPeriod: integer("tx_count_this_period").notNull().default(0),
+  periodResetAt: timestamp("period_reset_at", { withTimezone: true }),
 });
 
 export const insertApiKeySchema = createInsertSchema(apiKeysTable).omit({
@@ -17,6 +29,8 @@ export const insertApiKeySchema = createInsertSchema(apiKeysTable).omit({
   createdAt: true,
   lastUsedAt: true,
   revokedAt: true,
+  txCountThisPeriod: true,
+  periodResetAt: true,
 });
 export type InsertApiKey = z.infer<typeof insertApiKeySchema>;
 export type ApiKey = typeof apiKeysTable.$inferSelect;

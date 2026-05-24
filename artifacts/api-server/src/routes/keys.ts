@@ -2,11 +2,12 @@ import { Router, type IRouter } from "express";
 import { randomBytes } from "node:crypto";
 import bcrypt from "bcryptjs";
 import { db } from "@workspace/db";
-import { apiKeysTable, apiKeySwarms, relayTransactionsTable } from "@workspace/db/schema";
+import { apiKeysTable, apiKeySwarms, relayTransactionsTable, PLAN_QUOTAS, type Plan } from "@workspace/db/schema";
 import { desc, eq, isNull, sql } from "drizzle-orm";
 import { requireAdmin } from "../lib/admin-auth";
 import { requireApiKey, type AuthenticatedRequest } from "../lib/api-key-auth";
 import { getDeployedAppIds } from "@workspace/al0-contracts";
+import { getUncachableStripeClient } from "../stripeClient";
 
 const router: IRouter = Router();
 
@@ -22,21 +23,50 @@ router.post("/keys", requireAdmin, async (req, res): Promise<void> => {
     return;
   }
 
+  const email = swarmOwnerEmail.trim().toLowerCase();
   const rawKey = generateRawKey();
   const hashedKey = await bcrypt.hash(rawKey, 12);
 
+  const thirtyDaysFromNow = new Date();
+  thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+
   const [record] = await db
     .insert(apiKeysTable)
-    .values({ hashedKey, swarmOwnerEmail: swarmOwnerEmail.trim().toLowerCase(), name: name ?? null })
+    .values({
+      hashedKey,
+      swarmOwnerEmail: email,
+      name: name ?? null,
+      plan: "free",
+      periodResetAt: thirtyDaysFromNow,
+    })
     .returning();
 
-  req.log.info({ id: record!.id, swarmOwnerEmail }, "API key created");
+  req.log.info({ id: record!.id, swarmOwnerEmail: email }, "API key created");
+
+  let stripeCustomerId: string | null = null;
+  try {
+    const stripe = await getUncachableStripeClient();
+    const customer = await stripe.customers.create({
+      email,
+      metadata: { apiKeyId: String(record!.id) },
+    });
+    stripeCustomerId = customer.id;
+    await db
+      .update(apiKeysTable)
+      .set({ stripeCustomerId })
+      .where(eq(apiKeysTable.id, record!.id));
+    req.log.info({ id: record!.id, stripeCustomerId }, "Stripe customer created for new API key");
+  } catch (err) {
+    req.log.warn({ err }, "Failed to create Stripe customer — billing features will be unavailable for this key");
+  }
 
   res.status(201).json({
     id: record!.id,
     key: rawKey,
     swarmOwnerEmail: record!.swarmOwnerEmail,
     name: record!.name,
+    plan: record!.plan,
+    stripeCustomerId,
     createdAt: record!.createdAt,
     warning: "This is the only time the raw key will be shown. Store it securely.",
   });
@@ -48,6 +78,7 @@ router.get("/keys", requireAdmin, async (req, res): Promise<void> => {
       id: apiKeysTable.id,
       swarmOwnerEmail: apiKeysTable.swarmOwnerEmail,
       name: apiKeysTable.name,
+      plan: apiKeysTable.plan,
       createdAt: apiKeysTable.createdAt,
       lastUsedAt: apiKeysTable.lastUsedAt,
       revokedAt: apiKeysTable.revokedAt,
@@ -143,11 +174,18 @@ router.get("/keys/me/usage", requireApiKey, async (req: AuthenticatedRequest, re
 
   const txCount = stats?.txCount ?? 0;
   const estimatedAlgoPerTx = 0.001;
+  const plan = (keyRecord.plan ?? "free") as Plan;
+  const quota = PLAN_QUOTAS[plan] ?? PLAN_QUOTAS.free;
 
   res.json({
     apiKeyId: keyRecord.id,
     swarmOwnerEmail: keyRecord.swarmOwnerEmail,
     name: keyRecord.name,
+    plan,
+    quota,
+    txCountThisPeriod: keyRecord.txCountThisPeriod ?? 0,
+    periodResetAt: keyRecord.periodResetAt ?? null,
+    hasStripeCustomer: !!keyRecord.stripeCustomerId,
     createdAt: keyRecord.createdAt,
     lastUsedAt: keyRecord.lastUsedAt,
     txCount,

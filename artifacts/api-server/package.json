@@ -21,7 +21,9 @@
     "express": "^5",
     "express-basic-auth": "^1.2.1",
     "pino": "^9",
-    "pino-http": "^10"
+    "pino-http": "^10",
+    "stripe": "*",
+    "stripe-replit-sync": "*"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
