@@ -180,7 +180,7 @@ export class BallotBoxClient {
     args: InitPollArgs,
     pollFactoryAppId: number,
     sp?: algosdk.SuggestedParams
-  ): Promise<void> {
+  ): Promise<{ txId: string }> {
     const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
     const atc = new algosdk.AtomicTransactionComposer();
     atc.addMethodCall({
@@ -197,7 +197,8 @@ export class BallotBoxClient {
       appForeignApps: [pollFactoryAppId],
       boxes: refsInitPoll(pollFactoryAppId, args.poll_id),
     });
-    await atc.execute(this.algod, 4);
+    const result = await atc.execute(this.algod, 4);
+    return { txId: result.txIDs[0]! };
   }
 
   /**
@@ -219,7 +220,7 @@ export class BallotBoxClient {
     signer: algosdk.TransactionSigner,
     args: CastVoteArgs,
     sp?: algosdk.SuggestedParams
-  ): Promise<void> {
+  ): Promise<{ txId: string }> {
     const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
     const atc = new algosdk.AtomicTransactionComposer();
     atc.addMethodCall({
@@ -231,7 +232,8 @@ export class BallotBoxClient {
       suggestedParams,
       boxes: refsCastVote(args.poll_id, sender),
     });
-    await atc.execute(this.algod, 4);
+    const result = await atc.execute(this.algod, 4);
+    return { txId: result.txIDs[0]! };
   }
 
   /**

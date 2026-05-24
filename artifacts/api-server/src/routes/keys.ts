@@ -1,0 +1,120 @@
+import { Router, type IRouter } from "express";
+import { randomBytes } from "node:crypto";
+import bcrypt from "bcryptjs";
+import { db } from "@workspace/db";
+import { apiKeysTable, relayTransactionsTable } from "@workspace/db/schema";
+import { eq, isNull, sql } from "drizzle-orm";
+import { requireAdmin } from "../lib/admin-auth";
+import { requireApiKey, type AuthenticatedRequest } from "../lib/api-key-auth";
+
+const router: IRouter = Router();
+
+function generateRawKey(): string {
+  return "al0_" + randomBytes(32).toString("hex");
+}
+
+router.post("/keys", requireAdmin, async (req, res): Promise<void> => {
+  const { swarmOwnerEmail, name } = req.body as { swarmOwnerEmail?: string; name?: string };
+
+  if (!swarmOwnerEmail || typeof swarmOwnerEmail !== "string") {
+    res.status(400).json({ error: "swarmOwnerEmail is required" });
+    return;
+  }
+
+  const rawKey = generateRawKey();
+  const hashedKey = await bcrypt.hash(rawKey, 12);
+
+  const [record] = await db
+    .insert(apiKeysTable)
+    .values({ hashedKey, swarmOwnerEmail: swarmOwnerEmail.trim().toLowerCase(), name: name ?? null })
+    .returning();
+
+  req.log.info({ id: record!.id, swarmOwnerEmail }, "API key created");
+
+  res.status(201).json({
+    id: record!.id,
+    key: rawKey,
+    swarmOwnerEmail: record!.swarmOwnerEmail,
+    name: record!.name,
+    createdAt: record!.createdAt,
+    warning: "This is the only time the raw key will be shown. Store it securely.",
+  });
+});
+
+router.get("/keys", requireAdmin, async (req, res): Promise<void> => {
+  const rows = await db
+    .select({
+      id: apiKeysTable.id,
+      swarmOwnerEmail: apiKeysTable.swarmOwnerEmail,
+      name: apiKeysTable.name,
+      createdAt: apiKeysTable.createdAt,
+      lastUsedAt: apiKeysTable.lastUsedAt,
+      revokedAt: apiKeysTable.revokedAt,
+    })
+    .from(apiKeysTable)
+    .orderBy(apiKeysTable.createdAt);
+
+  res.json({ keys: rows });
+});
+
+router.delete("/keys/:id", requireAdmin, async (req, res): Promise<void> => {
+  const rawId = Array.isArray(req.params["id"]) ? req.params["id"][0] : req.params["id"];
+  const id = parseInt(rawId ?? "", 10);
+
+  if (Number.isNaN(id)) {
+    res.status(400).json({ error: "Invalid key id" });
+    return;
+  }
+
+  const [row] = await db
+    .update(apiKeysTable)
+    .set({ revokedAt: new Date() })
+    .where(eq(apiKeysTable.id, id))
+    .returning();
+
+  if (!row) {
+    res.status(404).json({ error: "API key not found" });
+    return;
+  }
+
+  req.log.info({ id }, "API key revoked");
+  res.json({ id: row.id, revokedAt: row.revokedAt });
+});
+
+router.delete("/keys/me", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
+  const id = req.apiKeyRecord!.id;
+  const [row] = await db
+    .update(apiKeysTable)
+    .set({ revokedAt: new Date() })
+    .where(eq(apiKeysTable.id, id))
+    .returning();
+
+  req.log.info({ id }, "API key self-revoked");
+  res.json({ id: row!.id, revokedAt: row!.revokedAt });
+});
+
+router.get("/keys/me/usage", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
+  const keyRecord = req.apiKeyRecord!;
+
+  const [stats] = await db
+    .select({
+      txCount: sql<number>`count(*)::int`,
+    })
+    .from(relayTransactionsTable)
+    .where(eq(relayTransactionsTable.apiKeyId, keyRecord.id));
+
+  const txCount = stats?.txCount ?? 0;
+  const estimatedAlgoPerTx = 0.001;
+
+  res.json({
+    apiKeyId: keyRecord.id,
+    swarmOwnerEmail: keyRecord.swarmOwnerEmail,
+    name: keyRecord.name,
+    createdAt: keyRecord.createdAt,
+    lastUsedAt: keyRecord.lastUsedAt,
+    txCount,
+    estimatedAlgoSpent: parseFloat((txCount * estimatedAlgoPerTx).toFixed(6)),
+  });
+});
+
+export default router;

@@ -176,7 +176,7 @@ export class PollFactoryClient {
     args: CreatePollArgs,
     registryAppId: number,
     sp?: algosdk.SuggestedParams
-  ): Promise<bigint> {
+  ): Promise<{ pollId: bigint; txId: string }> {
     if (args.options.length < 2 || args.options.length > 8) {
       throw new Error("options must contain between 2 and 8 entries");
     }
@@ -211,7 +211,10 @@ export class PollFactoryClient {
       boxes: refsCreatePoll(registryAppId, args.swarm_id, nextPollId),
     });
     const result = await atc.execute(this.algod, 4);
-    return result.methodResults[0]!.returnValue as bigint;
+    return {
+      pollId: result.methodResults[0]!.returnValue as bigint,
+      txId: result.txIDs[0]!,
+    };
   }
 
   /**

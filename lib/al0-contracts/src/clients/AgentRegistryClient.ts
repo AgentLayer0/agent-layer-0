@@ -82,7 +82,7 @@ export class AgentRegistryClient {
     signer: algosdk.TransactionSigner,
     args: RegisterSwarmArgs,
     sp?: algosdk.SuggestedParams
-  ): Promise<bigint> {
+  ): Promise<{ appId: bigint; txId: string }> {
     const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
     const atc = new algosdk.AtomicTransactionComposer();
     atc.addMethodCall({
@@ -95,7 +95,10 @@ export class AgentRegistryClient {
       boxes: refsRegisterSwarm(args.swarm_id),
     });
     const result = await atc.execute(this.algod, 4);
-    return result.methodResults[0]!.returnValue as bigint;
+    return {
+      appId: result.methodResults[0]!.returnValue as bigint,
+      txId: result.txIDs[0]!,
+    };
   }
 
   /**
