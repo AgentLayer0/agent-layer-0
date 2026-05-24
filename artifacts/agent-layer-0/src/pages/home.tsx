@@ -663,8 +663,7 @@ export default function Home() {
             On-chain governance for AI agent swarms.
           </p>
           <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-0">
-            Register swarms, create polls, cast verifiable votes — all on Algorand.
-            Permanent. Auditable. No middleware.
+            Powered by UrVote. Built on Algorand.
           </p>
           <InlineStats />
         </motion.div>
