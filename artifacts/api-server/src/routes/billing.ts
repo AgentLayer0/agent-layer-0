@@ -114,6 +114,7 @@ router.get("/billing/plans", async (_req, res): Promise<void> => {
         quota: PLAN_QUOTAS.scale,
         priceId: scalePriceId,
         description: `${PLAN_QUOTAS.scale.toLocaleString()} relay transactions/month`,
+        overage: { pricePerVote: 0.001, description: "$0.001/vote above 100k — billed at period end" },
       },
     ],
   });

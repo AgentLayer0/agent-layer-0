@@ -1,4 +1,4 @@
-import { getStripeSync } from "./stripeClient";
+import { getStripeSync, getUncachableStripeClient } from "./stripeClient";
 import { db } from "@workspace/db";
 import { apiKeysTable, type Plan } from "@workspace/db/schema";
 import { eq, sql } from "drizzle-orm";
@@ -21,7 +21,7 @@ async function handleSubscriptionUpdated(
 
   const result = await db
     .update(apiKeysTable)
-    .set({ plan, periodResetAt, txCountThisPeriod: 0 })
+    .set({ plan, periodResetAt, txCountThisPeriod: 0, overageVotes: 0 })
     .where(eq(apiKeysTable.stripeCustomerId, customerId))
     .returning({ id: apiKeysTable.id });
 
@@ -31,7 +31,7 @@ async function handleSubscriptionUpdated(
 async function handleSubscriptionDeleted(customerId: string): Promise<void> {
   const result = await db
     .update(apiKeysTable)
-    .set({ plan: "free", txCountThisPeriod: 0, periodResetAt: sql`NOW() + INTERVAL '30 days'` })
+    .set({ plan: "free", txCountThisPeriod: 0, overageVotes: 0, periodResetAt: sql`NOW() + INTERVAL '30 days'` })
     .where(eq(apiKeysTable.stripeCustomerId, customerId))
     .returning({ id: apiKeysTable.id });
 
@@ -58,11 +58,56 @@ async function handleInvoicePaid(
 
   const result = await db
     .update(apiKeysTable)
-    .set({ plan, periodResetAt, txCountThisPeriod: 0 })
+    .set({ plan, periodResetAt, txCountThisPeriod: 0, overageVotes: 0 })
     .where(eq(apiKeysTable.stripeCustomerId, customerId))
     .returning({ id: apiKeysTable.id });
 
   logger.info({ customerId, plan, rows: result.length }, "invoice paid: plan reset");
+}
+
+/**
+ * When Stripe creates a new invoice (draft state, before finalization), check whether
+ * the customer has accrued Scale plan overage votes. If so, add a line item for the
+ * overage charge ($0.001/vote) to the invoice before it is finalized.
+ *
+ * Overage < 500 votes (~$0.50) is forgiven to stay above Stripe's minimum charge.
+ */
+async function handleInvoiceCreated(customerId: string, invoiceId: string): Promise<void> {
+  const rows = await db
+    .select({
+      id: apiKeysTable.id,
+      plan: apiKeysTable.plan,
+      overageVotes: apiKeysTable.overageVotes,
+    })
+    .from(apiKeysTable)
+    .where(eq(apiKeysTable.stripeCustomerId, customerId))
+    .limit(1);
+
+  const row = rows[0];
+  if (!row || row.plan !== "scale" || (row.overageVotes ?? 0) === 0) return;
+
+  const overageVotes = row.overageVotes ?? 0;
+  // $0.001/vote → 0.1 cents/vote; Stripe requires integer cents
+  const amountCents = Math.round(overageVotes * 0.1);
+
+  if (amountCents < 50) {
+    // Below Stripe minimum charge — reset without billing (small amounts forgiven)
+    await db.update(apiKeysTable).set({ overageVotes: 0 }).where(eq(apiKeysTable.id, row.id));
+    logger.info({ customerId, overageVotes, amountCents }, "overage below $0.50 minimum: forgiven");
+    return;
+  }
+
+  const stripe = await getUncachableStripeClient();
+  await stripe.invoiceItems.create({
+    customer: customerId,
+    invoice: invoiceId,
+    amount: amountCents,
+    currency: "usd",
+    description: `Scale plan overage — ${overageVotes.toLocaleString()} relay votes above 100,000 ($0.001/vote)`,
+  });
+
+  await db.update(apiKeysTable).set({ overageVotes: 0 }).where(eq(apiKeysTable.id, row.id));
+  logger.info({ customerId, overageVotes, amountCents, invoiceId }, "overage invoice item added");
 }
 
 export class WebhookHandlers {
@@ -108,6 +153,17 @@ export class WebhookHandlers {
         const sub = event.data.object as unknown as Record<string, unknown>;
         const customerId = sub["customer"] as string;
         if (customerId) await handleSubscriptionDeleted(customerId);
+        break;
+      }
+      case "invoice.created": {
+        const inv = event.data.object as unknown as Record<string, unknown>;
+        const customerId = inv["customer"] as string | undefined;
+        const invoiceId = inv["id"] as string | undefined;
+        // Only act on subscription invoices (not one-off invoices)
+        const hasSubscription = !!(inv["subscription"] ?? inv["subscription_details"]);
+        if (customerId && invoiceId && hasSubscription) {
+          await handleInvoiceCreated(customerId, invoiceId);
+        }
         break;
       }
       case "invoice.paid": {

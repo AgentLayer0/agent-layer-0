@@ -34,6 +34,12 @@ const PLAN_PRICES: Record<string, string> = {
   scale: "$99/mo",
 };
 
+const PLAN_OVERAGE: Record<string, string | null> = {
+  free: null,
+  pro: null,
+  scale: "$0.001/vote above 100k",
+};
+
 const PLAN_BADGE_VARIANT: Record<string, "secondary" | "default" | "destructive"> = {
   free: "secondary",
   pro: "default",
@@ -109,10 +115,12 @@ export default function OverviewPage() {
   const plan = (stats as any)?.plan ?? "free";
   const quota = PLAN_QUOTAS[plan] ?? 500;
   const txCountThisPeriod = (stats as any)?.txCountThisPeriod ?? 0;
+  const overageVotes = (stats as any)?.overageVotes ?? 0;
   const periodResetAt = (stats as any)?.periodResetAt ?? null;
   const hasStripeCustomer = (stats as any)?.hasStripeCustomer ?? false;
   const usagePct = Math.min(100, Math.round((txCountThisPeriod / quota) * 100));
-  const isNearLimit = usagePct >= 80;
+  const isNearLimit = plan !== "scale" && usagePct >= 80;
+  const estimatedOverageCost = (overageVotes * 0.001).toFixed(2);
 
   function getApiKey(): string {
     return localStorage.getItem("al0_api_key") ?? "";
@@ -262,6 +270,9 @@ export default function OverviewPage() {
                       </div>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         {quota.toLocaleString()} relay transactions/month
+                        {PLAN_OVERAGE[plan] && (
+                          <span className="ml-1 text-primary">· {PLAN_OVERAGE[plan]}</span>
+                        )}
                       </p>
                     </div>
                   </div>
@@ -307,7 +318,7 @@ export default function OverviewPage() {
                     data-testid="billing-usage-bar"
                   />
                   <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{usagePct}% used</span>
+                    <span>{usagePct}% of quota used</span>
                     {periodResetAt && (
                       <span>Resets {format(new Date(periodResetAt), "MMM d, yyyy")}</span>
                     )}
@@ -316,6 +327,21 @@ export default function OverviewPage() {
                     <p className="text-xs text-destructive font-mono">
                       ⚠ Approaching quota limit — upgrade to avoid relay interruptions
                     </p>
+                  )}
+                  {plan === "scale" && overageVotes > 0 && (
+                    <div className="mt-2 rounded-md border border-primary/20 bg-primary/5 px-3 py-2 flex items-center justify-between" data-testid="overage-row">
+                      <span className="text-xs font-mono text-muted-foreground">
+                        OVERAGE THIS PERIOD
+                      </span>
+                      <div className="text-right">
+                        <span className="text-xs font-mono font-medium text-primary" data-testid="overage-count">
+                          {overageVotes.toLocaleString()} votes
+                        </span>
+                        <span className="text-xs text-muted-foreground ml-2">
+                          (~${estimatedOverageCost} billed at renewal)
+                        </span>
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -336,12 +362,15 @@ export default function OverviewPage() {
                             <span className="text-xs text-muted-foreground">{PLAN_PRICES[p.id]}</span>
                           </div>
                           <p className="text-xs text-muted-foreground">{p.description}</p>
+                          {PLAN_OVERAGE[p.id] && (
+                            <p className="text-xs text-primary font-mono">{PLAN_OVERAGE[p.id]}</p>
+                          )}
                           {p.id === plan ? (
-                            <span className="text-xs text-primary font-mono">Current plan</span>
+                            <span className="text-xs text-primary font-mono mt-auto">Current plan</span>
                           ) : p.priceId ? (
                             <Button
                               size="sm"
-                              className="w-full"
+                              className="w-full mt-auto"
                               onClick={() => handleUpgrade(p.priceId!)}
                               disabled={checkoutLoading === p.priceId}
                               data-testid={`button-select-plan-${p.id}`}
@@ -349,7 +378,7 @@ export default function OverviewPage() {
                               {checkoutLoading === p.priceId ? "Loading..." : `Select ${p.name}`}
                             </Button>
                           ) : (
-                            <span className="text-xs text-muted-foreground">No payment required</span>
+                            <span className="text-xs text-muted-foreground mt-auto">No payment required</span>
                           )}
                         </div>
                       ))}

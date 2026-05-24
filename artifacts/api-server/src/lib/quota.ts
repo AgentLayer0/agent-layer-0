@@ -24,12 +24,32 @@ export async function checkQuota(
     newResetAt.setDate(newResetAt.getDate() + 30);
     await db
       .update(apiKeysTable)
-      .set({ txCountThisPeriod: 0, periodResetAt: newResetAt })
+      .set({ txCountThisPeriod: 0, overageVotes: 0, periodResetAt: newResetAt })
       .where(eq(apiKeysTable.id, keyRecord.id));
     txCount = 0;
   }
 
   if (txCount >= quota) {
+    if (plan === "scale") {
+      // Scale plan: allow overage, track in overageVotes for end-of-period billing ($0.001/vote)
+      res.on("finish", () => {
+        if (res.statusCode < 400) {
+          db.update(apiKeysTable)
+            .set({
+              txCountThisPeriod: sql`${apiKeysTable.txCountThisPeriod} + 1`,
+              overageVotes: sql`${apiKeysTable.overageVotes} + 1`,
+            })
+            .where(eq(apiKeysTable.id, keyRecord.id))
+            .catch((err: unknown) => {
+              req.log.error({ err }, "Failed to increment overage_votes");
+            });
+        }
+      });
+      next();
+      return;
+    }
+
+    // Free and Pro: hard block — direct to upgrade
     const upgradeUrl = `${DASHBOARD_URL}/overview`;
     res.status(429).json({
       error: "Relay quota exceeded for this billing period.",
@@ -39,8 +59,8 @@ export async function checkQuota(
       upgradeUrl,
       message:
         plan === "free"
-          ? `Free plan allows ${quota} relay transactions/month. Upgrade to Pro ($29/mo, 10k tx) or Scale ($99/mo, 100k tx) at ${upgradeUrl}`
-          : `Your ${plan} plan allows ${quota.toLocaleString()} relay transactions/month. Manage your subscription at ${upgradeUrl}`,
+          ? `Free plan allows ${quota} relay transactions/month. Upgrade to Pro ($29/mo, 10k tx) or Scale ($99/mo, 100k tx + $0.001/tx overage) at ${upgradeUrl}`
+          : `Pro plan allows ${quota.toLocaleString()} relay transactions/month. Upgrade to Scale ($99/mo, 100k tx + $0.001/tx overage) at ${upgradeUrl}`,
     });
     return;
   }

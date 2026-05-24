@@ -184,6 +184,7 @@ router.get("/keys/me/usage", requireApiKey, async (req: AuthenticatedRequest, re
     plan,
     quota,
     txCountThisPeriod: keyRecord.txCountThisPeriod ?? 0,
+    overageVotes: keyRecord.overageVotes ?? 0,
     periodResetAt: keyRecord.periodResetAt ?? null,
     hasStripeCustomer: !!keyRecord.stripeCustomerId,
     createdAt: keyRecord.createdAt,

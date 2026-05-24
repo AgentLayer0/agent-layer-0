@@ -21,6 +21,7 @@ export const apiKeysTable = pgTable("api_keys", {
   plan: text("plan").notNull().default("free"),
   stripeCustomerId: text("stripe_customer_id"),
   txCountThisPeriod: integer("tx_count_this_period").notNull().default(0),
+  overageVotes: integer("overage_votes").notNull().default(0),
   periodResetAt: timestamp("period_reset_at", { withTimezone: true }),
 });
 
