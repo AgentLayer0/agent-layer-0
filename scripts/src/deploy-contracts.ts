@@ -27,7 +27,6 @@ import algosdk from "algosdk";
 import { readFileSync, writeFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
-import { execSync } from "child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, "../..");
@@ -211,12 +210,8 @@ async function main(): Promise<void> {
   console.log(`Node: ${ALGOD_SERVER}:${ALGOD_PORT}`);
   console.log("");
 
-  console.log("Step 1/3 — Compiling Python contracts...");
-  execSync(
-    `python3.12 ${join(REPO_ROOT, "lib/algorand-contracts/build.py")}`,
-    { stdio: "inherit" }
-  );
-  console.log("");
+  console.log("Step 1/3 — Using pre-compiled TEAL artifacts (skipping Python build)...");
+  console.log(`  Artifacts root: ${ARTIFACTS_ROOT}`);
 
   const client = getAlgodClient();
   const account = getAccount();
