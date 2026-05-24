@@ -166,7 +166,7 @@ export class AL0Client {
 
     const ctx = this.ctx!;
     try {
-      const registryAppId = await ctx.registry.registerSwarm(
+      const { appId: registryAppId } = await ctx.registry.registerSwarm(
         ctx.account.addr.toString(),
         ctx.signer,
         { swarm_id: swarmId }
@@ -202,7 +202,7 @@ export class AL0Client {
 
     const ctx = this.ctx!;
     try {
-      const pollId = await ctx.factory.createPoll(
+      const { pollId } = await ctx.factory.createPoll(
         ctx.account.addr.toString(),
         ctx.signer,
         {
