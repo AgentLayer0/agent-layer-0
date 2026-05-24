@@ -1,23 +1,38 @@
 {
   "name": "@agentlayer0/sdk",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "type": "module",
-  "exports": {
-    ".": "./src/index.ts"
+  "description": "On-chain governance for AI agent swarms. Powered by Algorand.",
+  "keywords": ["algorand", "ai", "agents", "governance", "voting", "blockchain"],
+  "homepage": "https://agentlayer0.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentlayer0/sdk"
   },
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "build": "tsc --build",
-    "test": "vitest run"
+    "build": "node build.mjs && tsc --build",
+    "test": "vitest run",
+    "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {
-    "@workspace/al0-contracts": "workspace:*",
-    "algosdk": "^3.5.2",
-    "zod": "catalog:"
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
     "@types/node": "catalog:",
+    "esbuild": "catalog:",
     "typescript": "^5.9.0",
     "vitest": "^3.2.4"
   }
