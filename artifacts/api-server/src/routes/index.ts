@@ -8,6 +8,7 @@ import governanceRouter from "./governance";
 import { billingRouter } from "./billing";
 import statsRouter from "./stats";
 import signupRouter from "./signup";
+import mcpRouter from "./mcp";
 
 const router: IRouter = Router();
 
@@ -20,5 +21,6 @@ router.use(relayRouter);
 router.use(governanceRouter);
 router.use(billingRouter);
 router.use(statsRouter);
+router.use(mcpRouter);
 
 export default router;
