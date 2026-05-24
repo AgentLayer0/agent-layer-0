@@ -220,11 +220,17 @@ router.get("/admin/waitlist.csv", requireAdmin, async (req, res) => {
  *
  * Flow:
  *   1. List all vote boxes for the poll via algod box list (no indexer needed)
- *   2. Delete each vote box  → recovers 22 500 µALGO per vote
- *   3. Delete meta + tally boxes → recovers ~45 000 µALGO total
+ *   2. Delete each individual vote box → recovers 22 500 µALGO per voter
  *
- * The recovered ALGO stays in the BallotBox app account as surplus MBR,
- * reducing future relay-wallet top-ups for subsequent polls.
+ * What is deliberately NOT deleted:
+ *   - Tally box (t:poll_id)  — on-chain record of the final vote outcome; kept as audit trail
+ *   - Meta  box (m:poll_id)  — cheap anchor for future expiry checks; kept alongside tally
+ *   - PollFactory box        — authoritative poll record; never touched
+ *
+ * The full audit trail therefore remains on-chain permanently:
+ *   PollFactory box  → question, options, creator, timestamps
+ *   BallotBox tally  → final per-option vote counts
+ *   Algorand tx log  → every cast_vote call, cryptographically signed and indexed forever
  *
  * Returns 200 on full success, 207 if any individual deletion failed.
  */
@@ -257,9 +263,10 @@ router.post("/admin/cleanup", requireAdmin, async (req: Request, res: Response):
     return;
   }
 
-  req.log.info({ poll_id, voterCount: voters.length }, "cleanup: starting MBR recycling");
+  req.log.info({ poll_id, voterCount: voters.length }, "cleanup: starting vote-box MBR recycling");
 
   // Step 2: delete each individual vote box
+  // Tally and meta boxes are intentionally left intact as the on-chain audit trail.
   const deleted: string[] = [];
   const failed: Array<{ voter: string; error: string }> = [];
   const sp = await algod.getTransactionParams().do();
@@ -275,36 +282,20 @@ router.post("/admin/cleanup", requireAdmin, async (req: Request, res: Response):
     }
   }
 
-  // Step 3: delete meta + tally boxes (only if all vote boxes were removed)
-  let pollBoxesTxId: string | null = null;
-  let pollBoxesError: string | null = null;
+  req.log.info(
+    { poll_id, deleted: deleted.length, failed: failed.length },
+    "cleanup: vote-box sweep complete — tally + meta boxes preserved as audit trail",
+  );
 
-  if (failed.length === 0) {
-    try {
-      const freshSp = await algod.getTransactionParams().do();
-      ({ txId: pollBoxesTxId } = await ballot.deletePollBoxes(sender, signer, { poll_id }, freshSp));
-      req.log.info({ poll_id, txId: pollBoxesTxId }, "cleanup: poll meta+tally boxes deleted");
-    } catch (err) {
-      pollBoxesError = err instanceof Error ? err.message : String(err);
-      req.log.error({ poll_id, err: pollBoxesError }, "cleanup: deletePollBoxes failed");
-    }
-  } else {
-    pollBoxesError = `Skipped — ${failed.length} vote box deletion(s) failed`;
-  }
+  const mbrRecoveredMicroAlgo = deleted.length * 22_500;
+  const status = failed.length === 0 ? 200 : 207;
 
-  // 22 500 µALGO per vote box + 12 900 (meta) + 32 100 (tally) if poll boxes deleted
-  const mbrRecoveredMicroAlgo =
-    deleted.length * 22_500 + (pollBoxesTxId ? 12_900 + 32_100 : 0);
-
-  const status = pollBoxesTxId ? 200 : 207;
   res.status(status).json({
     poll_id,
-    voters_found:           voters.length,
-    vote_boxes_deleted:     deleted.length,
-    vote_boxes_failed:      failed,
-    poll_boxes_deleted:     pollBoxesTxId !== null,
-    poll_boxes_tx:          pollBoxesTxId,
-    poll_boxes_error:       pollBoxesError,
+    voters_found:             voters.length,
+    vote_boxes_deleted:       deleted.length,
+    vote_boxes_failed:        failed,
+    tally_box_preserved:      true,
     mbr_recovered_micro_algo: mbrRecoveredMicroAlgo,
     mbr_recovered_algo:       mbrRecoveredMicroAlgo / 1_000_000,
   });
