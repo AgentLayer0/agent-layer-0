@@ -523,7 +523,7 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
       <p className="text-sm font-semibold text-primary/80 uppercase tracking-widest mb-2">Get Started</p>
       <h2 className="text-2xl font-bold tracking-tight mb-1">Two ways to connect</h2>
       <p className="text-sm text-muted-foreground mb-6">
-        Use the TypeScript SDK directly, or connect any MCP-compatible AI agent with a single URL.
+        Use the SDK directly, or connect any MCP-compatible AI agent with a single URL.
       </p>
 
       {/* Tab bar */}
