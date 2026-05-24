@@ -1,0 +1,23 @@
+{
+  "name": "@workspace/mcp-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "al0-mcp": "./dist/index.mjs"
+  },
+  "scripts": {
+    "build": "node ./build.mjs",
+    "dev": "node ./build.mjs && node --enable-source-maps ./dist/index.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "esbuild": "^0.27.3",
+    "typescript": "~5.9.2"
+  }
+}
