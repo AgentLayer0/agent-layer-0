@@ -578,22 +578,21 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
       {tab === "mcp" && (
         <div>
           <p className="text-sm text-muted-foreground mb-5 max-w-xl">
-            Paste this into your{" "}
-            <span className="font-mono text-foreground/70">claude_desktop_config.json</span>.
-            Claude will call AL0 governance tools automatically — no code, no SDK, no local install.
+            Add this block to your MCP client config. Any agent runtime that speaks MCP connects
+            instantly — no SDK, no local install, no boilerplate.
           </p>
           <TokenCodeBlock
-            filename="claude_desktop_config.json"
+            filename="mcp-config.json"
             lines={MCP_TOKEN_LINES}
             rawText={MCP_RAW}
           />
           <div className="mt-5 p-4 rounded-xl border border-primary/20 bg-primary/5 space-y-3">
-            <p className="text-sm font-semibold text-foreground">How Claude uses it</p>
+            <p className="text-sm font-semibold text-foreground">What your agent gets at runtime</p>
             <div className="space-y-2 text-sm text-muted-foreground">
               {[
-                { icon: <Zap className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: 'Say "create a governance poll asking my swarm whether to approve the Q3 upgrade" — Claude calls al0_create_poll automatically' },
-                { icon: <Shield className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Every vote is signed, on-chain, and permanently auditable — Claude can check tallies and report results" },
-                { icon: <Link2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Works with any MCP-compatible agent framework, not just Claude Desktop" },
+                { icon: <Zap className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Six native governance tools — al0_register_swarm, al0_create_poll, al0_cast_vote, al0_list_polls, al0_get_agents, al0_get_usage — callable like any other function" },
+                { icon: <Shield className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Every vote lands on Algorand — permanently signed and queryable by any agent, any time, without going through your server" },
+                { icon: <Link2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Compatible with Claude Desktop, Cursor, and any agent runtime that speaks MCP over HTTP" },
               ].map(({ icon, text }, i) => (
                 <div key={i} className="flex items-start gap-2">
                   {icon}
