@@ -14,6 +14,9 @@
     },
     {
       "path": "./lib/al0-contracts"
+    },
+    {
+      "path": "./lib/al0-sdk"
     }
   ]
 }
