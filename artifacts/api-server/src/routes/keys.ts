@@ -2,10 +2,11 @@ import { Router, type IRouter } from "express";
 import { randomBytes } from "node:crypto";
 import bcrypt from "bcryptjs";
 import { db } from "@workspace/db";
-import { apiKeysTable, relayTransactionsTable } from "@workspace/db/schema";
-import { eq, isNull, sql } from "drizzle-orm";
+import { apiKeysTable, apiKeySwarms, relayTransactionsTable } from "@workspace/db/schema";
+import { desc, eq, isNull, sql } from "drizzle-orm";
 import { requireAdmin } from "../lib/admin-auth";
 import { requireApiKey, type AuthenticatedRequest } from "../lib/api-key-auth";
+import { getDeployedAppIds } from "@workspace/al0-contracts";
 
 const router: IRouter = Router();
 
@@ -91,6 +92,43 @@ router.delete("/keys/me", requireApiKey, async (req: AuthenticatedRequest, res):
 
   req.log.info({ id }, "API key self-revoked");
   res.json({ id: row!.id, revokedAt: row!.revokedAt });
+});
+
+router.get("/keys/me/transactions", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
+  const keyRecord = req.apiKeyRecord!;
+  const limit = Math.min(parseInt(String(req.query["limit"] ?? "25"), 10) || 25, 100);
+
+  const rows = await db
+    .select({
+      id: relayTransactionsTable.id,
+      txType: relayTransactionsTable.txType,
+      algoTxId: relayTransactionsTable.algoTxId,
+      status: relayTransactionsTable.status,
+      createdAt: relayTransactionsTable.createdAt,
+    })
+    .from(relayTransactionsTable)
+    .where(eq(relayTransactionsTable.apiKeyId, keyRecord.id))
+    .orderBy(desc(relayTransactionsTable.createdAt))
+    .limit(limit);
+
+  res.json({ transactions: rows });
+});
+
+router.get("/keys/me/context", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
+  const keyRecord = req.apiKeyRecord!;
+  const swarms = await db
+    .select({ swarmId: apiKeySwarms.swarmId })
+    .from(apiKeySwarms)
+    .where(eq(apiKeySwarms.apiKeyId, keyRecord.id));
+  const appIds = getDeployedAppIds();
+  res.json({
+    swarms: swarms.map((s) => s.swarmId),
+    appIds: {
+      agentRegistryAppId: appIds.agentRegistryAppId,
+      pollFactoryAppId: appIds.pollFactoryAppId,
+      ballotBoxAppId: appIds.ballotBoxAppId,
+    },
+  });
 });
 
 router.get("/keys/me/usage", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
