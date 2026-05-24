@@ -37,6 +37,9 @@ import {
   refsCastVote,
   refsTallyLookup,
   refsVoteLookup,
+  refsDeleteVoteBox,
+  refsDeletePollBoxes,
+  decodeVotersFromBoxNames,
   tallyBoxKey,
   voteBoxKey,
 } from "./boxes.js";
@@ -101,6 +104,19 @@ const M = {
     name: "get_factory_app_id",
     args: [],
     returns: { type: "uint64" },
+  }),
+  delete_vote_box: new algosdk.ABIMethod({
+    name: "delete_vote_box",
+    args: [
+      { name: "poll_id", type: "uint64" },
+      { name: "voter",   type: "address" },
+    ],
+    returns: { type: "void" },
+  }),
+  delete_poll_boxes: new algosdk.ABIMethod({
+    name: "delete_poll_boxes",
+    args: [{ name: "poll_id", type: "uint64" }],
+    returns: { type: "void" },
   }),
 } as const;
 
@@ -339,6 +355,89 @@ export class BallotBoxClient {
    */
   async getFactoryAppId(): Promise<bigint> {
     return this._readGlobalUint("factory_app_id");
+  }
+
+  /**
+   * delete_vote_box(uint64,address)void
+   *
+   * Delete one vote box for an expired poll, recycling its 22 500 µALGO MBR
+   * back into the BallotBox app account balance.
+   *
+   * Box refs:
+   *   - poll_meta box (read — expiry check)
+   *   - vote box for voter (deleted)
+   *
+   * Reverts if the poll has not expired or the vote box doesn't exist.
+   */
+  async deleteVoteBox(
+    sender: string,
+    signer: algosdk.TransactionSigner,
+    args: { poll_id: bigint | number; voter: string },
+    sp?: algosdk.SuggestedParams
+  ): Promise<{ txId: string }> {
+    const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
+    const atc = new algosdk.AtomicTransactionComposer();
+    atc.addMethodCall({
+      appID: this.appId,
+      method: M.delete_vote_box,
+      methodArgs: [BigInt(args.poll_id), args.voter],
+      sender,
+      signer,
+      suggestedParams,
+      boxes: refsDeleteVoteBox(args.poll_id, args.voter),
+    });
+    const result = await atc.execute(this.algod, 4);
+    return { txId: result.txIDs[0]! };
+  }
+
+  /**
+   * delete_poll_boxes(uint64)void
+   *
+   * Delete the meta and tally boxes for an expired poll, recycling their
+   * combined ~45 000 µALGO MBR back into the BallotBox app account.
+   *
+   * Box refs:
+   *   - poll_meta box (deleted)
+   *   - tally box (deleted)
+   *
+   * Call after all vote boxes for the poll have been deleted.
+   * Reverts if the poll has not expired.
+   */
+  async deletePollBoxes(
+    sender: string,
+    signer: algosdk.TransactionSigner,
+    args: { poll_id: bigint | number },
+    sp?: algosdk.SuggestedParams
+  ): Promise<{ txId: string }> {
+    const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
+    const atc = new algosdk.AtomicTransactionComposer();
+    atc.addMethodCall({
+      appID: this.appId,
+      method: M.delete_poll_boxes,
+      methodArgs: [BigInt(args.poll_id)],
+      sender,
+      signer,
+      suggestedParams,
+      boxes: refsDeletePollBoxes(args.poll_id),
+    });
+    const result = await atc.execute(this.algod, 4);
+    return { txId: result.txIDs[0]! };
+  }
+
+  /**
+   * List all voter addresses that have a vote box for a given poll.
+   *
+   * Queries the algod box list for the BallotBox app and filters for vote
+   * boxes matching the given poll_id. Returns their decoded Algorand addresses.
+   *
+   * Used by the cleanup endpoint to discover voters without an indexer.
+   */
+  async getVotersForPoll(pollId: bigint | number): Promise<string[]> {
+    const result = await this.algod.getApplicationBoxes(this.appId).do();
+    const names = (result.boxes ?? []).map(
+      (b: { name: Uint8Array }) => b.name
+    );
+    return decodeVotersFromBoxNames(names, pollId);
   }
 
   private async _readGlobalUint(keyName: string): Promise<bigint> {

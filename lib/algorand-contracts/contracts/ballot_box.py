@@ -23,6 +23,7 @@ from algopy import (
     UInt64,
     arc4,
     log,
+    op,
     subroutine,
 )
 
@@ -159,7 +160,6 @@ class BallotBox(ARC4Contract):
 
         voter = arc4.Address(Txn.sender)
         vote_box_key = b"v:" + poll_id.bytes + voter.bytes
-        from algopy import op
         _existing, already_voted = op.Box.get(vote_box_key)
         assert not already_voted, "already voted"
 
@@ -181,7 +181,6 @@ class BallotBox(ARC4Contract):
     def has_voted(self, poll_id: arc4.UInt64, voter: arc4.Address) -> arc4.Bool:
         """Return true if the given voter has already cast a vote on this poll."""
         vote_box_key = b"v:" + poll_id.bytes + voter.bytes
-        from algopy import op
         _value, exists = op.Box.get(vote_box_key)
         return arc4.Bool(exists)
 
@@ -189,7 +188,6 @@ class BallotBox(ARC4Contract):
     def get_vote(self, poll_id: arc4.UInt64, voter: arc4.Address) -> arc4.UInt64:
         """Return the option index a voter chose (reverts if not voted)."""
         vote_box_key = b"v:" + poll_id.bytes + voter.bytes
-        from algopy import op
         vote_bytes, exists = op.Box.get(vote_box_key)
         assert exists, "voter has not voted on this poll"
         record = VoteRecord.from_bytes(vote_bytes)
@@ -204,6 +202,62 @@ class BallotBox(ARC4Contract):
     def get_factory_app_id(self) -> arc4.UInt64:
         """Return the linked PollFactory application ID."""
         return arc4.UInt64(self.factory_app_id)
+
+    @arc4.abimethod
+    def delete_vote_box(self, poll_id: arc4.UInt64, voter: arc4.Address) -> None:
+        """
+        Delete one vote box for an expired poll, recycling 22 500 µALGO MBR
+        back into the BallotBox app account balance.
+
+        Anyone may call this after the poll has expired. The recovered MBR
+        stays in the app account and is automatically available to cover
+        future vote-box creation costs, making the system self-sustaining.
+
+        Args:
+            poll_id : ID of an expired poll (must have been initialised).
+            voter   : Address whose vote box will be deleted.
+
+        Reverts if:
+          - Poll has not been initialised
+          - Poll has not yet expired
+          - Vote box does not exist for this voter / poll pair
+        """
+        assert poll_id in self.poll_meta, "poll not initialised"
+        meta = self.poll_meta[poll_id].copy()
+        assert meta.expires_at.native <= Global.latest_timestamp, "poll has not expired"
+
+        vote_box_key = b"v:" + poll_id.bytes + voter.bytes
+        existed = op.Box.delete(vote_box_key)
+        assert existed, "vote box does not exist"
+
+        log(b"AL0:BALLOT:DELETE_VOTE_BOX")
+
+    @arc4.abimethod
+    def delete_poll_boxes(self, poll_id: arc4.UInt64) -> None:
+        """
+        Delete the meta and tally boxes for an expired poll, recycling
+        their combined ~45 000 µALGO MBR back into the app account.
+
+        Call this after all vote boxes for the poll have been deleted via
+        delete_vote_box. The two boxes are always deleted together to keep
+        on-chain state consistent (no orphaned tally without a meta or
+        vice versa).
+
+        Args:
+            poll_id : ID of an expired poll whose vote boxes have been cleared.
+
+        Reverts if:
+          - Poll has not been initialised
+          - Poll has not yet expired
+        """
+        assert poll_id in self.poll_meta, "poll not initialised"
+        meta = self.poll_meta[poll_id].copy()
+        assert meta.expires_at.native <= Global.latest_timestamp, "poll has not expired"
+
+        del self.poll_meta[poll_id]
+        del self.tallies[poll_id]
+
+        log(b"AL0:BALLOT:DELETE_POLL_BOXES")
 
     @subroutine
     def _increment_tally(self, poll_id: arc4.UInt64, option_index: UInt64) -> None:

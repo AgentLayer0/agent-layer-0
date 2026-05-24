@@ -4,6 +4,8 @@ import { waitlistTable } from "@workspace/db/schema";
 import { desc } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import { timingSafeEqual } from "node:crypto";
+import { BallotBoxClient, getDeployedAppIds } from "@workspace/al0-contracts";
+import { getAlgodClient, makeRelayAddress, makeRelaySigner } from "../lib/relay-wallet";
 
 const router: IRouter = Router();
 
@@ -207,6 +209,105 @@ router.get("/admin/waitlist.csv", requireAdmin, async (req, res) => {
     req.log.error(err, "Failed to export waitlist CSV");
     res.status(500).send("Failed to export waitlist.");
   }
+});
+
+/**
+ * POST /api/admin/cleanup
+ *
+ * Recycle on-chain MBR from expired polls back into the BallotBox app account.
+ *
+ * Body: { poll_id: number }
+ *
+ * Flow:
+ *   1. List all vote boxes for the poll via algod box list (no indexer needed)
+ *   2. Delete each vote box  → recovers 22 500 µALGO per vote
+ *   3. Delete meta + tally boxes → recovers ~45 000 µALGO total
+ *
+ * The recovered ALGO stays in the BallotBox app account as surplus MBR,
+ * reducing future relay-wallet top-ups for subsequent polls.
+ *
+ * Returns 200 on full success, 207 if any individual deletion failed.
+ */
+router.post("/admin/cleanup", requireAdmin, async (req: Request, res: Response): Promise<void> => {
+  const { poll_id } = req.body as { poll_id?: unknown };
+
+  if (typeof poll_id !== "number" || !Number.isInteger(poll_id) || poll_id < 0) {
+    res.status(400).json({ error: "poll_id is required and must be a non-negative integer" });
+    return;
+  }
+
+  const appIds = getDeployedAppIds();
+  if (!appIds.ballotBoxAppId) {
+    res.status(503).json({ error: "BallotBox contract is not deployed" });
+    return;
+  }
+
+  const algod  = getAlgodClient();
+  const sender = makeRelayAddress();
+  const signer = makeRelaySigner();
+  const ballot = new BallotBoxClient(appIds.ballotBoxAppId, algod);
+
+  // Step 1: discover voters for this poll from on-chain box names
+  let voters: string[];
+  try {
+    voters = await ballot.getVotersForPoll(poll_id);
+  } catch (err) {
+    req.log.error({ err, poll_id }, "cleanup: failed to list vote boxes");
+    res.status(502).json({ error: "Failed to list vote boxes from Algorand node" });
+    return;
+  }
+
+  req.log.info({ poll_id, voterCount: voters.length }, "cleanup: starting MBR recycling");
+
+  // Step 2: delete each individual vote box
+  const deleted: string[] = [];
+  const failed: Array<{ voter: string; error: string }> = [];
+  const sp = await algod.getTransactionParams().do();
+
+  for (const voter of voters) {
+    try {
+      await ballot.deleteVoteBox(sender, signer, { poll_id, voter }, sp);
+      deleted.push(voter);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      req.log.warn({ poll_id, voter, err: msg }, "cleanup: deleteVoteBox failed");
+      failed.push({ voter, error: msg });
+    }
+  }
+
+  // Step 3: delete meta + tally boxes (only if all vote boxes were removed)
+  let pollBoxesTxId: string | null = null;
+  let pollBoxesError: string | null = null;
+
+  if (failed.length === 0) {
+    try {
+      const freshSp = await algod.getTransactionParams().do();
+      ({ txId: pollBoxesTxId } = await ballot.deletePollBoxes(sender, signer, { poll_id }, freshSp));
+      req.log.info({ poll_id, txId: pollBoxesTxId }, "cleanup: poll meta+tally boxes deleted");
+    } catch (err) {
+      pollBoxesError = err instanceof Error ? err.message : String(err);
+      req.log.error({ poll_id, err: pollBoxesError }, "cleanup: deletePollBoxes failed");
+    }
+  } else {
+    pollBoxesError = `Skipped — ${failed.length} vote box deletion(s) failed`;
+  }
+
+  // 22 500 µALGO per vote box + 12 900 (meta) + 32 100 (tally) if poll boxes deleted
+  const mbrRecoveredMicroAlgo =
+    deleted.length * 22_500 + (pollBoxesTxId ? 12_900 + 32_100 : 0);
+
+  const status = pollBoxesTxId ? 200 : 207;
+  res.status(status).json({
+    poll_id,
+    voters_found:           voters.length,
+    vote_boxes_deleted:     deleted.length,
+    vote_boxes_failed:      failed,
+    poll_boxes_deleted:     pollBoxesTxId !== null,
+    poll_boxes_tx:          pollBoxesTxId,
+    poll_boxes_error:       pollBoxesError,
+    mbr_recovered_micro_algo: mbrRecoveredMicroAlgo,
+    mbr_recovered_algo:       mbrRecoveredMicroAlgo / 1_000_000,
+  });
 });
 
 export default router;

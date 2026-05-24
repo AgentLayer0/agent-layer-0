@@ -18,6 +18,7 @@ import {
   refsRegisterSwarm,
   refsSwarmLookup,
 } from "./boxes.js";
+import { computeSwarmBoxMbr, mbrTopUp } from "./utils.js";
 
 // ─── Method definitions (from ARC-32 ABI) ────────────────────────────────────
 
@@ -85,13 +86,27 @@ export class AgentRegistryClient {
   ): Promise<{ appId: bigint; txId: string }> {
     const suggestedParams = sp ?? (await this.algod.getTransactionParams().do());
     const atc = new algosdk.AtomicTransactionComposer();
+
+    // Fund the AgentRegistry app account with the MBR it needs to store the
+    // new swarm box.  This is a one-time payment per swarm; if the app already
+    // has surplus balance the helper returns null and nothing is prepended.
+    const topUp = await mbrTopUp(
+      this.algod, this.appId, computeSwarmBoxMbr(args.swarm_id),
+      sender, suggestedParams, signer,
+    );
+    if (topUp) atc.addTransaction(topUp);
+
     atc.addMethodCall({
       appID: this.appId,
       method: M.register_swarm,
       methodArgs: [args.swarm_id],
       sender,
       signer,
-      suggestedParams,
+      suggestedParams: {
+        ...suggestedParams,
+        fee: BigInt(suggestedParams.minFee) * 2n,
+        flatFee: true,
+      },
       boxes: refsRegisterSwarm(args.swarm_id),
     });
     const result = await atc.execute(this.algod, 4);

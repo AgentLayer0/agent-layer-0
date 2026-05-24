@@ -1,7 +1,7 @@
 {
   "network": "testnet",
-  "agentRegistryAppId": 763222447,
-  "pollFactoryAppId": 763222454,
-  "ballotBoxAppId": 763222455,
-  "deployedAt": "2026-05-24T12:15:23.173Z"
+  "agentRegistryAppId": 763237008,
+  "pollFactoryAppId": 763237015,
+  "ballotBoxAppId": 763237016,
+  "deployedAt": "2026-05-24T16:52:54.452Z"
 }

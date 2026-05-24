@@ -19,6 +19,22 @@ export const BOX_MBR = {
 } as const;
 
 /**
+ * Compute the MBR for an AgentRegistry swarm box.
+ *
+ * Box key:  "s:" (2) + arc4_string(swarm_id) = 2 + 2 + len(swarm_id)
+ * Box value: SwarmRecord = owner(Address=32) + registered_at(UInt64=8) = 40 bytes
+ *
+ * Formula: 2500 + 400 * (key_bytes + value_bytes)
+ * A 5 000 µALGO safety buffer is added.
+ */
+export function computeSwarmBoxMbr(swarmId: string): bigint {
+  const enc = new TextEncoder();
+  const keyBytes   = 2 + 2 + enc.encode(swarmId).length; // "s:" + arc4 length prefix + utf8
+  const valueBytes = 40; // owner(32) + registered_at(8)
+  return 2500n + 400n * BigInt(keyBytes + valueBytes) + 5000n;
+}
+
+/**
  * Compute the MBR (minimum balance requirement) for a PollFactory poll box.
  *
  * The poll box value size depends on the actual string content:

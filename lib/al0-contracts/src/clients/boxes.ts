@@ -238,3 +238,61 @@ export function refsVoteLookup(
 ): BoxRef[] {
   return [self(voteBoxKey(pollId, voter))];
 }
+
+/**
+ * Box refs for BallotBox.delete_vote_box.
+ *
+ * Includes:
+ *   - poll_meta box (read — expiry check)
+ *   - vote box for the specified voter (deleted — MBR recovered)
+ */
+export function refsDeleteVoteBox(
+  pollId: bigint | number,
+  voter: string
+): BoxRef[] {
+  return [
+    self(pollMetaBoxKey(pollId)),
+    self(voteBoxKey(pollId, voter)),
+  ];
+}
+
+/**
+ * Box refs for BallotBox.delete_poll_boxes.
+ *
+ * Includes:
+ *   - poll_meta box (deleted — MBR recovered)
+ *   - tally box (deleted — MBR recovered)
+ */
+export function refsDeletePollBoxes(pollId: bigint | number): BoxRef[] {
+  return [
+    self(pollMetaBoxKey(pollId)),
+    self(tallyBoxKey(pollId)),
+  ];
+}
+
+/**
+ * Decode voter addresses from BallotBox box names.
+ *
+ * Given the full list of box names for a BallotBox app, filters for vote
+ * boxes belonging to a specific poll and extracts the voter Algorand address.
+ *
+ * Vote box key layout: b"v:" (2 bytes) + arc4_uint64(poll_id) (8 bytes) + voter_pk (32 bytes)
+ */
+export function decodeVotersFromBoxNames(
+  boxNames: Uint8Array[],
+  pollId: bigint | number
+): string[] {
+  const prefix = concat(encoder.encode("v:"), arc4UInt64(pollId));
+  const voters: string[] = [];
+  for (const name of boxNames) {
+    if (name.length !== prefix.length + 32) continue;
+    let match = true;
+    for (let i = 0; i < prefix.length; i++) {
+      if (name[i] !== prefix[i]) { match = false; break; }
+    }
+    if (!match) continue;
+    const pk = name.slice(prefix.length); // 32-byte public key
+    voters.push(algosdk.encodeAddress(pk));
+  }
+  return voters;
+}
