@@ -16,3 +16,4 @@ export type {
   CreatePollInput,
   VoteInput,
 } from "./validate.js";
+export { serialize } from "./serialize.js";
