@@ -23,3 +23,9 @@ id = "JNcrdlv9Qso03kPmkBXOJ"
 uri = "file://artifacts/agent-layer-0/public/og-image.png"
 type = "image"
 title = "Agent Layer 0 — OG Social Preview"
+
+[[outputs]]
+id = "awnS9URThqUug-tP3yzSl"
+uri = "file://lib/al0-sdk/README.md"
+type = "text"
+title = "@agentlayer0/sdk README"
