@@ -45,8 +45,8 @@ function CodeBlock({
   }
 
   return (
-    <div className="rounded-xl overflow-hidden border border-white/10 bg-[#0D1117] shadow-[0_0_32px_-12px_rgba(232,84,28,0.2)]">
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-[#161B22]">
+    <div className="rounded-xl border border-white/10 bg-[#0D1117] shadow-[0_0_32px_-12px_rgba(232,84,28,0.2)]">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-[#161B22] rounded-t-xl">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F57]" />
@@ -67,17 +67,19 @@ function CodeBlock({
           )}
         </button>
       </div>
-      <pre className="px-5 py-4 text-sm font-mono leading-relaxed overflow-x-auto">
-        {lines ? lines.map((tokens, i) => (
-          <div key={i} className="min-h-[1.4em]">
-            {tokens.map((tok, j) => (
-              <span key={j} style={{ color: tokenColor(tok.type) }}>{tok.text}</span>
-            ))}
-          </div>
-        )) : (
-          <span style={{ color: "#CDD3DE" }}>{plain}</span>
-        )}
-      </pre>
+      <div className="overflow-x-auto rounded-b-xl">
+        <pre className="px-5 py-4 text-sm font-mono leading-relaxed min-w-max">
+          {lines ? lines.map((tokens, i) => (
+            <div key={i} className="min-h-[1.4em]">
+              {tokens.map((tok, j) => (
+                <span key={j} style={{ color: tokenColor(tok.type) }}>{tok.text}</span>
+              ))}
+            </div>
+          )) : (
+            <span style={{ color: "#CDD3DE" }}>{plain}</span>
+          )}
+        </pre>
+      </div>
     </div>
   );
 }
@@ -127,7 +129,7 @@ function Step({
   last?: boolean;
 }) {
   return (
-    <div className="flex gap-6">
+    <div className="flex gap-3 sm:gap-6">
       {/* Left rail */}
       <div className="flex flex-col items-center shrink-0">
         <div
@@ -140,11 +142,11 @@ function Step({
       </div>
 
       {/* Content */}
-      <div className="flex-1 pb-12">
-        <div className="flex items-center gap-3 mb-1">
+      <div className="flex-1 min-w-0 pb-12">
+        <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1.5 mb-1">
           <h2 className="text-xl font-bold tracking-tight text-white">{title}</h2>
           {tag && (
-            <span className="text-xs font-mono text-[#E8541C]/70 border border-[#E8541C]/25 bg-[#E8541C]/8 px-2 py-0.5 rounded">
+            <span className="text-xs font-mono text-[#E8541C]/70 border border-[#E8541C]/25 bg-[#E8541C]/8 px-2 py-0.5 rounded whitespace-nowrap">
               {tag}
             </span>
           )}
@@ -207,7 +209,7 @@ export default function StepsPage() {
   const openSignup = useCallback(() => setSignupOpen(true), []);
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 selection:text-primary">
       {signupOpen && <SignupModal onClose={() => setSignupOpen(false)} />}
 
       {/* ── Nav ──────────────────────────────────────────── */}
@@ -335,7 +337,7 @@ export default function StepsPage() {
 
           <div className="rounded-lg border border-white/8 bg-white/3 px-4 py-3 space-y-1">
             <p className="text-xs font-mono text-white/40 uppercase tracking-widest mb-2">Quota usage</p>
-            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-xs font-mono text-white/50">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1 text-xs font-mono text-white/50">
               {[
                 ["registerAgent()", "1 tx"],
                 ["createPoll()", "2 tx"],
@@ -344,7 +346,7 @@ export default function StepsPage() {
               ].map(([method, cost]) => (
                 <div key={method} className="flex justify-between gap-2">
                   <span className="text-white/60">{method}</span>
-                  <span className="text-[#E8541C]/70">{cost}</span>
+                  <span className="text-[#E8541C]/70 shrink-0">{cost}</span>
                 </div>
               ))}
             </div>

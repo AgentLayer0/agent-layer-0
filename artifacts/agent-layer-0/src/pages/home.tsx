@@ -201,8 +201,8 @@ function TokenCodeBlock({
   }
 
   return (
-    <div className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0D1117] shadow-[0_0_40px_-10px_rgba(232,84,28,0.25)]">
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-[#161B22]">
+    <div className="relative rounded-xl border border-white/10 bg-[#0D1117] shadow-[0_0_40px_-10px_rgba(232,84,28,0.25)]">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/8 bg-[#161B22] rounded-t-xl">
         <div className="flex items-center gap-2">
           <div className="flex gap-1.5">
             <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
@@ -223,15 +223,17 @@ function TokenCodeBlock({
           )}
         </button>
       </div>
-      <pre className="px-5 py-4 text-sm font-mono leading-relaxed overflow-x-auto">
-        {lines.map((tokens, i) => (
-          <div key={i} className="min-h-[1.4em]">
-            {tokens.map((tok, j) => (
-              <span key={j} style={{ color: tokenColor(tok.type) }}>{tok.text}</span>
-            ))}
-          </div>
-        ))}
-      </pre>
+      <div className="overflow-x-auto rounded-b-xl">
+        <pre className="px-5 py-4 text-sm font-mono leading-relaxed min-w-max">
+          {lines.map((tokens, i) => (
+            <div key={i} className="min-h-[1.4em]">
+              {tokens.map((tok, j) => (
+                <span key={j} style={{ color: tokenColor(tok.type) }}>{tok.text}</span>
+              ))}
+            </div>
+          ))}
+        </pre>
+      </div>
     </div>
   );
 }
@@ -623,7 +625,7 @@ export default function Home() {
   const shouldReduce = useReducedMotion();
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground font-sans overflow-x-hidden selection:bg-primary/30 selection:text-primary">
+    <div className="relative min-h-screen bg-background text-foreground font-sans selection:bg-primary/30 selection:text-primary">
       <CircuitBackground />
       <MeteorCanvas />
 
@@ -651,7 +653,7 @@ export default function Home() {
       </nav>
 
       {/* ── Hero ─────────────────────────────────────────── */}
-      <section className="relative z-10 max-w-3xl mx-auto px-6 pt-12 pb-16">
+      <section className="relative z-10 max-w-3xl mx-auto px-6 pt-12 pb-16 overflow-x-hidden">
         <HeroTitle key={heroKey} />
 
         <motion.div
