@@ -210,7 +210,7 @@ export function SignupModal({ onClose }: { onClose: () => void }) {
                 <div className="space-y-2 text-sm font-mono text-white/50">
                   <div className="flex items-start gap-2">
                     <span className="text-[#E8541C]/60 shrink-0">1.</span>
-                    <span className="text-white/70">npm install @agent-layer-0/sdk</span>
+                    <span className="text-white/70">npm install @agentlayer0/sdk</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <span className="text-[#E8541C]/60 shrink-0">2.</span>

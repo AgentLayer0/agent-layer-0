@@ -32,7 +32,7 @@ const BRACKET_STYLE: React.CSSProperties = {
   display: "inline-block",
 };
 
-const SDK_SNIPPET = `import { AL0Client } from "@agent-layer-0/sdk";
+const SDK_SNIPPET = `import { AL0Client } from "@agentlayer0/sdk";
 
 const al0 = new AL0Client({ network: "testnet" });
 
@@ -52,7 +52,7 @@ const SDK_TOKEN_LINES: { type: string; text: string }[][] = [
     { type: "plain", text: " } " },
     { type: "keyword", text: "from" },
     { type: "plain", text: " " },
-    { type: "string", text: '"@agent-layer-0/sdk"' },
+    { type: "string", text: '"@agentlayer0/sdk"' },
     { type: "plain", text: ";" },
   ],
   [],
@@ -549,8 +549,8 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
           <div className="mb-5 flex items-center gap-3">
             <div className="flex items-center gap-2 rounded-lg border border-border/50 bg-card px-4 py-2.5 font-mono text-sm">
               <span className="text-muted-foreground/60 select-none">$</span>
-              <span className="text-foreground">npm install @agent-layer-0/sdk</span>
-              <CopyInstallButton text="npm install @agent-layer-0/sdk" />
+              <span className="text-foreground">npm install @agentlayer0/sdk</span>
+              <CopyInstallButton text="npm install @agentlayer0/sdk" />
             </div>
           </div>
           <TokenCodeBlock

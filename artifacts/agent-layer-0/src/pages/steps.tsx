@@ -158,7 +158,7 @@ function Step({
 // ── Code snippets ─────────────────────────────────────────────────────────────
 
 const INIT_LINES: Token[][] = [
-  [{ type: "keyword", text: "import" }, { type: "plain", text: " { " }, { type: "class", text: "AL0Client" }, { type: "plain", text: " } " }, { type: "keyword", text: "from" }, { type: "plain", text: " " }, { type: "string", text: '"@agent-layer-0/sdk"' }, { type: "plain", text: ";" }],
+  [{ type: "keyword", text: "import" }, { type: "plain", text: " { " }, { type: "class", text: "AL0Client" }, { type: "plain", text: " } " }, { type: "keyword", text: "from" }, { type: "plain", text: " " }, { type: "string", text: '"@agentlayer0/sdk"' }, { type: "plain", text: ";" }],
   [],
   [{ type: "comment", text: "// API key mode — the relay wallet signs Algorand txs for you." }],
   [{ type: "comment", text: "// No Algorand wallet or ALGO balance required." }],
@@ -286,7 +286,7 @@ export default function StepsPage() {
           <p className="text-muted-foreground text-sm leading-relaxed max-w-lg">
             The SDK works in any Node.js environment — server, edge worker, or AI agent runtime.
           </p>
-          <ShellBlock command="npm install @agent-layer-0/sdk" />
+          <ShellBlock command="npm install @agentlayer0/sdk" />
           <p className="text-xs text-white/30 font-mono">
             TypeScript types are included. No separate <code>@types</code> package needed.
           </p>
