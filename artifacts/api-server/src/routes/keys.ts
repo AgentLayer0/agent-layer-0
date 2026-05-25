@@ -113,6 +113,35 @@ router.delete("/keys/:id", requireAdmin, async (req, res): Promise<void> => {
   res.json({ id: row.id, revokedAt: row.revokedAt });
 });
 
+router.post("/keys/me/rekey", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
+  const old = req.apiKeyRecord!;
+  const rawKey = generateRawKey();
+  const hashedKey = await bcrypt.hash(rawKey, 12);
+
+  const thirtyDaysFromNow = new Date();
+  thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
+
+  await db.update(apiKeysTable).set({ revokedAt: new Date() }).where(eq(apiKeysTable.id, old.id));
+
+  const [record] = await db
+    .insert(apiKeysTable)
+    .values({
+      hashedKey,
+      swarmOwnerEmail: old.swarmOwnerEmail,
+      name: old.name,
+      plan: old.plan,
+      stripeCustomerId: old.stripeCustomerId,
+      periodResetAt: thirtyDaysFromNow,
+    })
+    .returning();
+
+  req.log.info({ oldId: old.id, newId: record!.id }, "API key rotated");
+  res.json({
+    key: rawKey,
+    warning: "Store this key securely — it will not be shown again. Your old key is now revoked.",
+  });
+});
+
 router.delete("/keys/me", requireApiKey, async (req: AuthenticatedRequest, res): Promise<void> => {
   const id = req.apiKeyRecord!.id;
   const [row] = await db

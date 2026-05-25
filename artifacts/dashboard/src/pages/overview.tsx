@@ -13,8 +13,19 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { format } from "date-fns";
-import { Activity, Database, Server, Zap, CreditCard, TrendingUp } from "lucide-react";
+import { Activity, Database, Server, Zap, CreditCard, TrendingUp, RefreshCw, Copy, Check } from "lucide-react";
 
 const PLAN_QUOTAS: Record<string, number> = {
   free: 500,
@@ -81,6 +92,9 @@ export default function OverviewPage() {
   const [showPlans, setShowPlans] = useState(false);
   const [checkoutLoading, setCheckoutLoading] = useState<string | null>(null);
   const [portalLoading, setPortalLoading] = useState(false);
+  const [rekeyLoading, setRekeyLoading] = useState(false);
+  const [newKey, setNewKey] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   const { data: context } = useUserContext();
   const { data: stats, isLoading: statsLoading, isError, error } = useUsageStats();
@@ -150,6 +164,30 @@ export default function OverviewPage() {
     } finally {
       setPortalLoading(false);
     }
+  }
+
+  async function handleRekey() {
+    setRekeyLoading(true);
+    setNewKey(null);
+    try {
+      const res = await fetch(`${API_BASE}/keys/me/rekey`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${getApiKey()}` },
+      });
+      const data = await res.json() as { key?: string; error?: string };
+      if (!res.ok || !data.key) throw new Error(data.error ?? "Rekey failed");
+      localStorage.setItem("al0_api_key", data.key);
+      setNewKey(data.key);
+    } finally {
+      setRekeyLoading(false);
+    }
+  }
+
+  function handleCopy() {
+    if (!newKey) return;
+    navigator.clipboard.writeText(newKey);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   }
 
   if (isError) {
@@ -385,6 +423,64 @@ export default function OverviewPage() {
                     </div>
                   </div>
                 )}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="mt-8">
+        <h2 className="text-lg font-bold font-mono text-foreground mb-4">
+          API.KEY
+        </h2>
+        <Card className="bg-card border-card-border">
+          <CardContent className="p-6">
+            {newKey ? (
+              <div className="space-y-3">
+                <p className="text-xs font-mono text-primary uppercase tracking-wider">New key issued — save it now</p>
+                <p className="text-xs text-muted-foreground">Your old key has been revoked. This is the only time your new key will be shown.</p>
+                <div className="flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/5 px-4 py-3 font-mono text-sm">
+                  <span className="flex-1 text-foreground break-all" data-testid="new-api-key">{newKey}</span>
+                  <button onClick={handleCopy} className="shrink-0 text-muted-foreground hover:text-foreground transition-colors">
+                    {copied ? <Check className="h-4 w-4 text-primary" /> : <Copy className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="flex items-center justify-between gap-4 flex-wrap">
+                <div>
+                  <p className="text-sm font-medium text-foreground">Rotate API Key</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">Issues a new key and immediately revokes the current one.</p>
+                </div>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <Button size="sm" variant="outline" data-testid="button-rekey">
+                      <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+                      Rotate Key
+                    </Button>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent>
+                    <AlertDialogHeader>
+                      <AlertDialogTitle className="font-mono">Rotate API Key?</AlertDialogTitle>
+                      <AlertDialogDescription>
+                        This will <strong>immediately revoke</strong> your current key and issue a new one.
+                        Any integration using your current key will stop working until you update it.
+                        The new key will be shown once — store it securely.
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogAction
+                        onClick={handleRekey}
+                        disabled={rekeyLoading}
+                        className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+                        data-testid="button-rekey-confirm"
+                      >
+                        {rekeyLoading ? "Rotating..." : "Yes, Rotate Key"}
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
               </div>
             )}
           </CardContent>
