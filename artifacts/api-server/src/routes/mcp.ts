@@ -147,7 +147,13 @@ function createMcpServer(apiKey: string): Server {
       if (name === "al0_register_swarm") {
         result = await localPost("/api/relay/register", args, apiKey);
       } else if (name === "al0_create_poll") {
-        result = await localPost("/api/relay/poll", args, apiKey);
+        const raw = await localPost("/api/relay/poll", args, apiKey) as Record<string, unknown>;
+        // Normalize pollId (camelCase string) → poll_id (integer) so the LLM
+        // can immediately use the value in a subsequent al0_cast_vote call.
+        result = {
+          ...raw,
+          poll_id: typeof raw["pollId"] !== "undefined" ? Number(raw["pollId"]) : undefined,
+        };
       } else if (name === "al0_cast_vote") {
         result = await localPost("/api/relay/vote", args, apiKey);
       } else if (name === "al0_list_polls") {

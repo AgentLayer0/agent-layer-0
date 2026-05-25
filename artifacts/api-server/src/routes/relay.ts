@@ -116,6 +116,10 @@ router.post(
       res.status(400).json({ error: "expires_at must be a positive unix timestamp (seconds)" });
       return;
     }
+    if (expires_at <= Math.floor(Date.now() / 1000)) {
+      res.status(400).json({ error: "expires_at must be in the future" });
+      return;
+    }
 
     const apiKeyId = req.apiKeyRecord!.id;
 
@@ -220,11 +224,20 @@ router.post(
 
     const pollClient = new PollFactoryClient(appIds.pollFactoryAppId, algod);
     let authoritativeSwarmId: string;
+    let pollOptionCount: number;
     try {
       const pollRecord = await pollClient.getPoll({ poll_id });
       authoritativeSwarmId = pollRecord.swarm_id;
+      pollOptionCount = Number(pollRecord.option_count);
     } catch {
       res.status(404).json({ error: "poll_id not found on-chain" });
+      return;
+    }
+
+    if (option_index >= pollOptionCount) {
+      res.status(400).json({
+        error: `option_index ${option_index} is out of range — poll has ${pollOptionCount} option(s) (0–${pollOptionCount - 1})`,
+      });
       return;
     }
 
@@ -250,6 +263,21 @@ router.post(
     await ensureSwarmFunded(swarmWallet.address);
 
     const ballotClient = new BallotBoxClient(appIds.ballotBoxAppId, algod);
+
+    // Pre-check: avoid sending a doomed transaction if swarm already voted.
+    try {
+      const alreadyVoted = await ballotClient.hasVoted({
+        poll_id,
+        voter: swarmWallet.address,
+      });
+      if (alreadyVoted) {
+        res.status(409).json({ error: "This swarm has already voted on poll " + poll_id });
+        return;
+      }
+    } catch {
+      // hasVoted check failing is non-fatal — fall through and let castVote surface the error
+    }
+
     let txId: string;
     try {
       ({ txId } = await ballotClient.castVote(
@@ -264,8 +292,6 @@ router.post(
         res.status(503).json({
           error: "Swarm wallet has insufficient ALGO balance. Swarm: " + authoritativeSwarmId,
         });
-      } else if (msg.includes("has already voted") || msg.includes("box already exists")) {
-        res.status(409).json({ error: "This swarm has already voted on poll " + poll_id });
       } else {
         req.log.error({ err, poll_id, swarmAddress: swarmWallet.address }, "relay/vote Algorand error");
         res.status(502).json({ error: "Algorand transaction failed: " + msg });
