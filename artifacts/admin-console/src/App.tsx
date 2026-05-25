@@ -67,7 +67,7 @@ function OverviewTab({ creds }: { creds: string }) {
         <div className="text-xs font-mono text-[hsl(var(--muted-foreground))] mb-2 uppercase tracking-wider">Accounts</div>
         <div className="grid grid-cols-2 gap-3">
           <StatCard label="Active API Keys" value={db?.activeAccounts ?? "—"} sub={`${db?.totalAccounts ?? 0} total`} />
-          <StatCard label="Waitlist Signups" value={db?.waitlistSignups ?? "—"} />
+          <StatCard label="Swarm Wallets" value={db?.swarmWallets ?? "—"} />
         </div>
       </div>
 
