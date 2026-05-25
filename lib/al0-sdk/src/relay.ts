@@ -35,17 +35,17 @@ const RelayPollResultsSchema = z.object({
 });
 
 const RelayRegisterAgentResultSchema = z.object({
-  swarmId: z.string(),
-  registryAppId: bigintLike,
+  swarm_id: z.string(),
+  appId: z.union([z.string(), z.number()]).transform((v) => BigInt(v)),
 });
 
 const RelayCreatePollResultSchema = z.object({
-  pollId: bigintLike,
+  pollId: z.union([z.string(), z.number()]).transform((v) => BigInt(v)),
 });
 
 const RelayVoteResultSchema = z.object({
-  pollId: bigintLike,
-  optionIndex: z.number().int(),
+  poll_id: z.number(),
+  option_index: z.number(),
 });
 
 export interface RelayRegisterAgentParams {
@@ -123,33 +123,43 @@ export class RelayClient {
   async registerAgent(
     params: RelayRegisterAgentParams
   ): Promise<RegisterAgentResult> {
-    const raw = await this.request("POST", "/api/relay/registerAgent", params);
+    const raw = await this.request("POST", "/api/relay/register", {
+      swarm_id: params.swarmId,
+    });
     const parsed = RelayRegisterAgentResultSchema.safeParse(raw);
     if (!parsed.success) {
       throw new AL0Error("Invalid relay response for registerAgent", "RELAY_ERROR");
     }
-    return parsed.data;
+    return { swarmId: parsed.data.swarm_id, registryAppId: parsed.data.appId };
   }
 
   async createPoll(params: RelayCreatePollParams): Promise<CreatePollResult> {
-    const raw = await this.request("POST", "/api/relay/createPoll", params);
+    const raw = await this.request("POST", "/api/relay/poll", {
+      swarm_id: params.swarmId,
+      question: params.question,
+      options: params.options,
+      expires_at: params.expiresAt,
+    });
     const parsed = RelayCreatePollResultSchema.safeParse(raw);
     if (!parsed.success) {
       throw new AL0Error("Invalid relay response for createPoll", "RELAY_ERROR");
     }
-    return parsed.data;
+    return { pollId: parsed.data.pollId };
   }
 
   async vote(params: RelayVoteParams): Promise<VoteResult> {
     const raw = await this.request("POST", "/api/relay/vote", {
-      pollId: String(params.pollId),
-      optionIndex: params.optionIndex,
+      poll_id: Number(params.pollId),
+      option_index: params.optionIndex,
     });
     const parsed = RelayVoteResultSchema.safeParse(raw);
     if (!parsed.success) {
       throw new AL0Error("Invalid relay response for vote", "RELAY_ERROR");
     }
-    return parsed.data;
+    return {
+      pollId: BigInt(parsed.data.poll_id),
+      optionIndex: parsed.data.option_index,
+    };
   }
 
   async getPoll(pollId: bigint | number): Promise<Poll> {

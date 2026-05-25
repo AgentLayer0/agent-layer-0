@@ -292,6 +292,133 @@ router.post(
   },
 );
 
+router.get(
+  "/relay/polls",
+  requireApiKey,
+  async (req: AuthenticatedRequest, res): Promise<void> => {
+    const appIds = getDeployedAppIds();
+    if (!appIds.pollFactoryAppId || !appIds.ballotBoxAppId) {
+      res.status(503).json({ error: "Contracts not deployed" });
+      return;
+    }
+    const algod = getAlgodClient();
+    const pollClient = new PollFactoryClient(appIds.pollFactoryAppId, algod);
+    try {
+      const nextId = await pollClient.getNextPollId();
+      if (nextId === 0n) { res.json([]); return; }
+      const ids = Array.from({ length: Number(nextId) }, (_, i) => i);
+      const polls = await Promise.all(
+        ids.map(async (id) => {
+          const [record, isActive] = await Promise.all([
+            pollClient.getPoll({ poll_id: id }),
+            pollClient.isActive({ poll_id: id }),
+          ]);
+          const count = Number(record.option_count);
+          const opts = [record.option_0, record.option_1, record.option_2, record.option_3,
+            record.option_4, record.option_5, record.option_6, record.option_7].slice(0, count);
+          return {
+            id,
+            question: record.question,
+            swarmId: record.swarm_id,
+            creator: record.creator,
+            options: opts,
+            optionCount: count,
+            createdAt: Number(record.created_at),
+            expiresAt: Number(record.expires_at),
+            isActive,
+          };
+        })
+      );
+      res.json(polls);
+    } catch (err) {
+      req.log.error({ err }, "relay/polls list error");
+      res.status(502).json({ error: "Failed to fetch polls from chain" });
+    }
+  },
+);
+
+router.get(
+  "/relay/polls/:id",
+  requireApiKey,
+  async (req: AuthenticatedRequest, res): Promise<void> => {
+    const pollId = parseInt(req.params["id"] ?? "", 10);
+    if (isNaN(pollId) || pollId < 0) {
+      res.status(400).json({ error: "Invalid poll id" });
+      return;
+    }
+    const appIds = getDeployedAppIds();
+    if (!appIds.pollFactoryAppId) {
+      res.status(503).json({ error: "PollFactory not deployed" });
+      return;
+    }
+    const algod = getAlgodClient();
+    const pollClient = new PollFactoryClient(appIds.pollFactoryAppId, algod);
+    try {
+      const [record, isActive] = await Promise.all([
+        pollClient.getPoll({ poll_id: pollId }),
+        pollClient.isActive({ poll_id: pollId }),
+      ]);
+      const count = Number(record.option_count);
+      const opts = [record.option_0, record.option_1, record.option_2, record.option_3,
+        record.option_4, record.option_5, record.option_6, record.option_7].slice(0, count);
+      res.json({
+        id: pollId,
+        question: record.question,
+        swarmId: record.swarm_id,
+        creator: record.creator,
+        options: opts,
+        optionCount: count,
+        createdAt: Number(record.created_at),
+        expiresAt: Number(record.expires_at),
+        isActive,
+      });
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (msg.includes("does not exist") || msg.includes("not found")) {
+        res.status(404).json({ error: "Poll not found" });
+      } else {
+        req.log.error({ err, pollId }, "relay/polls/:id error");
+        res.status(502).json({ error: "Failed to fetch poll from chain" });
+      }
+    }
+  },
+);
+
+router.get(
+  "/relay/polls/:id/results",
+  requireApiKey,
+  async (req: AuthenticatedRequest, res): Promise<void> => {
+    const pollId = parseInt(req.params["id"] ?? "", 10);
+    if (isNaN(pollId) || pollId < 0) {
+      res.status(400).json({ error: "Invalid poll id" });
+      return;
+    }
+    const appIds = getDeployedAppIds();
+    if (!appIds.pollFactoryAppId || !appIds.ballotBoxAppId) {
+      res.status(503).json({ error: "Contracts not deployed" });
+      return;
+    }
+    const algod = getAlgodClient();
+    const pollClient = new PollFactoryClient(appIds.pollFactoryAppId, algod);
+    const ballotClient = new BallotBoxClient(appIds.ballotBoxAppId, algod);
+    try {
+      const [meta, tally] = await Promise.all([
+        pollClient.getPollMeta({ poll_id: pollId }),
+        ballotClient.getTally({ poll_id: pollId }),
+      ]);
+      const count = Number(meta.option_count);
+      const allTallies = [tally.tally_0, tally.tally_1, tally.tally_2, tally.tally_3,
+        tally.tally_4, tally.tally_5, tally.tally_6, tally.tally_7];
+      const tallies = allTallies.slice(0, count).map(Number);
+      const totalVotes = tallies.reduce((s, t) => s + t, 0);
+      res.json({ pollId, tallies, totalVotes });
+    } catch (err) {
+      req.log.error({ err, pollId }, "relay/polls/:id/results error");
+      res.status(502).json({ error: "Failed to fetch results from chain" });
+    }
+  },
+);
+
 router.get("/relay/wallet", requireAdmin, async (req, res): Promise<void> => {
   const mnemonic = process.env["RELAY_WALLET_MNEMONIC"];
   if (!mnemonic) {
