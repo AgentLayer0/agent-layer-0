@@ -1,6 +1,6 @@
 {
   "name": "@agentlayer0/sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "On-chain governance for AI agent swarms. Powered by Algorand.",
   "keywords": [
