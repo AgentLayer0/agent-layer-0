@@ -34,7 +34,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "build": "node build.mjs && tsc --build",
     "test": "vitest run",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run test && pnpm run build"
   },
   "publishConfig": {
     "access": "public"

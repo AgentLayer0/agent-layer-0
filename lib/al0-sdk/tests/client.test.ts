@@ -121,7 +121,7 @@ describe("AL0Client — mnemonic mode: registerAgent", () => {
   it("calls AgentRegistryClient.registerSwarm and returns result", async () => {
     makeMnemonicClient();
     const { registry } = await getContractMocks();
-    registry.registerSwarm.mockResolvedValue(1001n);
+    registry.registerSwarm.mockResolvedValue({ appId: 1001n });
 
     const client = makeMnemonicClient();
     const result = await client.registerAgent({ swarmId: "my-swarm" });
@@ -170,7 +170,7 @@ describe("AL0Client — mnemonic mode: createPoll", () => {
   it("calls factory.createPoll + ballot.initPoll and returns pollId", async () => {
     makeMnemonicClient();
     const { factory, ballot } = await getContractMocks();
-    factory.createPoll.mockResolvedValue(7n);
+    factory.createPoll.mockResolvedValue({ pollId: 7n });
     ballot.initPoll.mockResolvedValue(undefined);
 
     const client = makeMnemonicClient();
@@ -441,13 +441,13 @@ describe("AL0Client — apiKey mode: registerAgent", () => {
     vi.unstubAllGlobals();
   });
 
-  it("calls relay POST /api/relay/registerAgent and returns typed result", async () => {
-    mockFetchOk({ swarmId: "relay-swarm", registryAppId: "1001" });
+  it("calls relay POST /api/relay/register and returns typed result", async () => {
+    mockFetchOk({ swarm_id: "relay-swarm", appId: "1001" });
     const client = makeApiKeyClient();
     const result = await client.registerAgent({ swarmId: "relay-swarm" });
     expect(result).toEqual({ swarmId: "relay-swarm", registryAppId: 1001n });
     expect(vi.mocked(fetch)).toHaveBeenCalledWith(
-      "https://relay.example.com/api/relay/registerAgent",
+      "https://relay.example.com/api/relay/register",
       expect.objectContaining({ method: "POST" })
     );
   });
@@ -514,7 +514,7 @@ describe("AL0Client — apiKey mode: vote", () => {
   });
 
   it("calls relay POST /api/relay/vote and returns typed result", async () => {
-    mockFetchOk({ pollId: "5", optionIndex: 2 });
+    mockFetchOk({ poll_id: 5, option_index: 2 });
     const client = makeApiKeyClient();
     const result = await client.vote({ pollId: 5n, optionIndex: 2 });
     expect(result).toEqual({ pollId: 5n, optionIndex: 2 });
