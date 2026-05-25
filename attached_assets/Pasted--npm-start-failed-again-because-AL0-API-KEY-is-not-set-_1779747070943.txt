@@ -1,0 +1,75 @@
+ npm start failed again because AL0_API_KEY is not set in this shell.
+
+  It’s back to the earlier startup guard in index.js:8:
+
+  Error: Missing AL0_API_KEY. Set it in .env or your shell environment.
+
+  If you want to run it again right now in PowerShell, set the variable first:
+
+  $env:AL0_API_KEY="al0_sk_your_real_key_here"
+  npm start
+
+  If you want it to persist for this project, add it to .env:
+
+  AL0_API_KEY=al0_sk_your_real_key_here
+
+  You should also rotate the key you pasted earlier before reusing it.
+
+
+› give me the errors so i can input into my system.
+
+
+• Here are the exact errors from the runs, in order.
+
+  Error: Missing AL0_API_KEY. Set it in .env or your shell environment.
+      at Object.<anonymous> (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote code\index.js:8:9)
+
+  _AL0Error: apiKey must start with "al0_sk_". Obtain one from https://agentlayer0.io/dashboard
+      at new AL0Client (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote code\vendor\agentlayer0-
+  sdk\dist\index.cjs:1234:24)
+      at Object.<anonymous> (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote code\index.js:11:13)
+    code: 'INVALID_CONFIG'
+
+  _AL0Error: Network error reaching relay: fetch failed
+      at RelayClient.request (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote
+  code\vendor\agentlayer0-sdk\dist\index.cjs:1073:13)
+      at async RelayClient.registerAgent (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote
+  code\vendor\agentlayer0-sdk\dist\index.cjs:1100:17)
+      at async AL0Client.registerAgent (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote
+  code\vendor\agentlayer0-sdk\dist\index.cjs:1281:16)
+      at async main (C:\Users\coope\OneDrive\Documents\Blockchain Voting System\UrPost Post Generator\urvote code\index.js:16:17) {
+    code: 'NETWORK_ERROR',
+    cause: [TypeError: fetch failed] {
+      [cause]: Error: getaddrinfo ENOTFOUND api.agentlayer0.io
+          at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26) {
+        errno: -3008,
+        code: 'ENOTFOUND',
+        syscall: 'getaddrinfo',
+        hostname: 'api.agentlayer0.io'
+      }
+    }
+  }
+
+  If you want them in JSON shape for logging, use:
+
+  [
+    {
+      "type": "startup",
+      "message": "Missing AL0_API_KEY. Set it in .env or your shell environment.",
+      "file": "index.js",
+      "line": 8
+    },
+    {
+      "type": "config",
+      "message": "apiKey must start with \"al0_sk_\". Obtain one from https://agentlayer0.io/dashboard",
+      "code": "INVALID_CONFIG"
+    },
+    {
+      "type": "network",
+      "message": "Network error reaching relay: fetch failed",
+      "code": "NETWORK_ERROR",
+      "cause_code": "ENOTFOUND",
+      "hostname": "api.agentlayer0.io",
+      "syscall": "getaddrinfo"
+    }
+  ]

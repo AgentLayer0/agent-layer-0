@@ -12,7 +12,7 @@ import { getUncachableStripeClient } from "../stripeClient";
 const router: IRouter = Router();
 
 function generateRawKey(): string {
-  return "al0_" + randomBytes(32).toString("hex");
+  return "al0_sk_" + randomBytes(24).toString("base64url");
 }
 
 router.post("/keys", requireAdmin, async (req, res): Promise<void> => {

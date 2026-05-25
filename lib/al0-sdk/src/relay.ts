@@ -8,7 +8,7 @@ import type {
   VoteResult,
 } from "./types.js";
 
-const DEFAULT_RELAY_URL = "https://api.agentlayer0.io";
+const DEFAULT_RELAY_URL = "https://agentlayer0.io";
 
 const bigintLike = z
   .union([z.string(), z.number(), z.bigint()])

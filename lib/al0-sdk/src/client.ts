@@ -102,9 +102,9 @@ export class AL0Client {
 
   constructor(config: ClientConfig) {
     if (isApiKeyConfig(config)) {
-      if (!config.apiKey.startsWith("al0_sk_")) {
+      if (!config.apiKey.startsWith("al0_")) {
         throw AL0Error.invalidConfig(
-          'apiKey must start with "al0_sk_". Obtain one from https://agentlayer0.io/dashboard'
+          'apiKey must start with "al0_". Obtain one from https://agentlayer0.io'
         );
       }
       this.mode = "apiKey";
