@@ -367,7 +367,7 @@ router.get(
   "/relay/polls/:id",
   requireApiKey,
   async (req: AuthenticatedRequest, res): Promise<void> => {
-    const pollId = parseInt(req.params["id"] ?? "", 10);
+    const pollId = parseInt(String(req.params["id"] ?? ""), 10);
     if (isNaN(pollId) || pollId < 0) {
       res.status(400).json({ error: "Invalid poll id" });
       return;
@@ -414,7 +414,7 @@ router.get(
   "/relay/polls/:id/results",
   requireApiKey,
   async (req: AuthenticatedRequest, res): Promise<void> => {
-    const pollId = parseInt(req.params["id"] ?? "", 10);
+    const pollId = parseInt(String(req.params["id"] ?? ""), 10);
     if (isNaN(pollId) || pollId < 0) {
       res.status(400).json({ error: "Invalid poll id" });
       return;
