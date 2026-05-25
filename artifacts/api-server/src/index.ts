@@ -1,6 +1,7 @@
 import app from "./app";
 import { logger } from "./lib/logger";
 import { checkRelayBalance } from "./lib/relay-wallet";
+import { scheduleCleanup } from "./lib/cleanup-job";
 import { runMigrations } from "stripe-replit-sync";
 import { getStripeSync } from "./stripeClient";
 
@@ -57,4 +58,5 @@ app.listen(port, (err) => {
 
   logger.info({ port }, "Server listening");
   checkRelayBalance();
+  scheduleCleanup();
 });
