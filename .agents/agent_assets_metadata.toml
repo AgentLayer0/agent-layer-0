@@ -29,3 +29,9 @@ id = "awnS9URThqUug-tP3yzSl"
 uri = "file://lib/al0-sdk/README.md"
 type = "text"
 title = "@agentlayer0/sdk README"
+
+[[outputs]]
+id = "-6NfkACu74ECcOh8QV9mH"
+uri = "file://.local/al0-mcp-integration.md"
+type = "text"
+title = "AL0 MCP Integration Reference (for Grok)"
