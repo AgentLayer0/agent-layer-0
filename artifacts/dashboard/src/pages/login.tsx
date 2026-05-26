@@ -58,6 +58,7 @@ export default function LoginPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6 mt-12">
+          <input type="text" name="username" autoComplete="username" style={{ display: "none" }} aria-hidden="true" readOnly />
           <div className="space-y-2">
             <label className="text-xs font-mono text-muted-foreground uppercase tracking-wider" htmlFor="api-key">
               Operator Access Key
@@ -70,6 +71,7 @@ export default function LoginPage() {
               placeholder="••••••••••••••••"
               className="bg-input/50 border-border focus-visible:ring-primary font-mono text-center text-lg h-12"
               data-testid="input-api-key"
+              autoComplete="current-password"
               disabled={isLoading}
             />
           </div>

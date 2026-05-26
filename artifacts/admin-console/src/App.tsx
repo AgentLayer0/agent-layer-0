@@ -445,6 +445,7 @@ function LoginScreen({ onLogin }: { onLogin: (creds: string) => void }) {
               onChange={(e) => setEmail(e.target.value)}
               required
               autoFocus
+              autoComplete="username"
               className="w-full rounded border border-[hsl(var(--input))] bg-[hsl(var(--background))] px-3 py-2 text-sm font-mono text-[hsl(var(--foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors"
             />
           </div>
@@ -455,6 +456,7 @@ function LoginScreen({ onLogin }: { onLogin: (creds: string) => void }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              autoComplete="current-password"
               className="w-full rounded border border-[hsl(var(--input))] bg-[hsl(var(--background))] px-3 py-2 text-sm font-mono text-[hsl(var(--foreground))] outline-none focus:border-[hsl(var(--primary))] transition-colors"
             />
           </div>

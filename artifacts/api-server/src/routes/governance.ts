@@ -123,8 +123,14 @@ function decodeTallyRecord(valueB64: string, optionCount: number): number[] {
  *   swarm_id            (optional — filters polls to this swarm only)
  */
 router.get("/governance/polls", async (req, res): Promise<void> => {
-  const pollFactoryAppId = parseInt(String(req.query["poll_factory_app_id"] ?? ""), 10);
-  const ballotBoxAppId = parseInt(String(req.query["ballot_box_app_id"] ?? ""), 10);
+  const pollFactoryAppId = parseInt(
+    String(req.query["poll_factory_app_id"] ?? process.env["POLL_FACTORY_APP_ID"] ?? ""),
+    10,
+  );
+  const ballotBoxAppId = parseInt(
+    String(req.query["ballot_box_app_id"] ?? process.env["BALLOT_BOX_APP_ID"] ?? ""),
+    10,
+  );
   const swarmIdFilter = String(req.query["swarm_id"] ?? "").trim();
 
   if (isNaN(pollFactoryAppId) || pollFactoryAppId <= 0) {
@@ -231,9 +237,18 @@ function decodeRegistryBoxValue(buf: Buffer): { address: string; registeredAt: n
  *   participation_rate  Percent of total polls voted (0–100), or null
  */
 router.get("/governance/agents", async (req, res): Promise<void> => {
-  const registryAppId = parseInt(String(req.query["registry_app_id"] ?? ""), 10);
-  const ballotBoxAppId = parseInt(String(req.query["ballot_box_app_id"] ?? ""), 10);
-  const pollFactoryAppId = parseInt(String(req.query["poll_factory_app_id"] ?? ""), 10);
+  const registryAppId = parseInt(
+    String(req.query["registry_app_id"] ?? process.env["AGENT_REGISTRY_APP_ID"] ?? ""),
+    10,
+  );
+  const ballotBoxAppId = parseInt(
+    String(req.query["ballot_box_app_id"] ?? process.env["BALLOT_BOX_APP_ID"] ?? ""),
+    10,
+  );
+  const pollFactoryAppId = parseInt(
+    String(req.query["poll_factory_app_id"] ?? process.env["POLL_FACTORY_APP_ID"] ?? ""),
+    10,
+  );
   const swarmIdFilter = String(req.query["swarm_id"] ?? "").trim();
 
   if (isNaN(registryAppId) || registryAppId <= 0) {

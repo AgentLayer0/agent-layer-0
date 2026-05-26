@@ -252,10 +252,12 @@ export function createMcpServer(apiKey: string): Server {
 
         case "al0_get_agents": {
           const appIds = await getAppIds(apiKey);
-          const params = new URLSearchParams({
-            registry_app_id: String(appIds.agentRegistryAppId ?? 0),
-          });
-          return ok(await apiFetch(`/api/governance/agents?${params}`, apiKey));
+          const params = new URLSearchParams();
+          if (appIds.agentRegistryAppId) {
+            params.set("registry_app_id", String(appIds.agentRegistryAppId));
+          }
+          const qs = params.toString();
+          return ok(await apiFetch(`/api/governance/agents${qs ? `?${qs}` : ""}`, apiKey));
         }
 
         case "al0_get_usage": {

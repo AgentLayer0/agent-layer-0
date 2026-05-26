@@ -327,6 +327,7 @@ router.get(
       res.status(503).json({ error: "Contracts not deployed" });
       return;
     }
+    const swarmIdFilter = String(req.query["swarm_id"] ?? "").trim();
     const algod = getAlgodClient();
     const pollClient = new PollFactoryClient(appIds.pollFactoryAppId, algod);
     try {
@@ -355,7 +356,8 @@ router.get(
           };
         })
       );
-      res.json(polls);
+      const filtered = swarmIdFilter ? polls.filter((p) => p.swarmId === swarmIdFilter) : polls;
+      res.json(filtered);
     } catch (err) {
       req.log.error({ err }, "relay/polls list error");
       res.status(502).json({ error: "Failed to fetch polls from chain" });
