@@ -120,28 +120,30 @@ const MCP_TOKEN_LINES: { type: string; text: string }[][] = [
   ],
   [
     { type: "plain", text: "      " },
-    { type: "class", text: '"type"' },
+    { type: "class", text: '"command"' },
     { type: "plain", text: ": " },
-    { type: "string", text: '"http"' },
+    { type: "string", text: '"npx"' },
     { type: "plain", text: "," },
   ],
   [
     { type: "plain", text: "      " },
-    { type: "class", text: '"url"' },
-    { type: "plain", text: ": " },
-    { type: "string", text: '"https://agentlayer0.io/api/mcp"' },
-    { type: "plain", text: "," },
+    { type: "class", text: '"args"' },
+    { type: "plain", text: ": [" },
+    { type: "string", text: '"-y"' },
+    { type: "plain", text: ", " },
+    { type: "string", text: '"@agentlayer0/mcp"' },
+    { type: "plain", text: "]," },
   ],
   [
     { type: "plain", text: "      " },
-    { type: "class", text: '"headers"' },
+    { type: "class", text: '"env"' },
     { type: "plain", text: ": {" },
   ],
   [
     { type: "plain", text: "        " },
-    { type: "class", text: '"Authorization"' },
+    { type: "class", text: '"AL0_API_KEY"' },
     { type: "plain", text: ": " },
-    { type: "string", text: '"Bearer al0_sk_..."' },
+    { type: "string", text: '"al0_sk_..."' },
   ],
   [{ type: "plain", text: "      }" }],
   [{ type: "plain", text: "    }" }],
@@ -511,10 +513,10 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
   const MCP_RAW = `{
   "mcpServers": {
     "agent-layer-0": {
-      "type": "http",
-      "url": "https://agentlayer0.io/api/mcp",
-      "headers": {
-        "Authorization": "Bearer al0_sk_..."
+      "command": "npx",
+      "args": ["-y", "@agentlayer0/mcp"],
+      "env": {
+        "AL0_API_KEY": "al0_sk_..."
       }
     }
   }
@@ -525,7 +527,7 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
       <p className="text-sm font-semibold text-primary/80 uppercase tracking-widest mb-2">Get Started</p>
       <h2 className="text-2xl font-bold tracking-tight mb-1">Two ways to connect</h2>
       <p className="text-sm text-muted-foreground mb-6">
-        Use the SDK directly, or connect any MCP-compatible AI agent with a single URL.
+        Use the SDK directly, or drop one config block into any MCP-compatible AI agent.
       </p>
 
       {/* Tab bar */}
@@ -580,8 +582,7 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
       {tab === "mcp" && (
         <div>
           <p className="text-sm text-muted-foreground mb-5 max-w-xl">
-            Add this block to your MCP client config. Any agent runtime that speaks MCP connects
-            instantly — no SDK, no local install, no boilerplate.
+            Add this block to your MCP client config. The package runs locally via <code className="text-xs bg-muted/40 px-1 py-0.5 rounded font-mono">npx</code> — no separate server, no auth headers to manage.
           </p>
           <TokenCodeBlock
             filename="mcp-config.json"
@@ -592,9 +593,9 @@ function ConnectSection({ onSignup }: { onSignup: () => void }) {
             <p className="text-sm font-semibold text-foreground">What your agent gets at runtime</p>
             <div className="space-y-2 text-sm text-muted-foreground">
               {[
-                { icon: <Zap className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Six native governance tools — al0_register_swarm, al0_create_poll, al0_cast_vote, al0_list_polls, al0_get_agents, al0_get_usage — callable like any other function" },
+                { icon: <Zap className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Eight native governance tools — al0_register_agent, al0_create_poll, al0_vote, al0_get_poll, al0_get_results, al0_list_polls, al0_get_agents, al0_get_usage — callable like any other function" },
                 { icon: <Shield className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Every vote lands on Algorand — permanently signed and queryable by any agent, any time, without going through your server" },
-                { icon: <Link2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Compatible with Claude Desktop, Cursor, and any agent runtime that speaks MCP over HTTP" },
+                { icon: <Link2 className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />, text: "Compatible with Claude Desktop, Cursor, Windsurf, VS Code, and any MCP-compatible client" },
               ].map(({ icon, text }, i) => (
                 <div key={i} className="flex items-start gap-2">
                   {icon}
