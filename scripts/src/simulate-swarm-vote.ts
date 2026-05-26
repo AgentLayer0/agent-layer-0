@@ -24,8 +24,8 @@ const ALGOD_TOKEN = "";
 
 const BALLOT_BOX_APP_ID = 763222455;
 
-const API_KEY  = "al0_sk_QpLzNkivV-wdDf01fkYDDFlP0B8wlbTw";
-const API_BASE = "http://localhost:80/api";
+const API_KEY  = process.env["AL0_API_KEY"] ?? "";
+const API_BASE = process.env["AL0_API_BASE"] ?? "http://localhost:80/api";
 
 const NUM_AGENTS  = 25;
 // 130 000 µALGO per wallet: 100 000 account min + 22 500 vote-box MBR + 7 500 fee buffer
