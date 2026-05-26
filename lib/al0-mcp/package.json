@@ -1,22 +1,41 @@
 {
-  "name": "@agentlayer0/mcp-server",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@agentlayer0/mcp",
+  "version": "1.0.3",
   "type": "module",
-  "bin": {
-    "al0-mcp": "./dist/bin.mjs"
+  "description": "Agent Layer 0 MCP server — on-chain governance tools for AI agent swarms via stdio",
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "algorand",
+    "ai-agents",
+    "governance",
+    "voting",
+    "blockchain"
+  ],
+  "homepage": "https://agentlayer0.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agentlayer0/sdk.git"
   },
+  "license": "MIT",
+  "bin": {
+    "al0-mcp": "dist/bin.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "node ./build.mjs",
-    "start": "node --enable-source-maps ./dist/bin.mjs",
-    "dev": "tsx src/bin.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "prepublishOnly": "pnpm run build"
   },
-  "dependencies": {
-    "@agentlayer0/sdk": "workspace:*",
-    "@modelcontextprotocol/sdk": "^1.29.0"
+  "publishConfig": {
+    "access": "public"
   },
   "devDependencies": {
+    "@agentlayer0/sdk": "workspace:*",
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@types/node": "catalog:",
     "esbuild": "0.27.3",
     "tsx": "catalog:",

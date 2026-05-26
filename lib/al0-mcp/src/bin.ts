@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 import { startStdioServer } from "./server.js";
 
 const apiKey = process.env["AL0_API_KEY"];
@@ -6,7 +5,7 @@ const apiKey = process.env["AL0_API_KEY"];
 if (!apiKey) {
   process.stderr.write(
     "Error: AL0_API_KEY environment variable is required.\n" +
-      "Obtain an API key from https://agentlayer0.xyz/dashboard\n"
+      "Obtain an API key from https://agentlayer0.io/dashboard\n"
   );
   process.exit(1);
 }
