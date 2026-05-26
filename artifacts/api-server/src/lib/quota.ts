@@ -6,7 +6,7 @@ import { type AuthenticatedRequest } from "./api-key-auth";
 
 const DASHBOARD_URL = process.env["REPLIT_DOMAINS"]
   ? `https://${process.env["REPLIT_DOMAINS"].split(",")[0]}/dashboard`
-  : "https://agentlayer0.com/dashboard";
+  : "https://agentlayer0.io/dashboard";
 
 export async function checkQuota(
   req: AuthenticatedRequest,
