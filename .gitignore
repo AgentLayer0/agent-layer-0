@@ -49,6 +49,11 @@ Thumbs.db
 .env.*
 *.env
 
+# Auto-generated / debug / personal files — never commit
+attached_assets/Pasted-*
+attached_assets/Screenshot*
+attached_assets/screenshots/
+
 # Replit
 .cache/
 .local/
