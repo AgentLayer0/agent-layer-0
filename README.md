@@ -168,4 +168,4 @@ Required environment variables (see `.env.example` if present):
 
 ## License
 
-MIT
+[AGPL-3.0](LICENSE) — use it freely, but any modifications or products built on top of this code must also be open sourced under the same license.
